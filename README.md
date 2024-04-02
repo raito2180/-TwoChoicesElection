@@ -22,11 +22,16 @@
 XをメインとしたSNSを用いての広報活動予定です。<br>
 <br>
 ■ サービスの差別化ポイント・推しポイント<br>
-みんなで投票(ネイティブアプリ)<br>
-https://play.google.com/store/apps/details?id=io.softry.pollforall&hl=ja&gl=US<br>
-現状webアプリで競合になるアプリはなさそうです。過去にicevoteというアプリはあったみたいです。<br>
-icevote<br>
-https://qiita.com/akaoni_sohei/items/186121bd9994197aab50<br>
+[みんなで投票(ネイティブアプリ)](https://play.google.com/store/apps/details?id=io.softry.pollforall&hl=ja&gl=US)<br>
+[icevote](https://qiita.com/akaoni_sohei/items/186121bd9994197aab50)<br>
+https://prtimes.jp/main/html/rd/p/000000002.000109404.html<br>
+https://prtimes.jp/main/html/rd/p/000000028.000034517.html<br>
+https://uxxinspiration.com/2013/09/questionnarire/<br>
+・ランキング機能…投票の正解数によってユーザーランキングを作成します。どの類似アプリにもない機能です。ランキング機能がある<br>
+事で、本リリース時の勲章機能の実績として組み込む予定なので、投票にゲーム性を持たせて楽しく投票に参加できます。<br>
+・チャット機能…本リリース時になりますが、作成するアプリをきっかけに仲良くなってほしい思いがあります。どの類似アプリにもない<br>
+機能ですし、プロフィールで投票したお題を記録する予定なので気が合う方を見つけやすいという事で、少なからず投票アプリにもマッチ<br>
+していると考えます。<br>
 ■ 機能候補<br>
 ##### MVP リリース時<br>
 1.レスポンシブ対応…tailwind.cssおよびdaisyUI使用していく予定<br>
