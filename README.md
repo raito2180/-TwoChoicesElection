@@ -54,10 +54,9 @@ https://sports.yahoo.co.jp/<br>
 9.チャット機能…ライブラリで実装予定<br>
 ■ 使用予定の技術スタック<br>
 **フロントエンド:Next.js**<br>
-チャット機能や動画視聴機能を実装予定の為SPAでストレスフリーなUI/UXを実装したいため
-**バックエンド:Next.js + Node.js+ supabase**
-チーム開発でReact.js + supabaseを使用した為、Next.jsをキャッチアップしながら開発可能と考えたため<br>
-ルーティングをNext.js、データベースをsupabaseで補う予定です。<br>
+チャット機能や動画視聴機能を実装予定の為SPAでストレスフリーなUI/UXを実装したいため<br>
+**バックエンド:RailsAPI**
+supabaseを活用するとクライアントでDBの取得を行わなければならないためDB操作がしやすいRailsを再選定。<br>
 **認証:OAuth2.0**<br>
 googleログイン機能を実装予定<br>
 **DB:supabase postgresql**<br>
