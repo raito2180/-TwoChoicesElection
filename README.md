@@ -55,7 +55,7 @@ https://sports.yahoo.co.jp/<br>
 ■ 使用予定の技術スタック<br>
 **フロントエンド:Next.js**<br>
 チャット機能や動画視聴機能を実装予定の為SPAでストレスフリーなUI/UXを実装したいため<br>
-**バックエンド:RailsAPI**
+**バックエンド:RailsAPI**<br>
 supabaseを活用するとクライアントでDBの取得を行わなければならないためDB操作がしやすいRailsを再選定。<br>
 **認証:OAuth2.0**<br>
 googleログイン機能を実装予定<br>
