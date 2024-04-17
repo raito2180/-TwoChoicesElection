@@ -1,4 +1,5 @@
 # Stardom<br>
+
 ■サービス概要<br>
 シーズン別、シーズン前半後半に分けてサッカーチームや選手の経歴を調べる事が出来ます。<br>
 選手のスーパープレイ動画も見る事が出来ます。<br>
@@ -74,3 +75,5 @@ Render.comを使用予定です。GitHubにpushすると自動デプロイが可
 一度構築してしまえば同じ環境をチーム全体で使いまわせるというとても便利な技術の為使用予定<br>
 **webAPI:YouTube Data API + openaiAPI**<br>
 アプリへのyoutubeの埋め込みとAIによる紹介機能の実装に使用します<br>
+<br>
+URL:[Figma](https://www.figma.com/file/dT7N4wgIYvc2ioLLQN6OE9/Stardom-PC?type=design&node-id=0%3A1&mode=design&t=hNDB6tsluNwnaoc8-1)<br>
