@@ -77,4 +77,4 @@ Render.comを使用予定です。GitHubにpushすると自動デプロイが可
 アプリへのyoutubeの埋め込みとAIによる紹介機能の実装に使用します<br>
 <br>
 URL:[Figma](https://www.figma.com/file/dT7N4wgIYvc2ioLLQN6OE9/Stardom-PC?type=design&node-id=0%3A1&mode=design&t=hNDB6tsluNwnaoc8-1)<br>
-URL:[drawio](https://github.com/raito2180/Stardom/assets/141425751/9a1364d1-9cef-43a8-9389-716f6fda1f17)
+URL:[drawio](https://github.com/raito2180/Stardom/assets/141425751/1dba8b93-0bde-4423-8404-584bad8a931f)
