@@ -1,24 +1,80 @@
-# README
+# Stardom<br>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+■サービス概要<br>
+シーズン別、シーズン前半後半に分けてサッカーチームや選手の経歴を調べる事が出来ます。<br>
+選手のスーパープレイ動画も見る事が出来ます。<br>
+<br>
+■ このサービスへの思い・作りたい理由<br>
+自分は元々サッカーが大好きでロナウジーニョやトッティの全盛期によくサッカーを見ていました。しかし、最近<br>
+ではサッカーを見る機会も減ったため情報についていけていません。またサッカーに触れたいけど1試合が長いた<br>
+めまとめてみる事が中々出来ない。短い時間でサッカーの情報を把握出来るようにする為、今回このアプリを作り<br>
+たいです。ヨーロッパが最高峰の世界なのでまずはヨーロッパリーグのみで作成予定です。<br>
+<br>
+■ ユーザー層について<br>
+最近はサッカーを見れていないけど、情報は知りたいもしくは今活躍している選手を知りたいと感じる方<br>
+<br>
+■サービスの利用イメージ<br>
+ヨーロッパサッカーチームを対象にシーズン別、シーズン(前半・後半別)毎にチーム経歴・活躍した選手<br>
+の概要を知る事が出来ます。<br>
+活躍した選手のスーパープレイ動画を見る事が出来ます<br>
+<br>
+■ ユーザーの獲得について<br>
+XをメインとしたSNSを用いての広報活動予定です。<br>
+<br>
+■ サービスの差別化ポイント・推しポイント<br>
+スポーツナビ
+https://sports.yahoo.co.jp/<br>
+・年度・シーズン別の経歴概要機能…詳細な戦績は載っていますが、年度別でこのチーム・選手はこういう経歴を<br>
+残した。などの概要がありません。データではなくニュアンスで把握できれば良いという方にとっては差別化で<br>
+きる点だと思われます<br>
+・活躍している選手のスーパープレイ動画を見る事が出来る点…経歴の概要に沿ってスーパープレイ動画を見る事<br>
+が出来ます。視覚的に選手の特徴がわかるため、情報がわからない状態でも好きな選手を見つける事が出来て、<br>
+サッカー愛が再燃するきっかけにもなります。<br>
+<br>
+■ 機能候補<br>
+##### MVP リリース時<br>
+1.レスポンシブ対応…tailwind.cssおよびdaisyUI使用していく予定<br>
+2.ログイン機能(googleログイン)<br>
+3.チーム・選手経歴概要検索機能(シーズン別(前半・後半))<br>
+4.選手のスーパープレイ動画検索機能<br>
+5.シェア機能(X)<br>
+6.プロフィール機能(好きなチーム・アイコン・ニックネーム)<br>
+##### 本リリース時<br>
+7.ヨーロッパリーグ以外の地域に対応(南米などの強い地域から拡張予定)<br>
+8.試合マッチング機能①…動画を見て体を動かしたくなった人たちの為にフットサル募集機能(6人)<br>
+9.試合マッチング機能②…①で集まった人たちでグループチャットが出来ます。スケジュール調整や雑談にどうぞ<br>
+■ 機能の実装方針予定<br>
+##### MVP リリース時<br>
+1.レスポンシブ対応…tailwind.cssおよびdaisyUI使用していく予定<br>
+2.ログイン機能(googleログイン)…Google APIにて実装<br>
+3.チーム・選手経歴概要検索機能(年度別・シーズン別(夏・冬の年2回))…openaiAPIにより概要抽出(画像添付)<br>
+4.選手のスーパープレイ動画検索機能…youtube apiにて埋め込む形で使用予定。<br>
+5.シェア機能(X)…https://publish.twitter.com/にて実装予定<br>
+6.プロフィール機能…使用する言語の標準機能で作成可能と思っている<br>
+##### 本リリース時<br>
+7.ヨーロッパリーグ以外の地域に対応(南米などの強い地域から拡張予定)…3と同じ<br>
+8.試合マッチング機能①…中間テーブルで上限６人まで募集に参加できる機能を実装予定<br>
+9.試合マッチング機能②…①で集まった人たちでグループチャットが出来ます。スケジュール調整や雑談用。<br>
+Hotwireを活用して作成予定<br>
+■ 使用予定の技術スタック<br>
+**フロントエンド:RubyOnRails**<br>
+**バックエンド:RubyOnRails<br>
+ワンパッケージでアプリを作り切れる点と、スクールカリキュラムで履修しているため実装しやすい点<br>
+**認証:OAuth2.0**<br>
+googleログイン機能を実装予定<br>
+**DB:postgresql**<br>
+gem Render.comのpostgresqlを使用予定<br>
+**PaaS:Render**<br>
+Render.comを使用予定です。GitHubにpushすると自動デプロイが可能な点を再評価しました<br>
+**CSSフレームワーク:tailwind.css**<br>
+クラス命名が不要かつユーティリティファーストで使いやすいため。レスポンシブ時に便利なコンポーネントも<br>
+用意<br>
+**CSSライブラリ:daisyUI**<br>
+コンポーネントがtailwind.cssと併用できるかつ、ユーティリティファーストな書き方が出来る為使いやすい。<br>
+**仮想コンテナ技術:Docker**<br>
+一度構築してしまえば同じ環境をチーム全体で使いまわせるというとても便利な技術の為使用予定<br>
+**webAPI:YouTube Data API + openaiAPI**<br>
+アプリへのyoutubeの埋め込みとAIによる紹介機能の実装に使用します<br>
+<br>
+URL:[Figma](https://www.figma.com/file/dT7N4wgIYvc2ioLLQN6OE9/Stardom-PC?type=design&node-id=0%3A1&mode=design&t=hNDB6tsluNwnaoc8-1)<br>
+URL:[drawio](https://github.com/raito2180/Stardom/assets/141425751/1dba8b93-0bde-4423-8404-584bad8a931f)
