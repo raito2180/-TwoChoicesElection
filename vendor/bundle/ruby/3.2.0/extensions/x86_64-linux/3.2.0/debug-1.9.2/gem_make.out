@@ -1,0 +1,19 @@
+current directory: /app/vendor/bundle/ruby/3.2.0/gems/debug-1.9.2/ext/debug
+/usr/local/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /app/vendor/bundle/ruby/3.2.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240421-33-hrh7si sitelibdir\=./.gem.20240421-33-hrh7si clean
+
+current directory: /app/vendor/bundle/ruby/3.2.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240421-33-hrh7si sitelibdir\=./.gem.20240421-33-hrh7si
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /app/vendor/bundle/ruby/3.2.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240421-33-hrh7si sitelibdir\=./.gem.20240421-33-hrh7si install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20240421-33-hrh7si/debug
+
+current directory: /app/vendor/bundle/ruby/3.2.0/gems/debug-1.9.2/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20240421-33-hrh7si sitelibdir\=./.gem.20240421-33-hrh7si clean
