@@ -6,6 +6,8 @@ ruby "3.2.2"
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
 
+#静的ページ作成用
+gem 'high_voltage'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
