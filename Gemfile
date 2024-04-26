@@ -9,6 +9,14 @@ gem 'jsbundling-rails'
 #静的ページ作成用
 gem 'high_voltage'
 
+#youtube data api用
+gem 'google-api-client', '~> 0.11'
+
+#環境変数指定用
+gem 'dotenv-rails'
+
+gem 'pry-byebug'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 
