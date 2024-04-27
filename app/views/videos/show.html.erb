@@ -1,2 +1,14 @@
-<h1>Videos#show</h1>
-<p>Find me in app/views/videos/show.html.erb</p>
+<div class="text-sm text-gray-600 flex justify-center">
+  <iframe src="https://www.youtube.com/embed/<%= params[:id] %>" width="800" height="600" frameborder="0" allowfullscreen></iframe>
+</div>
+<div class='flex text-3xl '>
+  <p class='mx-4'>タイトル</p>
+  <div class='mx-4'>
+    <%= link_to "#", target: '_blank' do %>
+      <i class="fab fa-twitter" style='color: #3399FF;'></i>シェア
+    <% end %>
+  </div>
+  <div class='mx-4'>
+    <%= link_to '動画検索TOP', videos_path %>
+  </div>
+</div>

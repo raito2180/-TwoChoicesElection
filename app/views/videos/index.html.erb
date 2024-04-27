@@ -1,11 +1,10 @@
-<div class="bg-blue-900 w-full h-screen text-white">
   <h1 class="text-5xl mb-4">動画視聴機能</h1>
 
   <div class="flex justify-center">
     <%= form_with url: search_videos_path, method: :get, local: true do |f| %>
       <div class="flex items-center">
-        <%= f.text_field :keyword, placeholder: "曲名やアーティスト名を入力", class: "border border-black border-2 rounded-md" %>
-        <%= f.submit "検索" %>
+        <%= f.text_field :keyword, placeholder: "選手名を入力", class: "border border-black border-2 rounded-md" %>
+        <%= f.submit "検索", class: 'btn'%>
       </div>
     <% end %>
   </div>
@@ -15,21 +14,7 @@
       <div>
         <ul class="grid grid-cols-1 md:grid-cols-3">
           <% @videos.each do |video| %>
-            <li>
-              <div class="mx-4 mb-4">
-                <div class="truncate text-lg">
-                  <%= video.snippet.title %>
-                </div>
-                <div class="text-sm text-gray-600">
-                  <%= video.snippet.published_at %>
-                </div>
-                <div class="text-sm text-gray-600">
-                  <%= link_to video_path(video.id.video_id) do %>
-                    <% image_tag "#{video.snippet.thumbnails.high.url}", :size => '350x270' %>
-                  <% end %>
-                </div>
-              <div>
-            </li>
+            <%= render partial: 'shared/video_item', locals: { video: video } %>
           <% end %>
         </ul>
       </div>
@@ -42,23 +27,8 @@
       <div>
         <ul class="grid grid-cols-1 md:grid-cols-3">
           <% @recommend_videos.each do |video| %>
-            <li>
-              <div class="mx-4 mb-4">
-                <div class="truncate text-lg">
-                  <%= video.snippet.title %>
-                </div>
-                <div class="text-sm text-gray-600">
-                  <%= video.snippet.published_at %>
-                </div>
-                <div class="text-sm text-gray-600">
-                  <%= link_to "https://www.youtube.com/watch?v=#{video.id.video_id}" do %>
-                    <% image_tag "#{video.snippet.thumbnails.high.url}", :size => '350x270' %>
-                  <% end %>
-                </div>
-              <div>
-            </li>
+            <%= render partial: 'shared/video_item', locals: { video: video } %>
           <% end %>
         </ul>
       </div>
   <% end %>
-</div>
