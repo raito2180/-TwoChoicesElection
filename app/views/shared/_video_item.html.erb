@@ -1,13 +1,15 @@
 <li>
   <div class="mx-4 mb-4">
     <div class="truncate text-lg">
-      <%= video[:title] %>
+      <%= link_to video_path(video[:video_id], video) do %>
+        <%= video[:title] %>
+      <% end %>
     </div>
     <div class="text-sm">
       再生回数:<%= video[:view_count] %>
     </div>
     <div>
-      <%= link_to video_path(video[:video_id]) do %>
+      <%= link_to video_path(video[:video_id], video) do %>
         <% image_tag "#{video[:thumbnail_url]}", :size => '350x270' %>
       <% end %>
     </div>

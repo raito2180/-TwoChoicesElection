@@ -1,14 +1,27 @@
-<div class="text-sm text-gray-600 flex justify-center">
-  <iframe src="https://www.youtube.com/embed/<%= params[:id] %>" width="800" height="600" frameborder="0" allowfullscreen></iframe>
-</div>
-<div class='flex text-3xl '>
-  <p class='mx-4'>タイトル</p>
-  <div class='mx-4'>
-    <%= link_to "#", target: '_blank' do %>
-      <i class="fab fa-twitter" style='color: #3399FF;'></i>シェア
-    <% end %>
-  </div>
-  <div class='mx-4'>
-    <%= link_to '動画検索TOP', videos_path %>
+<div class="bg-blue-900 w-full md:h-screen text-white overflow-hidden">
+  <div class="flex justify-center aspect-video">
+    <iframe src="https://www.youtube.com/embed/<%= params[:id] %>" frameborder="0" allowfullscreen class='w-96 h-96 md:w-2/3 md:h-screen'></iframe>
   </div>
 </div>
+<div class="bg-blue-900 w-full h-full text-white">
+    <div class='flex md:text-4xl '>
+      <p class='mx-4'><%= params[:title] %></p>
+    </div>
+    <div class='flex md:text-4xl '>
+      <p class='mx-4'>チャンネル名:<%= params[:channel_title] %></p>
+      <p class='mx-4'>再生回数:<%= params[:view_count] %>回</p>
+    </div>
+    <div class='flex md:text-4xl justify-center'>
+      <div class='mx-4 btn btn-neutral'>
+        <%= link_to "https://twitter.com/share?url=https://stardom-jonn.onrender.com&text=ここに文章を記載%0a%0aサッカーポータルサイト【Stardom】で#{params[:title]}を見たよ！！", target: '_blank' do %>
+          Xにシェア
+        <% end %>
+      </div>
+      <div class='mx-4 btn btn-accent'>
+        <%= link_to '蹴りに行く？(coming soon)', '#' %>
+      </div>
+      <div class='mx-4 btn btn-primary'>
+        <%= link_to '動画検索TOP', videos_path %>
+      </div>
+    </div>
+  </div>

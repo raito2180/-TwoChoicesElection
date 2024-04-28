@@ -1,10 +1,11 @@
+<div class="bg-blue-900 w-full h-full text-white">
   <h1 class="text-5xl mb-4">動画視聴機能</h1>
 
   <div class="flex justify-center">
     <%= form_with url: search_videos_path, method: :get, local: true do |f| %>
       <div class="flex items-center">
         <%= f.text_field :keyword, placeholder: "選手名を入力", class: "border border-black border-2 rounded-md" %>
-        <%= f.submit "検索", class: 'btn'%>
+        <%= f.submit "検索", class: 'btn btn-xs'%>
       </div>
     <% end %>
   </div>
@@ -32,3 +33,4 @@
         </ul>
       </div>
   <% end %>
+</diV>
