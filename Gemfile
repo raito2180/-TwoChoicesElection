@@ -15,7 +15,11 @@ gem 'google-api-client', '~> 0.11'
 #環境変数指定用
 gem 'dotenv-rails'
 
+#バグフィックス用
 gem 'pry-byebug'
+
+#認証機能用
+gem "devise"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
