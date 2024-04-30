@@ -1,25 +1,22 @@
 <header>
-  <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-2">
-    <div class="flex items-center flex-shrink-0 text-white">
+  <nav class="w-full flex bg-blue-500 p-2 justify-between">
+    <div class="flex text-white">
       <%= link_to root_path do %>
         <%= image_tag "logo.png", style: "width: 50px; height: 50px;" %>
       <% end %>
     </div>
-    <div class="block lg:hidden">
-      <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-      </button>
-    </div>
-    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-      <div class="text-sm lg:flex-grow">
-        <%= link_to '利用規約', page_path('terms'), class: "block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white text-2xl mx-8" %>
-        <%= link_to 'プライバシーポリシー', page_path('policy'), class: "block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white text-2xl mr-8" %>
+      <div class="dropdown dropdown-end flex">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+        </div>
+        <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-blue-900 rounded-box w-52">
+          <li><%= link_to 'ユーザー登録', new_user_registration_path, class: "block mt-4 lg:inline-block lg:mt-0 font-bold" %></li>
+          <li><%= link_to 'ログイン', new_user_session_path, class: "block mt-4 lg:inline-block lg:mt-0 font-bold" %></li>
+          <li><%= link_to '動画視聴', videos_path, class: "block mt-4 lg:inline-block lg:mt-0 font-bold" %></li>
+          <li><%= link_to '利用規約', page_path('terms'), class: "block mt-4 lg:inline-block lg:mt-0" %></li>
+          <li><%= link_to 'プライバシーポリシー', page_path('policy'), class: "block mt-4 lg:inline-block lg:mt-0" %></li>
+        </ul>
       </div>
-      <div>        
-        <%= link_to '動画視聴', videos_path, class: "block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white text-4xl font-bold mr-8" %>
-        <%= link_to 'ユーザー登録', '#', class: "block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white text-4xl font-bold mr-8" %>
-        <%= link_to 'ログイン', '#', class: "block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white text-4xl font-bold mr-8" %>
-      </div>
-    </div>
   </nav>
 </header>
+
