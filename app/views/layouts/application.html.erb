@@ -10,7 +10,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body class='bg-blue-900 text-white'>
     <header>
     <% if user_signed_in? %>
       <%= render partial: 'shared/login_header' %>
