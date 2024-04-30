@@ -10,10 +10,18 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+    <body class='bg-blue-900 text-white'>
     <header>
+    <% if user_signed_in? %>
+      <%= render partial: 'shared/login_header' %>
+    <% else %>
       <%= render partial: 'shared/before_login_header' %>
+    <% end %>
     </header>
+    <% flash.each do |type, message| %>
+      <%= content_tag(:div, message, 
+          class: "alert #{type == 'notice' ? 'alert-success' : 'alert-danger'} alert-success", role: "alert") %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
