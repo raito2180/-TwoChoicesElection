@@ -25,6 +25,9 @@ gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
+#メール確認用
+gem 'letter_opener_web'
+
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
