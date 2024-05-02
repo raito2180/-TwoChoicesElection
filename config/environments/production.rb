@@ -75,6 +75,16 @@ Rails.application.configure do
   
   #device用の設定
   config.action_mailer.default_url_options = { host: 'https://stardom-jonn.onrender.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    enable_starttls_auto: true,
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            ENV['GOOGLE_SMTP_EMAIL'],
+    password:             ENV['GOOGLE_SMTP_PASSWORD'],
+    authentication:       :plain
+  }
   
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
