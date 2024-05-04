@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
+  resources :contacts, only: [:new, :create]
+  get 'done', to: 'contacts#done', as: 'done'
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

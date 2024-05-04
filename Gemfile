@@ -16,6 +16,7 @@ gem 'google-api-client', '~> 0.11'
 gem 'dotenv-rails'
 
 #バグフィックス用
+gem 'pry-rails'
 gem 'pry-byebug'
 
 #認証機能用

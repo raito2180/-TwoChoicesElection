@@ -1,0 +1,27 @@
+<div class="bg-blue-900 w-full h-screen text-white overflow-hidden flex items-center justify-center">
+  <div>
+    <h1 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>お問い合わせ</h1>
+    <h1 class='font-bold'>ログインしているメールアドレスにお問い合わせが返信されます。<br>ご留意くださいませ。</h1>
+    <%= form_with(model: @contact, local: true) do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+      <div>
+        <%= f.label :name, 'お名前*' %><br>
+        <%= f.text_field :name, autofocus: true, class: 'border border-black border-2 rounded-md text-black w-96' %>
+      </div>
+
+      <div>
+        <%= f.label :subject, '件名*' %><br>
+        <%= f.text_field :subject, class: 'border border-black border-2 rounded-md text-black w-96' %>
+      </div>
+
+      <div>
+        <%= f.label :body, '内容*' %><br>
+        <%= f.text_area :body,  class: 'border border-black border-2 rounded-md text-black w-96' %>
+      </div>
+
+      <div class='actions flex justify-center pb-2 border-dotted border-b-2 border-fitting-white'>
+        <%= f.submit '送信', class: 'btn btn-xs' %>
+      </div>
+    <% end %>
+  </div>
+</div>
