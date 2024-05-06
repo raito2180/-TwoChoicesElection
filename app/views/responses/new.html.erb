@@ -1,4 +1,13 @@
 <div class="bg-blue-900 w-full h-screen text-white">
-<h1>Responses#new</h1>
-<p>Find me in app/views/responses/new.html.erb</p>
+  <h1 class="text-5xl mb-4">AI検索機能</h1>
+    <%= form_with url: responses_path, method: :get, local: true, class: 'flex-col md:flex rounded-md text-black' do |form| %>
+    
+
+    <%= form.collection_select :request_id, Request.all, :id, :name, { include_blank: "知りたい事を選択" }, { class: 'rounded-md text-black mx-1' } %>
+    <%= form.collection_select :team_id, Team.all, :id, :name, { include_blank: "チームを選択" }, { class: 'rounded-md text-black mx-1' } %>
+    <%= form.text_field :player_id, placeholder: "プレイヤーを入力", class: 'rounded-md text-black mx-1' %>
+    <%= form.collection_select :season_id, Season.all, :id, :name, { include_blank: "シーズンを選択" }, { class: 'rounded-md text-black mx-1' } %>
+    <%= form.submit '検索' , class: 'btn btn-sm rounded-md text-black mx-1'%>
+  <% end %>
 </div>
+
