@@ -1,4 +1,7 @@
 class ResponsesController < ApplicationController
+  require "openai"
+  client = OpenAI::Client.new(access_token: ENV['RAILS_OPENAI_API_KEY'])
+
   def new
   end
 
