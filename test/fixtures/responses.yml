@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  body: MyText
+  user: one
+  player: one
+  team: one
+  request: one
+  season: one
+
+two:
+  body: MyText
+  user: two
+  player: two
+  team: two
+  request: two
+  season: two

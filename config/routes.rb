@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   root 'tops#index'
@@ -7,8 +8,12 @@ Rails.application.routes.draw do
       get 'search'
     end
   end
+
+  resources :responses, only: [:new, :create, :show, :edit, :update, :destroy]
+
   resources :contacts, only: [:new, :create]
   get 'done', to: 'contacts#done', as: 'done'
+
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
