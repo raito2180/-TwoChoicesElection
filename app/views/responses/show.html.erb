@@ -1,5 +1,30 @@
 <div class="bg-blue-900 w-full h-full text-white">
   <h1 class="text-5xl mb-4">AI検索詳細</h1>
-    <%= @response.title %>
-    <%= simple_format(h(@response.body)) %>
+  <span class='font-bold text-2xl'>タイトル:<%= @response.title %></span>
+  <% if @response.request_id === 3 %>
+    <div class="grid grid-cols-1 md:grid-cols-3">
+      <% doc = Nokogiri::HTML(simple_format(h(@response.body))) %>
+      <% doc.css('p').each do |paragraph| %>
+        <div class="card card-compact bg-base-100 shadow-xl text-black mx-2 my-2">
+          <div class="card-body">
+            <%= paragraph.inner_html.html_safe %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <%= content_tag(:span, "上記の選手たちは、youtubeでもスーパープレイを披露してくれるトップクラスの選手たちです！！気になった選手をぜひ動画で検索してみてください！", class: 'font-bold') %>
+    <span>※2021年のデータになります</span>
+  <% else %>
+    <div class="grid grid-cols-1 md:grid-cols-3">
+        <div class="card card-compact bg-base-100 shadow-xl text-black mx-2 my-2">
+          <div class="card-body">
+            <%= simple_format(h(@response.body)) %>
+          </div>
+        </div>
+    </div>
+  <% end %>
+  <%= link_to '動画を見に行く', videos_path, class: 'btn btn-sm' %>
 </div>
+
+
+

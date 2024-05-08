@@ -1,1 +1,21 @@
-index
+<h1 class="text-5xl mb-4">AI記録一覧</h1>
+<div class='my-2'>
+  <ul class='grid grid-cols-1 md:grid-cols-3'>
+  <% @responses.each do |response| %>
+    <div class="card card-compact bg-blue-500 shadow-xl mx-2 my-2">
+      <figure>
+      <%= link_to root_path do %>
+        <%= image_tag "AIicon.jpg" %>
+      <% end %>
+      </figure>
+        <div class="card-body">
+        <h2 class="card-title"><%= "タイトル:#{response.title}" %></h2>
+        <p><%= "作成日:#{response.created_at}" %></p>
+        <div class="card-actions justify-end">
+          <%= link_to '投稿内容を見る', response_path(response.id), class: 'btn' %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </ul>
+</div>

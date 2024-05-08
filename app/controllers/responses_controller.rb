@@ -1,6 +1,6 @@
 class ResponsesController < ApplicationController
   def index
-    @responses = Response.find_by(params[:user_id])
+    @responses = Response.all
   end
   def new
     @response = Response.new
@@ -14,8 +14,7 @@ class ResponsesController < ApplicationController
     @response.player_id = player.id
     @response.user_id = current_user.id
     Rails.logger.debug
-    binding.pry
-    if 
+
     @player_data = Player.find_by(params[:player_id])
     @team_data = Team.find_by(params[:team_id])
     @request_data = Request.find_by(params[:request_id])
@@ -51,7 +50,7 @@ class ResponsesController < ApplicationController
     params.require(:response).permit(:title, :user_id, :player_name, :team_id, :request_id, :season_id)
   end
 
-  def fetch_openai(player_name, team_name, request_name, season_name)
+  def fetch_openai_beginner(player_name, team_name, request_name, season_name)
     require "ruby/openai"
     client = OpenAI::Client.new
     response = client.chat(
@@ -59,15 +58,33 @@ class ResponsesController < ApplicationController
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", 
             content: "2021年のサッカー欧州リーグについてです。
-            初心者が好きになれそうな世界トップクラスの選手を11人ベストイレブン形式で簡単な特長、所属クラブチームと共に教えてください。
+            初心者が好きになれそうな世界トップクラスの選手を11人、簡単な特長・所属クラブチームと共に教えてください。
             形式は、以下の通りでお願いします。
-            ```
+
             選手名:
             所属クラブチーム:
             特長:
-            ```
+
+            日本語で教えてください
             youtubeで見るのにおすすめな選手でお願いします
             箇条書きでお願いします" }],
+        })
+    @response.body = response.dig("choices", 0, "message", "content")
+    puts @response.body
+  end
+  def fetch_openai(player_name, team_name, request_name, season_name)
+    require "ruby/openai"
+    client = OpenAI::Client.new
+    response = client.chat(
+        parameters: {
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", 
+            content: "
+            サッカーの欧州リーグについて質問です。空白の箇所は無視してください。
+            知りたい事:プレースタイル
+            知りたい対象:#{player_name}、FCバルセロナ
+            シーズン#{season_name}
+            " }],
         })
     @response.body = response.dig("choices", 0, "message", "content")
     puts @response.body

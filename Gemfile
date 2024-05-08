@@ -30,6 +30,9 @@ gem 'letter_opener_web'
 #openai用
 gem "ruby-openai"
 
+#openaiレスポンス調整用
+gem 'nokogiri'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 

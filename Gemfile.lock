@@ -393,6 +393,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   letter_opener_web
+  nokogiri
   omniauth
   omniauth-github
   omniauth-google-oauth2
