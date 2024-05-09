@@ -1,4 +1,6 @@
 class ResponsesController < ApplicationController
+  before_action :set_openai, only: [:create]
+
   def index
     @responses = Response.all
   end
@@ -14,20 +16,66 @@ class ResponsesController < ApplicationController
     @response.player_id = player.id
     @response.user_id = current_user.id
     Rails.logger.debug
-
-    @player_data = Player.find_by(params[:player_id])
-    @team_data = Team.find_by(params[:team_id])
-    @request_data = Request.find_by(params[:request_id])
-    @season_data = Season.find_by(params[:team_id])
-    
+    @player_data = Player.where(id: @response.player_id).order(created_at: :desc).first
+    @team_data = Team.where(id: @response.team_id).order(created_at: :desc).first
+    @request_data = Request.where(id: @response.request_id).order(created_at: :desc).first
+    @season_data = Season.where(id: @response.season_id).order(created_at: :desc).first
     # リクエストに関連する情報を取得するメソッドを呼び出す
-    fetch_openai(@player_data.name, @team_data.name, @request_data.name, @season_data.name)
-    if @response.save
-      flash[:success] = "Information fetched successfully!"
-      redirect_to @response
-    else
-      flash.now[:danger] = '作成失敗'
+    if @request_data.name == '初心者の方はこちら'
+      fetch_beginner_infomation
+      if @response.save
+        flash[:success] = "Information fetched successfully!"
+        redirect_to @response
+      else
+        flash.now[:danger] = '作成失敗'
+        render :new, status: :unprocessable_entity
+      end
+    elsif @request_data.name == '成績'
+      if @team_data && @player_data
+      flash.now[:danger] = '選手とチームの情報は同時に入れないでください'
       render :new, status: :unprocessable_entity
+      elsif @team_data && @season_data
+        fetch_score_infomation(@team_data.name, @season_data.name)
+      elsif @player_data && @season_data
+        fetch_score_infomation(@player_data.name, @season_data.name)
+      elsif @team_data
+        fetch_score_infomation(@team_data.name)
+      elsif @player_data
+        fetch_score_infomation(@player_data.name)
+      else 
+        flash.now[:danger] = 'シーズンのみの入力は無効です'
+        render :new, status: :unprocessable_entity
+      end
+      if @response.save
+        flash[:success] = "Information fetched successfully!"
+        redirect_to @response
+      else
+        flash.now[:danger] = '作成失敗'
+        render :new, status: :unprocessable_entity
+      end
+    else @request_data.name == '特長'
+      if @team_data && @player_data
+      flash.now[:danger] = '選手とチームの情報は同時に入れないでください'
+      render :new, status: :unprocessable_entity
+      elsif @team_data && @season_data
+        fetch_character_infomation(@team_data.name, @season_data.name)
+      elsif @player_data && @season_data
+        fetch_character_infomation(@player_data.name, @season_data.name)
+      elsif @team_data
+        fetch_character_infomation(@team_data.name)
+      elsif @player_data
+        fetch_character_infomation(@player_data.name)
+      else 
+        flash.now[:danger] = 'シーズンのみの入力は無効です'
+        render :new, status: :unprocessable_entity
+      end
+      if @response.save
+        flash[:success] = "Information fetched successfully!"
+        redirect_to @response
+      else
+        flash.now[:danger] = '作成失敗'
+        render :new, status: :unprocessable_entity
+      end
     end
   end
 
@@ -46,14 +94,17 @@ class ResponsesController < ApplicationController
 
   private
 
+  def set_openai
+    require "ruby/openai"
+    @client = OpenAI::Client.new
+  end
+
   def response_params
     params.require(:response).permit(:title, :user_id, :player_name, :team_id, :request_id, :season_id)
   end
 
-  def fetch_openai_beginner(player_name, team_name, request_name, season_name)
-    require "ruby/openai"
-    client = OpenAI::Client.new
-    response = client.chat(
+  def fetch_beginner_infomation
+    response = @client.chat(
         parameters: {
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", 
@@ -72,17 +123,34 @@ class ResponsesController < ApplicationController
     @response.body = response.dig("choices", 0, "message", "content")
     puts @response.body
   end
-  def fetch_openai(player_name, team_name, request_name, season_name)
-    require "ruby/openai"
-    client = OpenAI::Client.new
-    response = client.chat(
+  def fetch_score_infomation(team_player_name, season_name)
+    response = @client.chat(
         parameters: {
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", 
             content: "
-            サッカーの欧州リーグについて質問です。空白の箇所は無視してください。
-            知りたい事:プレースタイル
-            知りたい対象:#{player_name}、FCバルセロナ
+            サッカーの欧州リーグについて質問です。
+            成績に加えて大事な試合などのメモリアルな話題も導入してください。
+            説明の対象は下記のとおりです。
+            1回のチャットごとに記憶をリセットしてください。
+            知りたいチーム:#{team_player_name}
+            シーズン#{season_name}
+            " }],
+        })
+    @response.body = response.dig("choices", 0, "message", "content")
+    puts @response.body
+  end
+  def fetch_character_infomation(team_player_name, season_name)
+    response = @client.chat(
+        parameters: {
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", 
+            content: "
+            サッカーの欧州リーグについて質問です。
+            プレースタイルを分かりやすく説明してください。
+            説明の対象は下記のとおりです。
+            1回のチャットごとに記憶をリセットしてください。
+            知りたい選手:#{team_player_name}
             シーズン#{season_name}
             " }],
         })
