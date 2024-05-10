@@ -1,11 +1,11 @@
 <h1 class="text-5xl mb-4">AI記録一覧</h1>
 <div class='my-2'>
-  <ul class='grid grid-cols-1 md:grid-cols-3'>
+  <ul class='grid grid-cols-1 md:grid-cols-4'>
   <% @responses.each do |response| %>
     <div class="card card-compact bg-blue-500 shadow-xl mx-2 my-2">
       <figure>
-      <%= link_to root_path do %>
-        <%= image_tag "AIicon.jpg" %>
+      <%= link_to response_path(response.id) do %>
+        <%= image_tag "apiindex.jpg" %>
       <% end %>
       </figure>
         <div class="card-body">
