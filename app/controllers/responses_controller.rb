@@ -15,27 +15,25 @@ class ResponsesController < ApplicationController
     @response = Response.new(response_params)
     @response.player_id = player.id
     @response.user_id = current_user.id
-    Rails.logger.debug
+
     @player_data = Player.where(id: @response.player_id).order(created_at: :desc).first
     @team_data = Team.where(id: @response.team_id).order(created_at: :desc).first
     @request_data = Request.where(id: @response.request_id).order(created_at: :desc).first
     @season_data = Season.where(id: @response.season_id).order(created_at: :desc).first
+    
     # リクエストに関連する情報を取得するメソッドを呼び出す
     if @response.request_id.blank?
       flash.now[:danger] = '知りたい事は必須入力です'
       render :new, status: :unprocessable_entity
       return
     end
-  
-    case @response.request.name
-    when '初心者の方はこちら'
-      handle_beginner_request
-    when '成績'
-      handle_score_request
-    when '特長'
-      handle_character_request
+    if can_call_api?
+      # APIを呼び出す処理
+      call_api
+      # API利用回数をインクリメント
+      current_user.increment!(:request_limit_count)
     else
-      flash.now[:danger] = '無効なリクエストです'
+      flash.now[:danger] = 'API利用回数が上限に達しました。いつもご使用ありがとうございます'
       render :new, status: :unprocessable_entity
       return
     end
@@ -65,14 +63,16 @@ class ResponsesController < ApplicationController
     params.require(:response).permit(:title, :user_id, :player_name, :team_id, :request_id, :season_id)
   end
 
-  def fetch_beginner_information
+  def fetch_stardom_information
     response = @client.chat(
         parameters: {
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", 
-            content: "2021年のサッカー欧州リーグについてです。
-            初心者が好きになれそうな世界トップクラスの選手を11人、簡単な特長・所属クラブチームと共に教えてください。
-            形式は、以下の通りでお願いします。
+            content: "2021年のサッカー欧州リーグについてです
+            初心者が好きになれそうな世界トップクラスの選手簡単な特長・所属クラブチームと共に教えてください
+            ポジション毎に計11人教えてください
+            改行はしないでください
+            形式は、以下の通りでお願いします
 
             選手名:
             所属クラブチーム:
@@ -80,7 +80,7 @@ class ResponsesController < ApplicationController
 
             日本語で教えてください
             youtubeで見るのにおすすめな選手でお願いします
-            箇条書きでお願いします" }],
+            " }],
         })
     @response.body = response.dig("choices", 0, "message", "content")
     puts @response.body
@@ -128,8 +128,8 @@ class ResponsesController < ApplicationController
     puts @response.body
   end
 
-  def handle_beginner_request
-    fetch_beginner_information
+  def handle_stardom_request
+    fetch_stardom_information
     save_response_with_redirect_or_render
   end
   
@@ -182,4 +182,24 @@ class ResponsesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def can_call_api?
+    current_user.request_limit_count < 3
+  end
+
+  def call_api
+    case @response.request.name
+    when 'Stardom Players'
+      handle_stardom_request
+    when '成績'
+      handle_score_request
+    when '特長'
+      handle_character_request
+    else
+      flash.now[:danger] = '無効なリクエストです'
+      render :new, status: :unprocessable_entity
+      return
+    end
+  end
+
 end

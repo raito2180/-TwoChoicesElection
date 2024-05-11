@@ -33,6 +33,10 @@ gem "ruby-openai"
 #openaiレスポンス調整用
 gem 'nokogiri'
 
+#openai使用制限定期実行用
+gem 'whenever', '1.0.0', :require => false
+gem 'chronic', '0.6.3'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 

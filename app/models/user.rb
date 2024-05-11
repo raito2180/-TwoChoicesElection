@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[google_oauth2]
 
   has_many :contacts, dependent: :destroy
+  has_many :responses, dependent: :destroy
   validates :email, uniqueness: true
   # omniauthのコールバック時に呼ばれるメソッド
   def self.from_omniauth(auth)
