@@ -4,7 +4,6 @@ ruby "3.2.2"
 
 #tailwindCSSインストール用
 gem 'cssbundling-rails'
-gem 'jsbundling-rails'
 
 #静的ページ作成用
 gem 'high_voltage'
@@ -17,7 +16,6 @@ gem 'dotenv-rails'
 
 #バグフィックス用
 gem 'pry-rails'
-gem 'pry-byebug'
 
 #認証機能用
 gem "devise"
@@ -29,6 +27,15 @@ gem 'omniauth-rails_csrf_protection'
 #メール確認用
 gem 'letter_opener_web'
 
+#openai用
+gem "ruby-openai"
+
+#openaiレスポンス調整用
+gem 'nokogiri'
+
+#openai使用制限定期実行用
+gem 'whenever', '1.0.0', :require => false
+gem 'chronic', '0.6.3'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"

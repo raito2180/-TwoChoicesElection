@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :responses, only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :responses
 
   resources :contacts, only: [:new, :create]
   get 'done', to: 'contacts#done', as: 'done'
