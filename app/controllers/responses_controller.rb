@@ -33,7 +33,7 @@ class ResponsesController < ApplicationController
       # API利用回数をインクリメント
       current_user.increment!(:request_limit_count)
     else
-      flash.now[:danger] = 'API利用回数が上限に達しました。いつもご使用ありがとうございます'
+      flash.now[:danger] = 'API利用回数が上限に達しました。午前5時にリセットされます'
       render :new, status: :unprocessable_entity
       return
     end
