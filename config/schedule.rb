@@ -27,7 +27,7 @@ set :environment, rails_env
 # cronのログの吐き出し場所
 set :output, "#{Rails.root}/log/cron.log"
 
-every 1.day, at: '8:00 pm' do
+every 1.minutes do
   begin
     rake 'reset_api:request_limit_count'
   rescue => e
