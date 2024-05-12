@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-bundle exec whenever --update-crontab
-service cron start
-crontab  -l
-
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /app/tmp/pids/server.pid
 
