@@ -4,7 +4,7 @@ set -e
 bundle exec whenever --update-crontab
 service cron start
 crontab  -l
-bundle exec rails runner Tasks::reset_api:request_limit_count -e production
+bundle exec rails runner "reset_api.request_limit_count" -e production
 
 # Remove a potentially pre-existing server.pid for Rails.
 rm -f /app/tmp/pids/server.pid
