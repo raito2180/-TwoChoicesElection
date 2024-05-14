@@ -1,18 +1,82 @@
-<div class="bg-blue-900 bg-cover min-h-screen object-cover w-full text-white">
-  <div class="bg-cover md:w-full md:h-screen text-white" style="background-image: url('<%= asset_path('top.jpg') %>')">
-    <div class="h-4/6 flex items-end">
+<div class="bg-blue-900 w-full h-full text-white">
+  <div class="bg-cover md:w-full md:h-screen min-h-[45vh] text-white" style="background-image: url('<%= asset_path('top.jpg') %>')">
+    <div class="h-[35vh] md:h-4/6 flex items-end">
       <div>
-        <p class="md:text-7xl font-bold">何度でも、ファンになろう。</p>
+        <p class="text-4xl md:text-7xl font-bold">何度でも、ファンになろう。</p>
       </div>
     </div>
-    <div class="h-1/6 flex flex-col items-end">
-    <%= link_to videos_path do %>
-      <button class="btn bg-blue-900 hover:bg-blue-800 text-white md:text-4xl mx-2 mb-2">→(登録不要)サッカー選手の動画を視聴</button>
-    <% end %>
-    <button class="btn bg-blue-900 hover:bg-blue-800 text-white md:text-4xl mx-2 mb-2">→(要登録)AIで選手・チームを調べに行く</button>
-      <button class="btn bg-blue-900 hover:bg-blue-800 text-gray-400 md:text-4xl mx-2 mb-2">→(coming soon)Let`s move!</button>
+  </div>
+</div>
+<div class='flex items-center justify-center m-16' >
+  <div class='flex flex-col'>
+    <%= image_tag asset_path('About.png'), class: "h-32 w-60"%>
+    <span class='font-bold text-4xl'>「サッカーファンのためのウェブサービス！」</span><br>
+    <span class='text-2xl'>サッカーは世界中で熱狂される最高のスポーツですが、情報の変化が速く、離れるとファンに戻りにくいという面も。</span><br>
+    <span class='text-2xl'>当サービスは元ファンが再び魅了され、ファンがより深くサッカーを愛するためのサービスです！</span>
+  </div>
+</div>
+
+
+<div class='flex items-center justify-center mb-16' >
+  <div>
+    <%= image_tag asset_path('Product features.png'), class: "h-32 w-80" %>
+    <div class='grid grid-cols-1 md:grid-cols-3 gap-4'>
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <figure class="px-10 pt-10">
+          <%= image_tag asset_path('youtube.png')%>
+        </figure>
+        <div class="card-body items-center text-center">
+          <h2 class="card-title text-black">サッカー動画視聴</h2>
+          <p class="text-black">欧州トップクラスのスーパープレイ動画を視聴して好きな選手を見つけましょう！！</p>
+          <div class="card-actions">
+            <%= link_to videos_path do %>
+              <button class="btn btn-primary">見に行く</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="card w-96 bg-base-100 shadow-xl">
+        <figure class="px-10 pt-10">
+          <%= image_tag asset_path('openai.png')%>
+        </figure>
+        <div class="card-body items-center text-center">
+          <h2 class="card-title text-black">AIによるサッカー情報検索</h2>
+          <p class="text-black">ＡＩでチームや選手の成績や特徴がわかる！！シーズン別でも検索可能です！！</p>
+          <div class="card-actions">
+            <%= link_to new_user_session_path do %>
+              <button class="btn btn-primary">検索する</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="card w-96 bg-gray-500 shadow-xl">
+        <figure class="px-10 pt-10">
+          <%= image_tag asset_path('footsal.png')%>
+        </figure>
+        <div class="card-body items-center text-center">
+          <h2 class="card-title text-black">フットサル募集機能(coming soon!)</h2>
+          <p class="text-black">スーパープレイ動画とAI検索で熱くなったら、体を動かしてみませんか？？</p>
+          <div class="card-actions">
+            <%= link_to '#' do %>
+              <button class="btn btn-primary">募集しに行く</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
+
 <% #todo スクリーンの高さスクロールしないようにする %>
+
+<h1 class="text-3xl font-bold underline">
+    Hello world!
+</h1>
+<h1 class="text-5xl mb-4 text-center text-red-200">動画を検索！</h1>
+<button class="bg-gray-700 hover:bg-gray-800 text-white rounded px-4 py-2">tailwind</button>
+
+<button class="btn">daisyUI</button>
+
+<button class="btn btn-secondary">btn btn-secondary</button>
+<%= link_to '動画へ', new_video_path %>

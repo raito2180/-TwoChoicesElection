@@ -15,6 +15,6 @@
 <% end %>
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to "#{OmniAuth::Utils.camelize(provider)}でログイン", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: 'btn btn-xs h-6 mx-2'  %><br />
+    <%= button_to "googleでログイン", omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: 'btn btn-xs h-6 mx-2'  %><br />
   <% end %>
 <% end %>
