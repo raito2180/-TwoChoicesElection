@@ -2,4 +2,3 @@
 //= link_tree ../builds
 //= link application.css
 //= link application.tailwind.css
-//= link application.js

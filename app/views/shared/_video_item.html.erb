@@ -1,6 +1,6 @@
-<li>
+<li class='my-6'>
   <div class="mx-4 mb-4">
-    <div class="truncate text-lg">
+    <div class="text-lg w-full overflow-hidden whitespace-nowrap" style="max-width: 36ch;">
       <%= link_to video_path(video[:video_id], video) do %>
         <%= video[:title] %>
       <% end %>
@@ -10,8 +10,8 @@
     </div>
     <div>
       <%= link_to video_path(video[:video_id], video) do %>
-        <% image_tag "#{video[:thumbnail_url]}", :size => '350x270' %>
+        <%= image_tag "#{video[:thumbnail_url]}", size: '350x270' %>
       <% end %>
     </div>
-  <div>
+  </div>
 </li>

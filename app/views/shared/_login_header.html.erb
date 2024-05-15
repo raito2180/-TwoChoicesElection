@@ -33,12 +33,22 @@
           <% end %>
         </li>
         <li>
+          <%= link_to responses_path, class: "block mt-4 lg:inline-block lg:mt-0 font-bold" do %>
+            <div class="flex flex-nowrap space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+              </svg>
+              <span><%= "AI投稿一覧" %></span>
+            </div>
+          <% end %>
+        </li>
+        <li>
           <%= link_to  new_response_path, class: "block mt-4 lg:inline-block lg:mt-0 font-bold" do %>
             <div class="flex flex-nowrap space-x-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 15.75-2.489-2.489m0 0a3.375 3.375 0 1 0-4.773-4.773 3.375 3.375 0 0 0 4.774 4.774ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
               </svg>
-              <span><%= "AI ※本日使用(#{current_user.request_limit_count}/3)" %></span>
+              <span><%= "AI検索 本日使用(#{current_user.request_limit_count}/3)" %></span>
             </div>
           <% end %>
         </li>
@@ -72,9 +82,6 @@
             </div>
           <% end %>
         </li>
-        <li><%= link_to '利用規約', page_path('terms'), class: "block mt-4 lg:inline-block lg:mt-0 " %></li>
-        <li><%= link_to 'プライバシーポリシー', page_path('policy'), class: "block mt-4 lg:inline-block lg:mt-0 " %></li>
-        <li><%= link_to 'お問い合わせ', new_contact_path, class: "block mt-4 lg:inline-block lg:mt-0" %></li>
       </ul>
     </div>
   </nav>
