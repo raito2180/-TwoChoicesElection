@@ -1,4 +1,5 @@
 class ResponsesController < ApplicationController
+  before_action :redirect_root
   before_action :set_openai, only: [:create]
 
   def index
@@ -27,13 +28,19 @@ class ResponsesController < ApplicationController
       render :new, status: :unprocessable_entity
       return
     end
+
+    if @response.title.blank?
+      flash.now[:danger] = 'タイトルは必須入力です'
+      render :new, status: :unprocessable_entity
+      return
+    end
+
     if can_call_api?
       # APIを呼び出す処理
       call_api
       # API利用回数をインクリメント
-      current_user.increment!(:request_limit_count)
     else
-      flash.now[:danger] = 'API利用回数が上限に達しました。午前5時にリセットされます'
+      flash.now[:danger] = 'API利用回数が上限に達しました。午前5時に利用回数がリセットされます'
       render :new, status: :unprocessable_entity
       return
     end
@@ -50,6 +57,13 @@ class ResponsesController < ApplicationController
   end
 
   def destroy
+    @response = Response.find(params[:id])
+    if @response.destroy
+      flash[:success] = '投稿が削除されました'
+    else
+      flash[:error] = '投稿の削除に失敗しました'
+    end
+    redirect_to request.referer
   end
 
   private
@@ -66,13 +80,14 @@ class ResponsesController < ApplicationController
   def fetch_stardom_information
     response = @client.chat(
         parameters: {
-            model: "gpt-3.5-turbo",
+            model: "gpt-4o",
             messages: [{ role: "user", 
-            content: "2021年のサッカー欧州リーグについてです
+            content: "2022年のサッカー欧州リーグについてです
             初心者が好きになれそうな世界トップクラスの選手簡単な特長・所属クラブチームと共に教えてください
             ポジション毎に計11人教えてください
             改行はしないでください
             形式は、以下の通りでお願いします
+            形式以外の文章は不要です。
 
             選手名:
             所属クラブチーム:
@@ -92,7 +107,7 @@ class ResponsesController < ApplicationController
     season_name = args[2]
     response = @client.chat(
         parameters: {
-            model: "gpt-4-0125-preview",
+            model: "gpt-4o",
             messages: [{ role: "user", 
             content: "
             サッカーの欧州リーグについて質問です。
@@ -113,7 +128,7 @@ class ResponsesController < ApplicationController
     season_name = args[2]
     response = @client.chat(
         parameters: {
-            model: "gpt-4-0125-preview",
+            model: "gpt-4o",
             messages: [{ role: "user", 
             content: "
             サッカーの欧州リーグについて質問です。
@@ -131,6 +146,7 @@ class ResponsesController < ApplicationController
   def handle_stardom_request
     fetch_stardom_information
     save_response_with_redirect_or_render
+    current_user.increment!(:request_limit_count)
   end
   
   def handle_score_request
@@ -151,6 +167,7 @@ class ResponsesController < ApplicationController
     end
   
     save_response_with_redirect_or_render
+    current_user.increment!(:request_limit_count)
   end
   
   def handle_character_request
@@ -171,6 +188,7 @@ class ResponsesController < ApplicationController
     end
   
     save_response_with_redirect_or_render
+    current_user.increment!(:request_limit_count)
   end
   
   def save_response_with_redirect_or_render

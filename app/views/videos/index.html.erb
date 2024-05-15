@@ -1,19 +1,18 @@
 <div class="bg-blue-900 w-full h-full text-white">
-  <h1 class="text-5xl mb-4">動画視聴機能</h1>
 
   <div class="flex justify-center">
     <%= form_with url: search_videos_path, method: :get, local: true do |f| %>
       <div class="flex items-center">
-        <%= f.text_field :keyword, placeholder: "選手名を入力", class: "border border-black border-2 rounded-md text-black" %>
-        <%= f.submit "検索", class: 'btn btn-xs'%>
+        <%= f.text_field :keyword, placeholder: "選手名を入力", class: "text-4xl border border-black border-2 rounded-md text-black my-20 mx-1" %>
+        <%= f.submit "検索", class: 'btn btn-md'%>
       </div>
     <% end %>
   </div>
-
+  
   <% if @videos.present? %>
       <h3 class="text-xl mt-6">検索結果</h3>
       <div>
-        <ul class="grid grid-cols-1 md:grid-cols-3">
+        <ul class="grid grid-cols-1 md:grid-cols-4">
           <% @videos.each do |video| %>
             <%= render partial: 'shared/video_item', locals: { video: video } %>
           <% end %>
@@ -26,8 +25,8 @@
 
   <% if @recommend_videos.present? %>
       <h3 class="text-xl mt-6">おすすめ</h3>
-      <div>
-        <ul class="grid grid-cols-1 md:grid-cols-3">
+      <div class="mb-20 w-full">
+        <ul class="grid grid-cols-1 md:grid-cols-4 place-items-center">
           <% @recommend_videos.each do |video| %>
             <%= render partial: 'shared/video_item', locals: { video: video } %>
           <% end %>

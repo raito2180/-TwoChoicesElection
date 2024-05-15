@@ -28,7 +28,7 @@ def set_youtube
   @youtube = Google::Apis::YoutubeV3::YouTubeService.new
   @youtube.key = ENV['YOUTUBE_API_KEY']
   recommend_keyword = "サッカー スーパープレイ集"
-  recommend_results = @youtube.list_searches(:snippet, q: recommend_keyword, type: 'video', max_results: 6)
+  recommend_results = @youtube.list_searches(:snippet, q: recommend_keyword, type: 'video', max_results: 12, order: 'viewCount')
   @recommend_videos = recommend_results.items.map do |result|
     video_id = result.id.video_id
     statistics = @youtube.list_videos(:statistics, id: video_id).items.first

@@ -1,4 +1,6 @@
 class ContactsController < ApplicationController
+  before_action :redirect_root
+  
   def new
     @contact = Contact.new
   end

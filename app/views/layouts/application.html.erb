@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
     <%= favicon_link_tag('favicon.ico') %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application.tailwind", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
@@ -23,5 +24,12 @@
           class: "alert #{type == 'notice' ? 'alert-success' : 'alert-danger'} alert-success", role: "alert") %>
     <% end %>
     <%= yield %>
+    <footer>
+      <% if user_signed_in? %>
+      <%= render partial: 'shared/login_footer' %>
+    <% else %>
+      <%= render partial: 'shared/before_login_footer' %>
+    <% end %>
+    </footer>
   </body>
 </html>
