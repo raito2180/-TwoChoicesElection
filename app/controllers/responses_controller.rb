@@ -28,11 +28,17 @@ class ResponsesController < ApplicationController
       render :new, status: :unprocessable_entity
       return
     end
+
+    if @response.title.blank?
+      flash.now[:danger] = 'タイトルは必須入力です'
+      render :new, status: :unprocessable_entity
+      return
+    end
+
     if can_call_api?
       # APIを呼び出す処理
       call_api
       # API利用回数をインクリメント
-      current_user.increment!(:request_limit_count)
     else
       flash.now[:danger] = 'API利用回数が上限に達しました。午前5時に利用回数がリセットされます'
       render :new, status: :unprocessable_entity
@@ -81,6 +87,7 @@ class ResponsesController < ApplicationController
             ポジション毎に計11人教えてください
             改行はしないでください
             形式は、以下の通りでお願いします
+            形式以外の文章は不要です。
 
             選手名:
             所属クラブチーム:
@@ -139,6 +146,7 @@ class ResponsesController < ApplicationController
   def handle_stardom_request
     fetch_stardom_information
     save_response_with_redirect_or_render
+    current_user.increment!(:request_limit_count)
   end
   
   def handle_score_request
@@ -159,6 +167,7 @@ class ResponsesController < ApplicationController
     end
   
     save_response_with_redirect_or_render
+    current_user.increment!(:request_limit_count)
   end
   
   def handle_character_request
@@ -179,6 +188,7 @@ class ResponsesController < ApplicationController
     end
   
     save_response_with_redirect_or_render
+    current_user.increment!(:request_limit_count)
   end
   
   def save_response_with_redirect_or_render

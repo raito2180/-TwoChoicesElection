@@ -1,34 +1,37 @@
 <div id='responsive-div' class='h-screen'>
   <h1 class="text-5xl mb-4">AI記録一覧</h1>
   <div class='my-2'>
-    <% if @response.present? %>
-    <ul class='grid grid-cols-1 md:grid-cols-4'>
-      <% @responses.each do |response| %>
-        <div class="card card-compact bg-blue-500 shadow-xl mx-2 my-2">
-          <figure>
-          <%= link_to response_path(response.id) do %>
-            <%= image_tag "apiindex.jpg" %>
-          <% end %>
-          </figure>
-            <div class="card-body">
-            <h2 class="card-title"><%= "タイトル:#{response.title}" %></h2>
-            <p><%= "作成日:#{response.created_at}" %></p>
-            <div class="card-actions justify-end">
-              <%= link_to '投稿内容を見る', response_path(response.id), class: 'btn' %>
-              <%= link_to '投稿削除', response_path(response), data: { turbo_method: :delete }, class: 'btn' %>
+    <% if @responses.present? %>
+      <ul class='grid grid-cols-1 md:grid-cols-4'>
+        <% @responses.each do |response| %>
+          <li class='my-2'>
+            <div class="card card-compact bg-blue-500 shadow-xl mx-2">
+              <figure>
+                <%= link_to response_path(response.id) do %>
+                  <%= image_tag "apiindex.jpg" %>
+                <% end %>
+              </figure>
+              <div class="card-body">
+                <h2 class="card-title"><%= "タイトル:#{response.title}" %></h2>
+                <p><%= "作成日:#{response.created_at}" %></p>
+                <div class="card-actions justify-end">
+                  <%= link_to '投稿内容を見る', response_path(response.id), class: 'btn' %>
+                  <%= link_to '投稿削除', response_path(response), data: { turbo_method: :delete }, class: 'btn' %>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      <% end %>
-    </ul>
+          </li>
+        <% end %>
+      </ul>
     <% else %>
-      <div class='w-full flex flex-col my-56 justify-center items-center'>
+      <div class='w-full flex flex-col my-56 items-center'>
         <span class='font-bold text-3xl'>今のところ投稿がありません。ぜひAI検索機能を使ってみてください♪</span>
-        <%= image_tag asset_path('POSTME.png')%>
+        <%= image_tag asset_path('POSTME.png') %>
       </div>
     <% end %>
   </div>
 </div>
+
 
 <script>
   function updateHeightClass() {
