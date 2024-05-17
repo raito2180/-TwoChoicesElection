@@ -36,7 +36,8 @@
 <script>
   function updateHeightClass() {
     const div = document.getElementById('responsive-div');
-    if (window.innerHeight > 100 * 16) { // 100vhは16pxフォントサイズで100rem
+    const viewportHeight = document.documentElement.clientHeight;
+    if (viewportHeight > 600 ) {
       div.classList.remove('h-screen');
       div.classList.add('h-full');
     } else {
