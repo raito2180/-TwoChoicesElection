@@ -88,6 +88,7 @@ class ResponsesController < ApplicationController
             改行はしないでください
             形式は、以下の通りでお願いします
             形式以外の文章は不要です。
+            改行を一行ずつ入れてください。
 
             選手名:
             所属クラブチーム:
@@ -115,6 +116,7 @@ class ResponsesController < ApplicationController
             説明の対象は下記のとおりです。
             具体的な点数も含めてください
             1回のチャットごとに記憶をリセットしてください。
+            マークダウン方式は使用しないでください
             知りたい対象:#{team_name}#{player_name}
             シーズン#{season_name}
             " }],
@@ -135,6 +137,7 @@ class ResponsesController < ApplicationController
             プレースタイルを分かりやすく説明してください。シーズンの指定が無い場合は、選手時代の全体を通しての総評を説明して下さい。
             説明の対象は下記のとおりです。
             1回のチャットごとに記憶をリセットしてください。
+            マークダウン方式は使用しないでください
             知りたい対象:#{team_name}#{player_name}
             シーズン#{season_name}
             " }],
