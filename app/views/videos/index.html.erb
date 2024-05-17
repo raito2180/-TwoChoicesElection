@@ -3,7 +3,7 @@
   <div class="flex justify-center">
     <%= form_with url: search_videos_path, method: :get, local: true do |f| %>
       <div class="flex items-center">
-        <%= f.text_field :keyword, placeholder: "選手名を入力", class: "text-4xl border border-black border-2 rounded-md text-black my-20 mx-1" %>
+        <%= f.text_field :keyword, placeholder: "選手名を入力", class: "text-2xl md:text-4xl border border-black border-2 rounded-md text-black my-20 mx-1" %>
         <%= f.submit "検索", class: 'btn btn-md'%>
       </div>
     <% end %>
