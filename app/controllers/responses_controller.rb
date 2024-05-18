@@ -24,13 +24,13 @@ class ResponsesController < ApplicationController
     
     # リクエストに関連する情報を取得するメソッドを呼び出す
     if @response.request_id.blank?
-      flash.now[:danger] = '知りたい事は必須入力です'
+      flash.now[:danger] = '知りたい事を入力してください'
       render :new, status: :unprocessable_entity
       return
     end
 
     if @response.title.blank?
-      flash.now[:danger] = 'タイトルは必須入力です'
+      flash.now[:danger] = 'タイトルを入力してください'
       render :new, status: :unprocessable_entity
       return
     end
@@ -154,7 +154,7 @@ class ResponsesController < ApplicationController
   
   def handle_score_request
     if @team_data && @player_data.name != ""
-      flash.now[:danger] = '選手とチームの情報は同時に入れないでください'
+      flash.now[:danger] = '選手とチームの情報は同時に入力しないでください'
       render :new, status: :unprocessable_entity
       return
     end
@@ -175,7 +175,7 @@ class ResponsesController < ApplicationController
   
   def handle_character_request
     if @team_data && @player_data.name != ""
-      flash.now[:danger] = '選手とチームの情報は同時に入れないでください'
+      flash.now[:danger] = '選手とチームの情報は同時に入力しないでください'
       render :new, status: :unprocessable_entity
       return
     end
