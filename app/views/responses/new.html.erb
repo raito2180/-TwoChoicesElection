@@ -1,13 +1,13 @@
 <div class="bg-blue-900 w-full h-screen text-white">
   <h1 class="text-5xl mb-4">AI検索機能</h1>
     <%= form_with model: @response, url: responses_path, method: :post, local: true do |form| %>
-      <div class='flex-col md:grid md:grid-cols-7 rounded-md text-black'>
-        <%= form.collection_select :request_id, Request.all, :id, :name, { include_blank: "知りたい事を選択" }, { class: 'border border-black border-2 rounded-md text-black mx-1 md:col-span-1' } %>
-        <%= form.collection_select :team_id, Team.all, :id, :name, { include_blank: "チームを選択" }, { class: 'border border-black border-2 rounded-md text-black mx-1 md:col-span-1' } %>
-        <%= form.text_field :player_name, placeholder: "プレイヤーを入力", class: 'border border-black border-2 rounded-md text-black mx-1 md:col-span-1' %>
-        <%= form.collection_select :season_id, Season.all, :id, :name, { include_blank: "シーズンを選択" }, { class: 'border border-black border-2 rounded-md text-black mx-1 md:col-span-1' } %>
-        <%= form.text_field :title, placeholder: '記録用タイトルを入力', class: 'border border-black border-2 rounded-md text-black md:col-span-1'%>
-        <%= form.submit '検索' , class: 'btn btn-sm rounded-md text-black mx-1 md:col-span-1'%>
+      <div class='grid grid-cols-1 md:grid-cols-7 rounded-md text-black'>
+        <%= form.collection_select :request_id, Request.all, :id, :name, { include_blank: "知りたい事を選択" }, { class: 'border border-black border-2 rounded-md bg-base-100 text-black mx-1 md:col-span-1' } %>
+        <%= form.collection_select :team_id, Team.all, :id, :name, { include_blank: "チームを選択" }, { class: 'border border-black border-2 rounded-md bg-base-100 text-black mx-1 md:col-span-1' } %>
+        <%= form.text_field :player_name, placeholder: "プレイヤーを入力", class: 'border border-black border-2 rounded-md bg-base-100 text-black mx-1 md:col-span-1' %>
+        <%= form.collection_select :season_id, Season.all, :id, :name, { include_blank: "シーズンを選択" }, { class: 'border border-black border-2 rounded-md bg-base-100 text-black mx-1 md:col-span-1' } %>
+        <%= form.text_field :title, placeholder: '記録用タイトルを入力', class: 'border border-black border-2 rounded-md bg-base-100 text-black md:col-span-1'%>
+        <%= form.submit '検索' , class: 'btn btn-sm rounded-md bg-base-100 text-black mx-1 md:col-span-1'%>
       </div>
     <% end %>
 </div>
