@@ -3,7 +3,7 @@ class ResponsesController < ApplicationController
   before_action :set_openai, only: [:create]
 
   def index
-    @responses = Response.all
+    @responses = current_user.responses
   end
   def new
     @response = Response.new
