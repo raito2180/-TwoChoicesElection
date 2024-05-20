@@ -12,7 +12,7 @@
   <% if @videos.present? %>
       <h3 class="text-xl mt-6">検索結果</h3>
       <div>
-        <ul class="grid grid-cols-1 md:grid-cols-4">
+        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 place-items-center">
           <% @videos.each do |video| %>
             <%= render partial: 'shared/video_item', locals: { video: video } %>
           <% end %>
@@ -20,13 +20,13 @@
       </div>
   <% else %>
     <h3 class="text-xl mt-6">検索結果</h3>
-    <h1>未検索です。検索窓から検索してください</h1>
+    <h1>未検索、もしくは検索ワードが適正でない可能性があります。検索窓からサッカーに関するワードで検索してください</h1>
   <% end %>
 
   <% if @recommend_videos.present? %>
       <h3 class="text-xl mt-6">おすすめ</h3>
       <div class="mb-20 w-full">
-        <ul class="grid grid-cols-1 md:grid-cols-4 place-items-center">
+        <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 place-items-center">
           <% @recommend_videos.each do |video| %>
             <%= render partial: 'shared/video_item', locals: { video: video } %>
           <% end %>

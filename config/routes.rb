@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   root 'tops#index'
+
+  resources :users do
+    member do
+      delete 'user_delete'
+    end
+  end
+
   resources :videos do
     collection do
       get 'search'
