@@ -1,0 +1,17 @@
+<div class="bg-blue-900 w-full h-screen text-white overflow-hidden flex items-center justify-center">
+  <div>
+    <h1 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>ユーザー詳細</h1>
+    <h1 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>
+      <%= image_tag "#{@profile.image}", size: '350x270' %>
+    </h1>
+    <h1 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>
+      <%= @profile.name %>
+    </h1>
+    <h1 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>
+      <%= @profile.gender %>
+    </h1>
+    <h1 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>
+      <%= @profile.body %>
+    </h1>
+  </div>
+</div>
