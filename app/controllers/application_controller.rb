@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_profile
+  before_action :ensure_profile
 
   private
   
@@ -10,6 +11,17 @@ class ApplicationController < ActionController::Base
   def set_profile
     if user_signed_in?
       @profile = current_user.profile
+    end
+  end
+
+  def ensure_profile
+    if user_signed_in? && current_user.profile.nil?
+      current_user.create_profile(
+        name: "ファン#{current_user.id}号",
+        gender: 0,
+        body: 'こんにちは、皆でフットサルやりましょう!',
+        image: 'default.jpg'
+      )
     end
   end
 
