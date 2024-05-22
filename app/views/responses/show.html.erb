@@ -15,16 +15,16 @@
     <%= content_tag(:span, "上記の選手たちは、youtubeでもスーパープレイを披露してくれるトップクラスの選手たちです！！気になった選手をぜひ動画で検索してみてください！", class: 'font-bold') %>
     <span>※2022年のデータになります</span>
   <% else %>
-    <div class="grid grid-cols-1 md:grid-cols-3">
-        <div class="card card-compact bg-base-100 shadow-xl text-black mx-2 my-2">
+    <div class="grid grid-cols-1 place-items-center">
+        <div class="card card-compact shadow-xl text-black md:w-1/2 mx-2 my-20 bg-blue-200">
           <div class="card-body">
             <%= simple_format(h(@response.body)) %>
           </div>
         </div>
     </div>
     <%= content_tag(:span, "感動的な情報に出会えましたか？？気になったらぜひ動画で検索してみてください！", class: 'font-bold') %>
-  <% end %><br>
-  <%= link_to '動画を見に行く', videos_path, class: 'btn btn-sm flex items-center my-2 mx-2' %>
+  <% end %>
+  <%= link_to '動画を見に行く', videos_path, class: 'btn btn-sm my-2 mx-2 w-36' %>
 </div>
 
 

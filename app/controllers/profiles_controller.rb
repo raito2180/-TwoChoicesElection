@@ -1,9 +1,7 @@
 class ProfilesController < ApplicationController
   
 
-  def show
-    @profile = current_user.profile
-  end
+  def show; end
 
   def edit
   end
@@ -14,7 +12,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:name, :gender, :body, :images )
+    params.require(:profile).permit(:name, :gender, :body, :image )
   end
 
 end
