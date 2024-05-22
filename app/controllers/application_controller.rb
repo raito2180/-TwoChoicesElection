@@ -16,12 +16,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_profile
     if user_signed_in? && current_user.profile.nil?
-      current_user.create_profile(
-        name: "ファン#{current_user.id}号",
-        gender: 0,
-        body: 'こんにちは、皆でフットサルやりましょう!',
-        image: 'default.jpg'
-      )
+      Profile.create(user: self, name: "ファン#{self.id}号", gender: 0, body: 'こんにちは、皆でフットサルやりましょう!', image: 'default.jpg')
     end
   end
 
