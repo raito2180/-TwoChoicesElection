@@ -1,2 +1,21 @@
-<h1>Profiles#edit</h1>
-<p>Find me in app/views/profiles/edit.html.erb</p>
+<%= form_with(model: @profile, local: true) do |f| %>
+  <div class="field">
+    <%= f.label :image %><br>
+    <%= f.file_field :image, autofocus: true, placeholder: 'アイコンをアップロード', class: 'rounded-md w-96 text-black'%>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, class: 'rounded-md w-96 text-black'%>
+  </div>
+  <div class="field">
+    <%= f.label :gender %><br>
+    <%= f.select :gender, Profile.genders.keys.map { |w| [w.humanize, w] }, {}, class: 'rounded-md w-96 text-black' %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body, class: 'rounded-md w-96 text-black'%>
+  </div>
+  <div class="actions flex justify-center pb-2 border-dotted border-b-2 border-fitting-white">
+    <%= f.submit "更新", class: 'btn btn-sm mt-2'%>
+  </div>
+<% end %>
