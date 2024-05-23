@@ -1,51 +1,58 @@
-<div class="bg-blue-900 w-full h-screen text-white overflow-hidden flex items-center justify-center">
-  <div>
+<div class="mt-3 mb-5 <%= @profile.errors.include?(:avatar) ? "validation_errors" : "" %>">
+  <div class="bg-blue-900 w-full h-screen text-white overflow-hidden flex items-center justify-center">
     <div>
-      <%= form_with(model: @profile, local: true) do |f| %>
-        <div class="field border-dotted border-t-2 border-fitting-whitec pt-2">
-          <%= f.label :image %><br>
-            <div class="image-preview flex items-center justify-center" onclick="document.getElementById('profile_image').click()">
-              <%= image_tag @profile.image, id: 'profile_image_preview', class: 'w-60 h-60 rounded-full cursor-pointer  relative brightness-50' %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-36 h-36 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[55%] text-white cursor-pointer">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-            </div>
-          <%= f.file_field :image, id: 'profile_image', class: 'invisible', onchange: "previewImage(event)" %>
-        </div>
-        <div class="field">
-          <%= f.label :name %><br>
-          <%= f.text_field :name, class: 'rounded-md w-96 text-black'%>
-        </div>
-        <div class="field">
-          <%= f.label :gender %><br>
-          <%= f.select :gender, Profile.genders.keys.map { |w| [w.humanize, w] }, {}, class: 'rounded-md w-96 text-black' %>
-        </div>
-        <div class="field">
-          <%= f.label :body %><br>
-          <%= f.text_area :body, class: 'rounded-md w-96 text-black'%>
-        </div>
-        <div class="actions flex justify-center pb-2 border-dotted border-b-2 border-fitting-white">
-          <%= f.submit "更新", class: 'btn btn-sm mt-2'%>
-          <%= link_to profile_path(@profile) do %>
-            <span class='btn btn-sm mt-2 mx-2 '%>やっぱり戻る</span>
-          <% end %>
-        </div>
-      <% end %>
+      <div>
+        <%= form_with(model: @profile, local: true, html: { multipart: true }) do |f| %>
+          <div class="field border-dotted border-t-2 border-fitting-white pt-2">
+            <%= f.label :image %><br>
+              <div class="image-preview flex items-center justify-center" onclick="document.getElementById('profile_avatar').click()">
+                <% if @profile.avatar.present? %>
+                  <%= image_tag @profile.avatar, id: 'preview', class: 'w-60 h-60 rounded-full cursor-pointer relative brightness-50' %>
+                <% else %>
+                  <%= image_tag "default.jpg", id: 'preview', class: 'w-60 h-60 rounded-full cursor-pointer  relative brightness-50' %>
+                <% end %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-36 h-36 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white cursor-pointer">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+              </div>
+            <%= f.file_field :avatar, id: 'profile_avatar', class: 'invisible', onchange: 'previewImage(this)'  %>
+          </div>
+          <div class="field">
+            <%= f.label :name %><br>
+            <%= f.text_field :name, class: 'rounded-md w-96 text-black'%>
+          </div>
+          
+          <div class="field">
+            <%= f.label :gender %><br>
+            <%= f.select :gender, Profile.genders.keys.map { |w| [w.humanize, w] }, {}, class: 'rounded-md w-96 text-black' %>
+          </div>
+          <div class="field">
+            <%= f.label :body %><br>
+            <%= f.text_area :body, class: 'rounded-md w-96 text-black'%>
+          </div>
+          <div class="actions flex justify-center pb-2 border-dotted border-b-2 border-fitting-white">
+            <%= f.submit "更新", class: 'btn btn-sm mt-2'%>
+            <%= link_to profile_path(@profile) do %>
+              <span class='btn btn-sm mt-2 mx-2 '%>やっぱり戻る</span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
+</div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('profile_image').addEventListener('change', previewImage);
-
-    function previewImage(event) {
+    function previewImage(input) {
+      const file = input.files[0];
+      if (file) {
       const reader = new FileReader();
       reader.onload = function(){
-        const output = document.getElementById('profile_image_preview');
+        const output = document.getElementById('preview');
         output.src = reader.result;
       };
-      reader.readAsDataURL(event.target.files[0]);
+      console.log('ログ:', file);
+      reader.readAsDataURL(file);
+     };
     }
-  });
 </script>

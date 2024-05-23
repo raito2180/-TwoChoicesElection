@@ -2,7 +2,11 @@
   <div class='w-3/4 md:w-1/2 border-dotted border-t-2 border-fitting-whitec pt-2 flex flex-col items-center justify-center'>
     <div class="avatar">
       <div class="w-40 h-40 md:w-80 md:h-80 rounded-full flex items-center justify-center">
-        <%= image_tag "#{@profile.image}", size: '350x270' %>
+        <% if @profile.avatar.present? %>
+        <%= image_tag @profile.avatar, size: '350x270' %>
+        <% else %>
+          <%= image_tag "default.jpg" %>
+        <% end %>
       </div>
     </div><br>
     <div class="badge badge-lg badge-primary">

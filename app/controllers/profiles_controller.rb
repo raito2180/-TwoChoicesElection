@@ -5,9 +5,11 @@ class ProfilesController < ApplicationController
   def edit; end
 
   def update
+    @profile.avatar.attach(params[:profile][:avatar]) if @profile.avatar.blank?
     if @profile.update(profile_params)
       redirect_to @profile, notice: 'プロフィールを更新しました'
     else
+      flash.now[:danger] = '更新に失敗しました'
       render :edit
     end
   end
@@ -15,7 +17,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:name, :gender, :body, :image )
+    params.require(:profile).permit(:name, :gender, :body, :avatar )
   end
 
 end
