@@ -21,7 +21,7 @@ class User < ApplicationRecord
   private
 
   def create_profile
-    Profile.create(user: self, name: "ファン#{self.id}号", gender: 0, body: 'こんにちは、皆でフットサルやりましょう!', image: 'default.jpg')
+    Profile.create(user: self, name: "ファン#{self.id}号", gender: 0, body: 'こんにちは、皆でフットサルやりましょう!')
   end
 
 end
