@@ -39,6 +39,7 @@ gem 'chronic', '0.6.3'
 
 #active_storageバリデーション用
 gem "active_storage_validations"
+gem "aws-sdk-s3", require: false
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
