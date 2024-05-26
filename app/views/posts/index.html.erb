@@ -1,0 +1,37 @@
+<div id='responsive-div' class='h-full'>
+  <h1 class="text-5xl mb-4">募集一覧</h1>
+  <div class='my-2'>
+    <% if @posts.present? %>
+      <ul class='grid grid-cols-1 md:grid-cols-4'>
+        <% @posts.each do |post| %>
+          <li class='my-2'>
+            <div class="card card-compact bg-blue-500 shadow-xl mx-2">
+              <figure>
+                <%= link_to post_path(post.id) do %>
+                  <%= image_tag "apiindex.jpg" %>
+                <% end %>
+              </figure>
+              <div class="card-body">
+                <h2 class="card-title"><%= "タイトル:#{post.title}" %></h2>
+                <p><%= "作成日:#{post.created_at}" %></p>
+                <p><%= "作成日:#{post.created_at}" %></p>
+                <div class="card-actions justify-end">
+                  <%= link_to '募集内容を見る', post_path(post.id), class: 'btn' %>
+                  <% if post.user?%>
+                    <%= link_to '募集削除', post_path(post), data: { turbo_method: :delete }, class: 'btn' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class='w-full flex flex-col my-56 items-center'>
+        <span class='font-bold text-3xl'>今のところ投稿がありません。募集して皆でフットサルしませんか？</span>
+        <%= image_tag asset_path('POSTME.png') %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= link_to '投稿する', new_post_path, class: "block mt-4 lg:inline-block lg:mt-0 font-bold" %>

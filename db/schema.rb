@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_23_194748) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_26_225013) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_194748) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "profile_id", null: false
+    t.index ["group_id"], name: "index_chats_on_group_id"
+    t.index ["profile_id"], name: "index_chats_on_profile_id"
+  end
+
   create_table "contacts", force: :cascade do |t|
     t.string "name", null: false
     t.string "subject", null: false
@@ -52,10 +62,40 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_194748) do
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_groups_on_post_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "profile_id", null: false
+    t.bigint "group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_memberships_on_group_id"
+    t.index ["profile_id"], name: "index_memberships_on_profile_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "detail", null: false
+    t.string "location", null: false
+    t.integer "capacity", null: false
+    t.string "related_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "profile_id", null: false
+    t.datetime "date", null: false
+    t.index ["profile_id"], name: "index_posts_on_profile_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -120,7 +160,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_194748) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chats", "groups", on_delete: :cascade
+  add_foreign_key "chats", "profiles", on_delete: :cascade
   add_foreign_key "contacts", "users", on_delete: :cascade
+  add_foreign_key "groups", "posts", on_delete: :cascade
+  add_foreign_key "memberships", "groups", on_delete: :cascade
+  add_foreign_key "memberships", "profiles", on_delete: :cascade
+  add_foreign_key "posts", "profiles", on_delete: :cascade
   add_foreign_key "profiles", "users", on_delete: :cascade
   add_foreign_key "responses", "players"
   add_foreign_key "responses", "requests"
