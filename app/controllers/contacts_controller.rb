@@ -7,7 +7,6 @@ class ContactsController < ApplicationController
 
   def create
     @contact = current_user.contacts.new(contact_params)
-    binding.pry
     if @contact.save
       ContactMailer.send_mail(@contact, current_user).deliver_now
       redirect_to done_path, flash: { success: 'お問い合わせが完了しました' }

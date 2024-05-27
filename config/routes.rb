@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   resources :responses
 
+  resources :posts
+
   resources :contacts, only: [:new, :create]
   get 'done', to: 'contacts#done', as: 'done'
 

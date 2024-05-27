@@ -1,6 +1,9 @@
 class ProfilesController < ApplicationController
+  before_action :set_profile, only: [:edit, :update]
 
-  def show; end
+  def show
+    @profile = Profile.find(params[:id])
+  end
 
   def edit; end
 
