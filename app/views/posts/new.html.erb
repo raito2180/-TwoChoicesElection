@@ -1,1 +1,41 @@
-new
+<div class="bg-blue-900 w-full h-screen text-white overflow-hidden flex items-center justify-center">
+  <div class='md:w-1/2'>
+    <h1 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>募集投稿画面</h1>
+    <%= form_with(model: @post, local: true) do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+      <div>
+        <%= f.label :title, 'タイトル' %><br>
+        <%= f.text_field :title, autofocus: true, class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+      </div>
+
+      <div>
+        <%= f.label :date, '日時' %><br>
+        <%= f.datetime_field :date, class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+      </div>
+
+      <div>
+        <%= f.label :location, '場所' %><br>
+        <%= f.text_field :location, class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+      </div>
+
+      <div>
+        <%= f.label :capacity, '募集人数' %><br>
+        <%= f.number_field :capacity,  class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+      </div>
+
+      <div>
+        <%= f.label :detail, '詳細' %><br>
+        <%= f.text_area :detail, size: "20x10",  class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+      </div>
+
+      <div>
+        <%= f.label :related_url, '関連URL' %><br>
+        <%= f.text_field :related_url,placeholder:'場所などの関連URLがあれば入力してください', class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+      </div>
+
+      <div class='actions flex justify-center pb-2 border-dotted border-b-2 border-fitting-white'>
+        <%= f.submit '送信', class: 'btn btn-xs' %>
+      </div>
+    <% end %>
+  </div>
+</div>

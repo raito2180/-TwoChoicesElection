@@ -8,8 +8,8 @@
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar h-20 w-20">
         <div class="h-20 w-20 rounded-full">
-          <% if @profile.avatar.present? %>
-            <%= image_tag @profile.avatar %>
+          <% if current_user.profile.avatar.present? %>
+            <%= image_tag current_user.profile.avatar %>
           <% else %>
             <%= image_tag "default.jpg" %>
           <% end %>
@@ -90,3 +90,7 @@
     </div>
   </nav>
 </header>
+
+
+
+
