@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  belongs_to :profile, dependent: :destroy
+  belongs_to :profile
   has_one :group, dependent: :destroy
   validates :title, :detail, :location, :capacity, presence: true
 
