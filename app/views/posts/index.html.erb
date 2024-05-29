@@ -1,5 +1,8 @@
 <div class='h-full'>
-  <h1 class="text-5xl mb-4">募集一覧</h1>
+  <div class='flex mb-2 mt-2'>
+    <h1 class="text-5xl">募集一覧</h1>
+    <%= link_to '募集する', new_post_path, class: "btn ml-5" %>
+  </div>
   <div class='my-2'>
     <% if @posts.present? %>
       <ul class='grid grid-cols-1 md:grid-cols-2'>
@@ -21,28 +24,35 @@
                     <% end %>
                     </div>
                   </div>
-                  <div class="ml-4">
+                  <div class="ml-4 max-w-full">
                     <h2 class="card-title">
                       <%= "開催日: #{post.date.strftime('%Y-%m-%d %H:%M')}" %>
                       <%= "募集状況: 1/#{post.capacity}" %>
                     </h2>
-                    <p class="w-full overflow-hidden whitespace-nowrap" style="max-width: 70ch;"><%= "#{post.location}" %></p>
-                    <p class="w-full overflow-hidden whitespace-nowrap" style="max-width: 70ch;"><%= "#{post.title}" %></p>
-                    <p class="w-full overflow-hidden whitespace-nowrap" style="max-width: 70ch;"><%= "#{post.detail}" %></p>
+                    <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]"><%= "#{post.location}" %></p>
+                    <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]"><%= "#{post.title}" %></p>
+                    <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]"><%= "#{post.detail}" %></p>
                   </div>
                 </div>
                 <div class="collapse bg-base-200">
                   <input type="checkbox" class="peer" /> 
-                  <div class="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content font-bold">
+                  <div class="collapse-title bg-primary text-primary-content peer-checked:bg-info peer-checked:text-secondary-content font-bold">
                     場所などの関連リンクはこちら♪
                   </div>
-                  <div class="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content"> 
-                    <%= link_to "#{post.related_url}", post.related_url, target: :_blank, rel: "noopener noreferrer"%>
-                  </div>
+                  <% if post.related_url.present? %>
+                    <div class="collapse-content bg-primary text-primary-content peer-checked:bg-info peer-checked:text-secondary-content"> 
+                      <%= link_to "#{post.related_url}", post.related_url, target: :_blank, rel: "noopener noreferrer"%>
+                    </div>
+                  <% else %>
+                    <div class="collapse-content bg-primary text-primary-content peer-checked:bg-info peer-checked:text-secondary-content"> 
+                      <span>関連URLリンクはありません</span>
+                    </div>
+                  <% end %>
                 </div>
                 <div class="card-actions justify-end">
                   <%= link_to '募集内容を見る', post_path(post.id), class: 'btn' %>
                   <% if post.owned_by?(current_user) %>
+                    <%= link_to '募集編集', edit_post_path(post), class: 'btn' %>
                     <%= link_to '募集削除', post_path(post), data: { turbo_method: :delete }, class: 'btn' %>
                   <% end %>
                 </div>
@@ -59,4 +69,3 @@
     <% end %>
   </div>
 </div>
-<%= link_to '投稿する', new_post_path, class: "block mt-4 lg:inline-block lg:mt-0 font-bold" %>

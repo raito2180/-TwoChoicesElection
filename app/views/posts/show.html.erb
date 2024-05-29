@@ -1,0 +1,65 @@
+<div class='h-full w-full'>
+  <div class='flex flex-col items-center mx-5 my-2 '>
+    <h1 class="text-5xl my-2 md:w-1/2">募集詳細</h1>
+    <div class="card card-compact bg-blue-500 shadow-xl w-full md:w-1/2 mx-2">
+      <div class="card-body">
+        <div class='flex flex-row items-end'>
+          <div tabindex="0" class="avatar h-20 w-20">
+            <div class="h-20 w-20 rounded-full">
+              <% if @post.profile.avatar.present? %>
+                <%= link_to profile_path(@post.profile) do %>
+                  <%= image_tag @post.profile.avatar %>
+                <% end %>
+              <% else %>
+                <%= link_to profile_path(@post.profile) do %>
+                  <%= image_tag "default.jpg" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="chat chat-start w-full">
+            <div class="chat-bubble w-full">
+              <div class="ml-4 max-w-full">
+                <h3 class='font-bold text-xl text-red-300'>
+                  開催日:<%= "#{@post.date.strftime('%Y-%m-%d %H:%M')}" %>
+                </h3>
+                <p class="w-full overflow-hidden my-2 font-bold">
+                  タイトル:<%= "#{@post.title}" %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="divider divider-primary">場所</div>
+          <div class="w-full overflow-hidden"><span class='font-bold'></span><%= "#{@post.location}" %></div>
+        <div class="divider divider-primary">詳細</div>
+          <div class="w-full overflow-hidden"><span class='font-bold'></span><%= safe_join(@post.detail.split("\n"), tag(:br)) %></div>
+        <div class="divider divider-primary">関連URL</div>
+          <div class="w-full overflow-hidden"><span class='font-bold'></span><%= link_to "#{@post.related_url}", @post.related_url, target: :_blank, rel: "noopener noreferrer"%></div>
+        <div class="divider divider-primary">参加状況</div>
+        <div class='grid grid-cols-1 md:grid-cols-3'>
+          <div class='bg-white border text-black rounded-lg mx-2 my-1'>
+            <div class='border-b-2 mb-2'>参加者(1/<%= "#{@post.capacity}" %>人)</div>
+            参加者アイコン 参加者名
+          </div>
+          <div class='bg-white border text-black rounded-lg mx-2 my-1'>
+            <div class='border-b-2 mb-2'>興味あり(0人)</div>
+            参加者アイコン 参加者名
+          </div>
+          <div class='bg-white border text-black rounded-lg mx-2 my-1'>
+            <div class='border-b-2 mb-2'>不参加(0人)</div>
+            参加者アイコン 参加者名
+          </div>
+        </div>
+        <div class="card-actions justify-end mt-10">
+          <%= link_to '募集一覧に戻る', posts_path, class: 'btn' %>
+          <% if @post.owned_by?(current_user) %>
+            <%= link_to '募集編集', edit_post_path(@post), class: 'btn' %>
+            <%= link_to '募集削除', post_path(@post), data: { turbo_method: :delete }, class: 'btn' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to '投稿する', new_post_path, class: "block mt-4 lg:inline-block lg:mt-0 font-bold" %>
