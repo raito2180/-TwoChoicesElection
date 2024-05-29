@@ -5,23 +5,23 @@
       <%= render "shared/error_messages", object: f.object %>
       <div>
         <%= f.label :title, 'タイトル' %><br>
-        <%= f.text_field :title, autofocus: true, placeholder:'タイトルを入力してください' class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+        <%= f.text_field :title, autofocus: true, placeholder:'タイトルを入力してください', class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
       </div>
       <div>
         <%= f.label :date, '日時' %><br>
-        <%= f.datetime_field :date, placeholder:'日時を入力してください' class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+        <%= f.datetime_field :date, placeholder:'日時を入力してください', class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
       </div>
       <div>
         <%= f.label :location, '場所' %><br>
-        <%= f.text_field :location, placeholder:'会場の住所を入力してください' class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+        <%= f.text_field :location, placeholder:'会場の住所を入力してください', class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
       </div>
       <div>
         <%= f.label :capacity, '募集人数' %><br>
-        <%= f.number_field :capacity,  class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+        <%= f.number_field :capacity, placeholder:'募集人数を入力してください',  class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
       </div>
       <div>
         <%= f.label :detail, '詳細' %><br>
-        <%= f.text_area :detail, size: "20x10", placeholder:'日時や料金などの必要事項を入力してください'  class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
+        <%= f.text_area :detail, size: "20x10", placeholder:'日時や料金などの必要事項を入力してください',  class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
       </div>
       <div>
         <%= f.label :related_url, '関連URL' %><br>
