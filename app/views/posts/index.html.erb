@@ -1,5 +1,8 @@
 <div class='h-full'>
-  <h1 class="text-5xl mb-4">募集一覧</h1>
+  <div class='flex mb-2 mt-2'>
+    <h1 class="text-5xl">募集一覧</h1>
+    <%= link_to '募集する', new_post_path, class: "btn ml-5" %>
+  </div>
   <div class='my-2'>
     <% if @posts.present? %>
       <ul class='grid grid-cols-1 md:grid-cols-2'>
@@ -66,4 +69,3 @@
     <% end %>
   </div>
 </div>
-<%= link_to '投稿する', new_post_path, class: "block mt-4 lg:inline-block lg:mt-0 font-bold" %>

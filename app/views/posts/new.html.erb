@@ -27,8 +27,9 @@
         <%= f.label :related_url, '関連URL' %><br>
         <%= f.text_field :related_url, placeholder:'会場HPなどの関連URLがあれば入力してください', class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
       </div>
-      <div class='actions flex justify-center pb-2 border-dotted border-b-2 border-fitting-white'>
-        <%= f.submit '送信', class: 'btn btn-xs' %>
+      <div class='actions flex justify-center py-2 border-dotted border-b-2 border-fitting-white'>
+        <%= f.submit '作成', class: 'btn' %>
+        <%= link_to '募集一覧に戻る', posts_path, class: 'btn ml-3' %>
       </div>
     <% end %>
   </div>
