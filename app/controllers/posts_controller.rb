@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :redirect_root, only: [:new, :edit, :destroy]
 
   def index
     @posts = Post.all
@@ -51,6 +52,5 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :date, :location, :detail, :capacity, :related_url )
   end
-
 
 end
