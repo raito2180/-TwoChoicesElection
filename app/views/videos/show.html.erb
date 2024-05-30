@@ -12,15 +12,15 @@
       <p class='mx-4'>再生回数:<%= params[:view_count] %>回</p>
     </div>
     <div class='flex flex-col md:flex-row md:text-4xl justify-center'>
-      <div class='mx-12 my-2 btn btn-neutral'>
+      <div class='mx-12 my-2 btn btn-neutral md:w-60'>
         <%= link_to "https://twitter.com/share?url=https://stardom-jonn.onrender.com&text=文章%0a%0a【Stardom】で#{params[:title]}を見たよ！！", target: '_blank' do %>
           Xにシェア
         <% end %>
       </div>
-      <div class='mx-12 my-2 btn btn-accent'>
-        <%= link_to '蹴りに行く？(coming soon)', '#' %>
+      <div class='mx-12 my-2 btn btn-accent md:w-60'>
+        <%= link_to '蹴りに行く？', posts_path %>
       </div>
-      <div class='mx-12 my-2 btn btn-primary'>
+      <div class='mx-12 my-2 btn btn-primary md:w-60'>
         <%= link_to '動画検索TOP', videos_path %>
       </div>
     </div>
