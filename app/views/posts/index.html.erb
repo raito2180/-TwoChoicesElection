@@ -27,7 +27,7 @@
                   <div class="ml-4 max-w-full">
                     <h2 class="card-title">
                       <%= "開催日: #{post.date.strftime('%Y-%m-%d %H:%M')}" %>
-                      <%= "募集状況: 1/#{post.capacity}" %>
+                      <%= "募集状況: #{post.group.memberships.where(status: '参加').count}/#{post.capacity}" %>
                     </h2>
                     <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]"><%= "#{post.location}" %></p>
                     <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]"><%= "#{post.title}" %></p>
@@ -50,6 +50,9 @@
                   <% end %>
                 </div>
                 <div class="card-actions justify-end">
+                  <% if post.group.memberships.exists?(profile: current_user.profile, status: '参加') %>
+                    <%= link_to 'グループチャットへ', '#', class: 'btn btn-accent' %>
+                  <% end %>
                   <%= link_to '募集内容を見る', post_path(post.id), class: 'btn' %>
                   <% if post.owned_by?(current_user) %>
                     <%= link_to '募集編集', edit_post_path(post), class: 'btn' %>

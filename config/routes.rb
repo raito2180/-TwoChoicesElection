@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
   resources :posts
 
+  resources :groups do
+    resources :memberships, only: [:create,:update]
+  end
+
   resources :contacts, only: [:new, :create]
   get 'done', to: 'contacts#done', as: 'done'
 

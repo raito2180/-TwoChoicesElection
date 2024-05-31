@@ -1,0 +1,18 @@
+<ul>
+  <% memberships.each do |membership| %>
+    <li class='flex border-t-2 p-1'>
+      <div class="h-6 w-6 rounded-full overflow-hidden">
+        <% if membership.profile.avatar.present? %>
+          <%= link_to profile_path(membership.profile) do %>
+            <%= image_tag membership.profile.avatar, class: "w-full h-full object-cover object-center" %>
+          <% end %>
+        <% else %>
+          <%= link_to profile_path(membership.profile) do %>
+            <%= image_tag "default.jpg", class: "w-full h-full object-cover object-center" %>
+          <% end %>
+        <% end %>
+      </div>
+        <%= link_to "#{membership.profile.name}", profile_path(membership.profile) %>
+    </li>
+  <% end %>
+</ul>
