@@ -35,8 +35,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @group = @post.group
     @participating_profiles = @group.memberships.where(status: :参加).includes(:profile)
-    @not_participating_profiles = @group.memberships.where(status: :不参加).includes(:profile)
     @interested_profiles = @group.memberships.where(status: :興味あり).includes(:profile)
+    @not_participating_profiles = @group.memberships.where(status: :不参加).includes(:profile)
   end
 
   def edit

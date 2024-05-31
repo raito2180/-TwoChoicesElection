@@ -44,46 +44,53 @@
             </div>
             <div class='grid grid-cols-1 md:grid-cols-3'>
               <div class='btn btn-accent mx-5 my-1 text-white'>
-                参加する
+                <% if @group.memberships.exists?(profile: current_user.profile) %>
+                  <%= link_to group_membership_path(@group, @group.memberships.find_by(profile: current_user.profile), status: '参加'), data: { turbo_method: :patch } do %>
+                      <span>参加する</span>
+                  <% end %>
+                <% else %>
+                  <%= link_to group_memberships_path(@group, status: '参加'), data: { turbo_method: :post } do %>
+                      <span>参加する</span>
+                  <% end %>
+                <% end %>
               </div>
               <div class='btn btn-neutral mx-5 my-1'>
-                興味あり
+                <% if @group.memberships.exists?(profile: current_user.profile) %>
+                  <%= link_to group_membership_path(@group, @group.memberships.find_by(profile: current_user.profile), status: '興味あり'), data: { turbo_method: :patch } do %>
+                      <span>興味あり</span>
+                  <% end %>
+                <% else %>
+                  <%= link_to group_memberships_path(@group, status: '興味あり'), data: { turbo_method: :post } do %>
+                      <span>興味あり</span>
+                  <% end %>
+                <% end %>
               </div>
               <div class='btn btn-secondary mx-5 my-1'>
-                不参加
+                <% if @group.memberships.exists?(profile: current_user.profile) %>
+                  <%= link_to group_membership_path(@group, @group.memberships.find_by(profile: current_user.profile), status: '不参加'), data: { turbo_method: :patch } do %>
+                      <span>不参加</span>
+                  <% end %>
+                <% else %>
+                  <%= link_to group_memberships_path(@group, status: '不参加'), data: { turbo_method: :post } do %>
+                      <span>不参加</span>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>
         </div>
         <div class='grid grid-cols-1 md:grid-cols-3'>
-          <div class='bg-white border text-black rounded-lg mx-2 my-1'>
-            <div class='border-b-2 mb-2'>参加者(<%= @participating_profiles.count %>/<%= "#{@post.capacity}" %>人)</div>
-            <ul>
-              <% @participating_profiles.each do |membership| %>
-                <li class='flex'>
-                  <div class="h-6 w-6 rounded-full overflow-hidden">
-                    <% if membership.profile.avatar.present? %>
-                      <%= link_to profile_path(membership.profile) do %>
-                        <%= image_tag member.profile.avatar, class: "w-full h-full object-cover object-center" %>
-                      <% end %>
-                    <% else %>
-                      <%= link_to profile_path(membership.profile) do %>
-                        <%= image_tag "default.jpg", class: "w-full h-full object-cover object-center" %>
-                      <% end %>
-                    <% end %>
-                  </div>
-                    <%= link_to "#{membership.profile.name}", profile_path(membership.profile) %>
-                </li>
-              <% end %>
-            </ul>
+          <div class='bg-white text-black rounded-lg mx-2 my-1'>
+            <div class='mb-2'>参加者(<%= @participating_profiles.count %>/<%= "#{@post.capacity}" %>人)</div>
+            <%= render partial: 'shared/membership_list', locals: { memberships: @participating_profiles }%>
           </div>
-          <div class='bg-white border text-black rounded-lg mx-2 my-1'>
-            <div class='border-b-2 mb-2'>興味あり(0人)</div>
-            参加者アイコン 参加者名
+          <div class='bg-white text-black rounded-lg mx-2 my-1'>
+            <div class='mb-2'>興味あり(<%= @interested_profiles.count %>人)</div>
+            <%= render partial: 'shared/membership_list', locals: { memberships: @interested_profiles }%>
           </div>
-          <div class='bg-white border text-black rounded-lg mx-2 my-1'>
-            <div class='border-b-2 mb-2'>不参加(0人)</div>
-            参加者アイコン 参加者名
+          <div class='bg-white text-black rounded-lg mx-2 my-1'>
+            <div class='mb-2'>不参加(<%= @not_participating_profiles.count %>人)</div>
+            <%= render partial: 'shared/membership_list', locals: { memberships: @not_participating_profiles }%>
           </div>
         </div>
         <div class="divider divider-primary">皆にこのイベントを拡散しよう♪</div>
@@ -102,6 +109,9 @@
           </div>
         </div>
         <div class="card-actions justify-end mt-10">
+          <% if @post.group.memberships.exists?(profile: current_user.profile, status: '参加') %>
+            <%= link_to 'グループチャットへ', '#', class: 'btn btn-accent' %>
+          <% end %>
           <%= link_to '募集一覧に戻る', posts_path, class: 'btn' %>
           <% if @post.owned_by?(current_user) %>
             <%= link_to '募集編集', edit_post_path(@post), class: 'btn' %>
