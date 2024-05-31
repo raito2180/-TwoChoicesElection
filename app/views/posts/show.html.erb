@@ -57,8 +57,25 @@
         </div>
         <div class='grid grid-cols-1 md:grid-cols-3'>
           <div class='bg-white border text-black rounded-lg mx-2 my-1'>
-            <div class='border-b-2 mb-2'>参加者(1/<%= "#{@post.capacity}" %>人)</div>
-            参加者アイコン 参加者名
+            <div class='border-b-2 mb-2'>参加者(<%= @participating_profiles.count %>/<%= "#{@post.capacity}" %>人)</div>
+            <ul>
+              <% @participating_profiles.each do |membership| %>
+                <li class='flex'>
+                  <div class="h-6 w-6 rounded-full overflow-hidden">
+                    <% if membership.profile.avatar.present? %>
+                      <%= link_to profile_path(membership.profile) do %>
+                        <%= image_tag member.profile.avatar, class: "w-full h-full object-cover object-center" %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to profile_path(membership.profile) do %>
+                        <%= image_tag "default.jpg", class: "w-full h-full object-cover object-center" %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                    <%= link_to "#{membership.profile.name}", profile_path(membership.profile) %>
+                </li>
+              <% end %>
+            </ul>
           </div>
           <div class='bg-white border text-black rounded-lg mx-2 my-1'>
             <div class='border-b-2 mb-2'>興味あり(0人)</div>

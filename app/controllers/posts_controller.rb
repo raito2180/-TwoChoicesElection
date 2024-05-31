@@ -12,15 +12,31 @@ class PostsController < ApplicationController
   def create
     @post = current_user.profile.posts.new(post_params)
     if @post.save
-      redirect_to @post, notice: '募集を投稿しました'
+      group = Group.new(post: @post)
+      if group.save
+        membership = Membership.new(profile_id: current_user.profile.id, group: group, status: :参加)
+        if membership.save
+          redirect_to @post, notice: '募集投稿が作成されました。'
+        else
+          @post.destroy
+          group.destroy
+          render :new, alert: 'Membershipの作成に失敗しました。'
+        end
+      else
+        @post.destroy
+        render :new, alert: 'Groupの作成に失敗しました。'
+      end
     else
-      flash.now[:danger] = '募集の投稿に失敗しました'
       render :new
     end
   end
 
   def show
     @post = Post.find(params[:id])
+    @group = @post.group
+    @participating_profiles = @group.memberships.where(status: :参加).includes(:profile)
+    @not_participating_profiles = @group.memberships.where(status: :不参加).includes(:profile)
+    @interested_profiles = @group.memberships.where(status: :興味あり).includes(:profile)
   end
 
   def edit
