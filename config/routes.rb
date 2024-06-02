@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'chatroom/show'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
@@ -23,7 +24,9 @@ Rails.application.routes.draw do
   resources :posts
 
   resources :groups do
-    resources :memberships, only: [:create,:update]
+    resources :memberships, only: [:create,:update] do
+      resource :chatroom, only: [:show]
+    end
   end
 
   resources :contacts, only: [:new, :create]
