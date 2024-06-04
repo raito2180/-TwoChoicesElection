@@ -1,11 +1,8 @@
-<h1>チャットルーム</h1>
-<!-- チャットメッセージの入力フォーム -->
-<form>
-  <label for="sender"><%= current_user.profile.name %></label>
-  <input type="text" id="sender" size="16" /><br />
-  <label for="content">メッセージ：</label>
-  <input type="text" id="content" size="50" /><br />
-</form>
-<!-- チャットメッセージの表示場所 -->
-<div id ='messages'>
+<h1>Chat room</h1>
+<div id="messages">
+  <%= render partial: 'chatrooms/chat', collection: @chats, as: :chat %>
 </div>
+<form>
+  <label>Say something:</label><br>
+  <input type="text" class='text-black' data-behavior="room_speaker">
+</form>
