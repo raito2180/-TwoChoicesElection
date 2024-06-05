@@ -9,17 +9,20 @@ class ChatroomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    ActionCable.server.broadcast('chatroom_channel', {message: data['message']})
+    group = Group.find_by(params[:group])
+    profile = Profile.find_by(params[:profile])
+    if group && profile
+      chat = Chat.create!(body: data['message'], group: group, profile: profile)
+      ActionCable.server.broadcast('chatroom_channel', {message: render_message(chat,profile)})
+    end
   end
 
-end
+  def render_message(chat, profile)
+    ApplicationController.render_with_signed_in_user(
+      profile.user, 
+      partial: 'chatrooms/chat', 
+      locals: { chat: chat, profile: profile }
+    )
+  end  
 
-def praspeak(data)
-  group = Group.find_by(id: params[:group_id])
-  profile = Profile.find_by(id: params[:profile_id])
-  
-  if group && profile
-    chat = Chat.create!(body: data['message'], group: group, profile: profile)
-    ActionCable.server.broadcast 'room_channel', message: chat.body
-  end
 end

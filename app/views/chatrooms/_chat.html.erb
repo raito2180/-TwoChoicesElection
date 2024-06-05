@@ -1,3 +1,12 @@
-<div class="message">
-  <p><%= chat.body %></p>
+<div class="chat chat-start">
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+      <% if chat.profile.avatar.present? %>
+        <%= image_tag url_for(chat.profile.avatar) %>
+      <% else %>
+        <%= image_tag "default.jpg" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="chat-bubble message"><p><%= chat.body %></p></div>
 </div>
