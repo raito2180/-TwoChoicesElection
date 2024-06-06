@@ -16,15 +16,32 @@ const appRoom = consumer.subscriptions.create("ChatroomChannel", {
   },
 
   speak: function(message) {
-    return this.perform('speak', {message: message});
+    return this.perform('speak', {message: message, post_id: window.postData.id});
   }
 });
 
-window.document.onkeydown = function(event) {
-  if(event.key == 'Enter') {
-    event.preventDefault();
-    appRoom.speak(event.target.value);
-    console.log('ログ', event.target.value);
-    event.target.value = '';
+document.addEventListener('DOMContentLoaded',
+function () {
+  const post = document.getElementById('post').value
+  console.log(post);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const postInput = document.getElementById('post_input');
+  const submitButton = document.getElementById('submit_button');
+
+  if (postInput && submitButton) {
+    submitButton.addEventListener('click', function() {
+      appRoom.speak(postInput.value);
+      postInput.value = '';
+    });
+
+    postInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        appRoom.speak(postInput.value);
+        postInput.value = '';
+      }
+    });
   }
-}
+});

@@ -21,11 +21,11 @@ Rails.application.routes.draw do
 
   resources :responses
 
-  resources :posts
-
-  resources :groups do
-    resources :memberships, only: [:create,:update] do
-      resource :chatroom, only: [:show]
+  resources :posts do
+    resources :groups do
+      resources :memberships, only: [:create,:update] do
+        resource :chatroom, only: [:show]
+      end
     end
   end
 

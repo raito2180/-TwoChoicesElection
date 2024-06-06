@@ -52,7 +52,7 @@
                 <div class="card-actions justify-end">
                   <% if post.group.memberships.exists?(profile: current_user.profile, status: '参加') %>
                   <% membership = post.group.memberships.find_by(profile: current_user.profile, status: '参加') %>
-                    <%= link_to 'グループチャットへ', group_membership_chatroom_path(post.group, membership), class: 'btn btn-accent' %>
+                    <%= link_to 'グループチャットへ', post_group_membership_chatroom_path(post, post.group, membership), class: 'btn btn-accent' %>
                   <% end %>
                   <%= link_to '募集内容を見る', post_path(post.id), class: 'btn' %>
                   <% if post.owned_by?(current_user) %>

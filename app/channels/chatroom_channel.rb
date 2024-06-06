@@ -9,11 +9,13 @@ class ChatroomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    group = Group.find_by(params[:group])
-    profile = Profile.find_by(params[:profile])
+    profile_id = current_user.profile.id
+    profile = Profile.find_by(id: profile_id)
+    post = Post.find(data['post_id'])
+    group = post.group
     if group && profile
-      chat = Chat.create!(body: data['message'], group: group, profile: profile)
-      ActionCable.server.broadcast('chatroom_channel', {message: render_message(chat,profile)})
+      chat = profile.chats.create!(body: data['message'], group: group)
+      ActionCable.server.broadcast('chatroom_channel', {message: render_message(chat, profile)})
     end
   end
 
@@ -21,7 +23,7 @@ class ChatroomChannel < ApplicationCable::Channel
     ApplicationController.render_with_signed_in_user(
       profile.user, 
       partial: 'chatrooms/chat', 
-      locals: { chat: chat, profile: profile }
+      locals: { chat: chat }
     )
   end  
 
