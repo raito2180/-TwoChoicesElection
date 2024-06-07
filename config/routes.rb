@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
@@ -20,10 +21,12 @@ Rails.application.routes.draw do
 
   resources :responses
 
-  resources :posts
-
-  resources :groups do
-    resources :memberships, only: [:create,:update]
+  resources :posts do
+    resources :groups do
+      resources :memberships, only: [:create,:update] do
+        resource :chatroom, only: [:show]
+      end
+    end
   end
 
   resources :contacts, only: [:new, :create]

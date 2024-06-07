@@ -104,3 +104,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+group :production do
+  #actioncable用
+  gem 'redis', '~> 5.2'
+end

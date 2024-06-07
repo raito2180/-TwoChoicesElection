@@ -1,0 +1,18 @@
+<h1>Chat room</h1>
+<div class="flex flex-col justify-center items-center">
+  <div id="messages" class='w-full md:w-1/2'>
+    <%= render partial: 'chatrooms/chat', collection: @chats, as: :chat %>
+  </div>
+  <form onsubmit="return false;">
+    <input type="hidden" id="post" value="<%= @post.id %>">
+    <input type="hidden" id="profile" value="<%= current_user.profile.id %>">
+    <input id='post_input' name="mytext" class='text-black' type="text" />
+    <button id='submit_button' type="submit" data-behavior="room_speaker">送信</button>
+  </form>
+</div>
+
+<script>
+    window.postData = {
+      id: <%= @post.id %>,
+    }
+</script>
