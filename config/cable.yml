@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: postgresql
-  url: <%= ENV.fetch("DATABASE_URL") %>
+  url: <%= ENV.fetch("RENDER_DB_URL") %>
   channel_prefix: my_app_production
