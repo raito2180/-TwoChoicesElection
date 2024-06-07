@@ -9,8 +9,7 @@ class ChatroomChannel < ApplicationCable::Channel
   end
 
   def speak(data)
-    profile_id = current_user.profile.id
-    profile = Profile.find_by(id: profile_id)
+    profile = Profile.find(data['profile_id'])
     post = Post.find(data['post_id'])
     group = post.group
     if group && profile

@@ -16,22 +16,31 @@ const appRoom = consumer.subscriptions.create("ChatroomChannel", {
   },
 
   speak: function(message) {
-    return this.perform('speak', {message: message, post_id: window.postData.id});
+    return this.perform('speak', {message: message, post_id: window.postData.id,  profile_id: window.profileData.id });
   }
 });
 
-document.addEventListener('DOMContentLoaded',
-function () {
-  const post = document.getElementById('post').value
-  console.log(post);
-});
-
-document.addEventListener('DOMContentLoaded', function() {
+function initializeChat() {
   const postInput = document.getElementById('post_input');
   const submitButton = document.getElementById('submit_button');
+  const postElement = document.getElementById('post');
+  const profileElement = document.getElementById('profile');
+
+  if (postElement) {
+    window.postData = {
+      id: postElement.value,
+    };
+  }
+
+  if (profileElement) {
+    window.profileData = {
+      id: profileElement.value,
+    };
+  }
 
   if (postInput && submitButton) {
-    submitButton.addEventListener('click', function() {
+    submitButton.addEventListener('click', function(event) {
+      event.preventDefault();
       appRoom.speak(postInput.value);
       postInput.value = '';
     });
@@ -44,4 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-});
+  
+}
+
+
+// Turbo Drive でページ読み込みが完了した後にチャットルームを初期化する
+document.addEventListener('turbo:load', initializeChat);
+
