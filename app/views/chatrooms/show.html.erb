@@ -1,15 +1,15 @@
 <div class="min-h-[800px] flex flex-col items-center mx-3 mb-3">
   <div class='my-2 flex flex-col justify-center md:flex-row '>
-    <span class='flex text-xl items-center mb-2 md:mb-0 mr-2 ' >お部屋No.<%= @post.id %></span>
+    <span class='flex text-xl justify-center items-center mb-2 md:mb-0 mr-2 ' >お部屋No.<%= @post.id %></span>
     <div class='flex justify-center'>
       <%= link_to '募集詳細', post_path(@post.id), class: 'btn mx-2' %>
       <%= link_to '募集一覧', posts_path, class: 'btn' %>
     </div>
   </div>
-  <div class="w-full md:w-1/2 rounded-sm bg-cover" style="background-image: url('<%= asset_path('talk.jpg') %>')">
-    <turbo-frame id="messages">
+  <div class="w-full md:w-1/2 rounded-md bg-cover" style="background-image: url('<%= asset_path('talk.jpg') %>')">
+    <div id="messages">
       <%= render partial: 'chatrooms/chat', collection: @chats, as: :chat %>
-    </turbo-frame>
+    </div>
     <form onsubmit="return false;" class='flex flex-col justify-center items-center min-h-[96px]'>
       <input type="hidden" id="post" value="<%= @post.id %>">
       <input type="hidden" id="profile" value="<%= current_user.profile.id %>">
