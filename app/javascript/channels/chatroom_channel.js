@@ -74,4 +74,5 @@ function initializeChat() {
 
 // Turbo Drive でページ読み込みが完了した後にチャットルームを初期化する
 document.addEventListener('turbo:load', initializeChat);
+document.addEventListener('turbo:frame-load', initializeChat);
 
