@@ -110,7 +110,7 @@
         </div>
         <div class="card-actions justify-end mt-10">
           <% if @post.group.memberships.exists?(profile: current_user.profile, status: '参加') %>
-            <%= link_to 'グループチャットへ', '#', class: 'btn btn-accent' %>
+            <%= link_to 'グループチャットへ', post_group_membership_chatroom_path(@post, @post.group, @membership), class: 'btn btn-accent' %>
           <% end %>
           <%= link_to '募集一覧に戻る', posts_path, class: 'btn' %>
           <% if @post.owned_by?(current_user) %>

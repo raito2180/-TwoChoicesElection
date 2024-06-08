@@ -12,7 +12,11 @@ const appRoom = consumer.subscriptions.create("ChatroomChannel", {
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     const messages = document.getElementById('messages');
-  messages.insertAdjacentHTML('beforeend', data['message']);
+    messages.insertAdjacentHTML('beforeend', data['message']);
+    const newMessage = document.getElementById(`chat_${data['chat_id']}`);
+      if (newMessage) {
+        newMessage.scrollIntoView({ block: "center", behavior: 'smooth' });
+    }
   },
 
   speak: function(message) {
@@ -40,16 +44,27 @@ function initializeChat() {
 
   if (postInput && submitButton) {
     submitButton.addEventListener('click', function(event) {
+      if (postInput.value.trim() === '') {
+        event.preventDefault();
+        alert('チャット内容を入力してください。');
+      } else {
       event.preventDefault();
       appRoom.speak(postInput.value);
       postInput.value = '';
+      }
     });
 
     postInput.addEventListener('keydown', function(event) {
-      if (event.key === 'Enter') {
+      
+      if (event.key === 'Enter' && !event.shiftKey) {
+        if (postInput.value.trim() === '') {
+          event.preventDefault();
+          alert('チャット内容を入力してください。');
+        }else{
         event.preventDefault();
         appRoom.speak(postInput.value);
         postInput.value = '';
+        }
       }
     });
   }

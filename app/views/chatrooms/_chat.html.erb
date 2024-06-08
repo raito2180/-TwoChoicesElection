@@ -1,7 +1,7 @@
-<% if current_user == chat.profile.user %>
-  <div class="chat chat-end">
+<% if current_user.profile.id == chat.profile.id %>
+  <div class="chat chat-end my-2 mr-2 ">
 <% else %>
-  <div class="chat chat-start">
+  <div class="chat chat-start my-2 ml-2 ">
 <% end %>
     <div class="chat-image avatar">
       <div class="w-10 rounded-full">
@@ -12,5 +12,5 @@
         <% end %>
       </div>
     </div>
-    <div class="chat-bubble message"><p><%= chat.body %></p></div>
+    <div class="chat-bubble message" id="chat_<%= chat.id %>"><p><%= raw Rinku.auto_link(simple_format(h(chat.body)), :all, 'target="_blank"') %></p></div>
   </div>
