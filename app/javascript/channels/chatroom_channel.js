@@ -24,10 +24,6 @@ const appRoom = consumer.subscriptions.create("ChatroomChannel", {
   }
 });
 
-document.addEventListener('turbo:load', () => {
-  initializeChat();
-});
-
 function initializeChat() {
   const postInput = document.getElementById('post_input');
   const submitButton = document.getElementById('submit_button');
@@ -47,40 +43,32 @@ function initializeChat() {
   }
 
   if (postInput && submitButton) {
-    // 既存のイベントリスナーを削除
-    submitButton.removeEventListener('click', handleButtonClick);
-    postInput.removeEventListener('keydown', handlePostInputKeydown);
-
-    // 新しいイベントリスナーを追加
-    submitButton.addEventListener('click', handleButtonClick);
-    postInput.addEventListener('keydown', handlePostInputKeydown);
-  }
-}
-
-function handleButtonClick(event) {
-  const postInput = document.getElementById('post_input');
-  if (postInput.value.trim() === '') {
-    event.preventDefault();
-    alert('チャット内容を入力してください。');
-  } else {
-    event.preventDefault();
-    appRoom.speak(postInput.value);
-    postInput.value = '';
-  }
-}
-
-function handlePostInputKeydown(event) {
-  const postInput = document.getElementById('post_input');
-  if (event.key === 'Enter' && !event.shiftKey) {
-    if (postInput.value.trim() === '') {
-      event.preventDefault();
-      alert('チャット内容を入力してください。');
-    } else {
+    submitButton.addEventListener('click', function(event) {
+      if (postInput.value.trim() === '') {
+        event.preventDefault();
+        alert('チャット内容を入力してください。');
+      } else {
       event.preventDefault();
       appRoom.speak(postInput.value);
       postInput.value = '';
-    }
+      }
+    });
+
+    postInput.addEventListener('keydown', function(event) {
+      
+      if (event.key === 'Enter' && !event.shiftKey) {
+        if (postInput.value.trim() === '') {
+          event.preventDefault();
+          alert('チャット内容を入力してください。');
+        }else{
+        event.preventDefault();
+        appRoom.speak(postInput.value);
+        postInput.value = '';
+        }
+      }
+    });
   }
+  
 }
 
 
