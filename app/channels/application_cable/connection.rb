@@ -10,9 +10,11 @@ module ApplicationCable
     protected
 
     def find_verified_user
-      User.find_by(id: cookies.signed['user.id']) # クッキーから取ってくるようにした
-    rescue
-      reject_unauthorized_connection
+      if (verified_user = env['warden'].user)
+        verified_user
+      else
+        reject_unauthorized_connection
+      end
     end
   end
 end
