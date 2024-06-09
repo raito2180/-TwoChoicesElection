@@ -1,5 +1,5 @@
 <%= turbo_stream.append 'messages' do %>
-  <div id="chat_<%= chat.id %>/<%= current_user.profile.id %><%= chat.profile.id %>">
+  <div id="chat_<%= chat.id %>/<%= current_user.profile.id %>/<%= chat.profile.id %>">
     <% if current_user.profile.id == chat.profile.id %>
       <div class="chat chat-end my-2 mr-2">
     <% else %>

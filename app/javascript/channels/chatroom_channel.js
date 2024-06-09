@@ -12,8 +12,17 @@ const appRoom = consumer.subscriptions.create("ChatroomChannel", {
   received(data) {
     // Called when there's incoming data on the websocket for this channel
     const messages = document.getElementById('messages');
-    messages.insertAdjacentHTML('beforeend', data['message']);
-    const newMessage = document.getElementById(`chat_${data['chat_id']}`);
+    const newMessageHtml = data['message'];
+    const chatId = data['chat_id'];
+    const isCurrentUserChat = window.profileData.id;
+    const chatStyle = isCurrentUserChat ? 'chat-end my-2 mr-2' : 'chat-start my-2 ml-2';
+    const chatMessageHtml = `
+    <div id="chat_${chatId}" class="chat ${chatStyle}">
+      ${newMessageHtml}
+    </div>
+    ` ;
+    messages.insertAdjacentHTML('beforeend', chatMessageHtml);
+    const newMessage = document.getElementById(`chat_${chatId}`);
       if (newMessage) {
         newMessage.scrollIntoView({ block: "center", behavior: 'smooth' });
     }
