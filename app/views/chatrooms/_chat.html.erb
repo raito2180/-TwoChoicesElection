@@ -20,10 +20,6 @@
       </div>
     </div>
     <script>
-      if (!sessionStorage.getItem('reloaded')) {
-        sessionStorage.setItem('reloaded', 'true');
-        window.location.reload();
-      }
       document.getElementById("chat_<%= chat.id %>").scrollIntoView({ behavior: 'smooth', block: 'center' });
     </script>
   </div>
