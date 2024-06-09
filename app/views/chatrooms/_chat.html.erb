@@ -20,16 +20,11 @@
       </div>
     </div>
     <script>
+      if (!sessionStorage.getItem('reloaded')) {
+        sessionStorage.setItem('reloaded', 'true');
+        window.location.reload();
+      }
       document.getElementById("chat_<%= chat.id %>").scrollIntoView({ behavior: 'smooth', block: 'center' });
     </script>
   </div>
 <% end %>
-
-<script>
-  document.addEventListener('turbo:load', function() {
-    if (!sessionStorage.getItem('reloaded')) {
-      sessionStorage.setItem('reloaded', 'true');
-      window.location.reload();
-    }
-  });
-</script>
