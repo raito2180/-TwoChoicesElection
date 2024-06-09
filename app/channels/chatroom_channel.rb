@@ -14,7 +14,7 @@ class ChatroomChannel < ApplicationCable::Channel
     group = post.group
     if group && profile
       chat = profile.chats.create!(body: data['message'], group: group)
-      ActionCable.server.broadcast('chatroom_channel', {message: render_message(chat), chat_id: chat.id})
+      ActionCable.server.broadcast('chatroom_channel', {message: render_message(chat), chat_id: chat.id, chat_profile_id: chat.profile.id})
     end
   end
 

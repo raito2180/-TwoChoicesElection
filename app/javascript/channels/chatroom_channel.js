@@ -14,10 +14,14 @@ const appRoom = consumer.subscriptions.create("ChatroomChannel", {
     const messages = document.getElementById('messages');
     const newMessageHtml = data['message'];
     const chatId = data['chat_id'];
-    const isCurrentUserChat = window.profileData;
-    const chatStyle = isCurrentUserChat ? 'chat-end my-2 mr-2' : 'chat-start my-2 ml-2';
+    const isChatProfile = data['chat_profile_id'];
+    const isCurrentUserProfile = window.profileData.id;
+    console.log('isCurrentUserProfile:',isCurrentUserProfile);
+    console.log('isChatProfile:',isChatProfile);
+    const chatStyle = isCurrentUserProfile == isChatProfile ? 'chat-end my-2 mr-2' : 'chat-start my-2 ml-2';
+    
     const chatMessageHtml = `
-    <div id="chat_${chatId}">
+    <div id="chat_${chatId}/${isCurrentUserProfile}/${isChatProfile}">
       <div class="chat ${chatStyle}">  
         ${newMessageHtml}
       </div>
