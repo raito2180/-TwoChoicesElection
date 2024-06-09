@@ -8,7 +8,7 @@
   </div>
   <div class="w-full md:w-1/2 rounded-md bg-cover" style="background-image: url('<%= asset_path('talk.jpg') %>')">
     <div id="messages">
-      <%= render partial: 'chatrooms/chat', collection: @chats, as: :chat %>
+      <%= render partial: 'chatrooms/chat', collection: @chats, as: :chat, locals: { profile: @profile } %>
     </div>
     <form onsubmit="return false;" class='flex flex-col justify-center items-center min-h-[96px]'>
       <input type="hidden" id="post" value="<%= @post.id %>">

@@ -19,11 +19,10 @@ class ChatroomChannel < ApplicationCable::Channel
   end
 
   def render_message(chat, profile)
-    ApplicationController.render_with_signed_in_user(
-      profile.user, 
-      partial: 'chatrooms/chat', 
-      locals: { chat: chat }
+    ApplicationController.render(
+      partial: 'chatrooms/chat',
+      locals: { chat: chat, profile: profile }
     )
-  end  
+  end
 
 end
