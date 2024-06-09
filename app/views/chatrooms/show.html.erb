@@ -12,7 +12,7 @@
     </div>
     <form onsubmit="return false;" class='flex flex-col justify-center items-center min-h-[96px]'>
       <input type="hidden" id="post" value="<%= @post.id %>">
-      <input type="hidden" id="profile" value="<%= current_user.profile.id %>">
+      <input type="hidden" id="profile" value="<%= @profile.id %>">
       <div class="w-full flex flex-row justify-center items-center">
         <textarea id='post_input' name="mytext" class='text-black rounded-md mx-2' rows="1" placeholder="メッセージを入力" cols="40" autofocus ></textarea>
         <button id='submit_button' type="submit" data-behavior="room_speaker" class='btn btn-sm'>
