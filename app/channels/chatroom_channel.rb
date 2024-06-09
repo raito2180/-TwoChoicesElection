@@ -14,14 +14,14 @@ class ChatroomChannel < ApplicationCable::Channel
     group = post.group
     if group && profile
       chat = profile.chats.create!(body: data['message'], group: group)
-      ActionCable.server.broadcast('chatroom_channel', {message: render_message(chat, profile)})
+      ActionCable.server.broadcast('chatroom_channel', {message: render_message(chat), chat_id: chat.id, chat_profile_id: chat.profile.id})
     end
   end
 
-  def render_message(chat, profile)
+  def render_message(chat)
     ApplicationController.render_with_signed_in_user(
-      profile.user, 
-      partial: 'chatrooms/chat', 
+      chat.profile.user, 
+      partial: 'chatrooms/mychat', 
       locals: { chat: chat }
     )
   end  

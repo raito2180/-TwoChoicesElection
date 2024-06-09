@@ -41,6 +41,9 @@ gem 'chronic', '0.6.3'
 gem "active_storage_validations"
 gem "aws-sdk-s3", require: false
 
+#チャットのテキストリンク用
+gem 'rinku'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 

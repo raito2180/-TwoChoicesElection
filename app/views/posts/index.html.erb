@@ -1,5 +1,5 @@
 <div class='h-full'>
-  <div class='flex mb-2 mt-2'>
+  <div class='flex items-center mb-2 mt-2'>
     <h1 class="text-5xl">募集一覧</h1>
     <%= link_to '募集する', new_post_path, class: "btn ml-5" %>
   </div>
@@ -57,7 +57,7 @@
                   <%= link_to '募集内容を見る', post_path(post.id), class: 'btn' %>
                   <% if post.owned_by?(current_user) %>
                     <%= link_to '募集編集', edit_post_path(post), class: 'btn' %>
-                    <%= link_to '募集削除', post_path(post), data: { turbo_method: :delete }, class: 'btn' %>
+                    <%= link_to '募集削除', post_path(post), data: { turbo_method: :delete, turbo_confirm: "投稿を削除しますか？" }, class: 'btn' %>
                   <% end %>
                 </div>
               </div>

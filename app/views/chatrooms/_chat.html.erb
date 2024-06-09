@@ -1,16 +1,26 @@
-<% if current_user == chat.profile.user %>
-  <div class="chat chat-end">
-<% else %>
-  <div class="chat chat-start">
-<% end %>
-    <div class="chat-image avatar">
-      <div class="w-10 rounded-full">
-        <% if chat.profile.avatar.attached? %>
-          <%= image_tag url_for(chat.profile.avatar) %>
-        <% else %>
-          <%= image_tag "default.jpg" %>
-        <% end %>
+<%= turbo_stream.append 'messages' do %>
+  <div id="chat_<%= chat.id %>/<%= current_user.profile.id %>/<%= chat.profile.id %>">
+    <% if current_user.profile.id == chat.profile.id %>
+      <div class="chat chat-end my-2 mr-2">
+    <% else %>
+      <div class="chat chat-start my-2 ml-2">
+    <% end %>
+        <div class="chat-image avatar">
+          <div class="w-10 rounded-full">
+            <% if chat.profile.avatar.attached? %>
+              <%= image_tag url_for(chat.profile.avatar) %>
+            <% else %>
+              <%= image_tag "default.jpg" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="chat-bubble message" id="chat_<%= chat.id %>">
+          <p><%= raw Rinku.auto_link(simple_format(h(chat.body)), :all, 'target="_blank"') %></p>
+        </div>
       </div>
     </div>
-    <div class="chat-bubble message"><p><%= chat.body %></p></div>
+    <script>
+      document.getElementById("chat_<%= chat.id %>").scrollIntoView({ behavior: 'smooth', block: 'center' });
+    </script>
   </div>
+<% end %>
