@@ -1,4 +1,4 @@
-<div class="bg-blue-900 w-full h-screen text-white overflow-hidden flex items-center justify-center">
+<div class="bg-blue-900 w-full h-full my-10 md:m-10 text-white overflow-hidden flex items-center justify-center">
   <div class='md:w-1/2'>
     <h1 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>募集投稿画面</h1>
     <%= form_with(model: @post, local: true) do |f| %>
@@ -16,7 +16,7 @@
         <%= f.text_field :location, placeholder:'会場の住所を入力してください', class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
       </div>
       <div>
-        <%= f.label :capacity, '募集人数' %><br>
+        <%= f.label :capacity, '最大人数' %><br>
         <%= f.number_field :capacity, placeholder:'募集人数を入力してください',  class: 'border border-black border-2 rounded-md text-black w-96 md:w-full' %>
       </div>
       <div>

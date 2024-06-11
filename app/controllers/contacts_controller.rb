@@ -9,7 +9,7 @@ class ContactsController < ApplicationController
     @contact = current_user.contacts.new(contact_params)
     if @contact.save
       ContactMailer.send_mail(@contact, current_user).deliver_now
-      redirect_to done_path, flash: { success: 'お問い合わせが完了しました' }
+      redirect_to done_path, flash: { notice: 'お問い合わせが完了しました' }
     else
       flash.now[:danger] = '作成失敗'
       render :new, status: :unprocessable_entity

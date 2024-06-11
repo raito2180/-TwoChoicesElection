@@ -1,5 +1,7 @@
 <div class="bg-blue-900 w-full h-screen text-white">
-  <h1 class="text-5xl mb-4">AI検索機能</h1>
+  <div class="tooltip md:tooltip-right mb-2 mx-2 pr-40 md:pr-0" data-tip="欧州トップクラスの選手を11人教えてくれます。タイトルのみ入力して検索できます。2022年時点のデータになります。">
+    <span>Stardom Playersとは？</span>
+  </div>
     <%= form_with model: @response, url: responses_path, method: :post, local: true do |form| %>
       <div class='grid grid-cols-1 md:grid-cols-7 rounded-md text-black'>
         <%= form.collection_select :request_id, Request.all, :id, :name, { include_blank: "知りたい事を選択" }, { class: 'border border-black border-2 rounded-md bg-base-100 mx-1 md:col-span-1' } %>

@@ -24,7 +24,7 @@
           
           <div class="field">
             <%= f.label :gender %><br>
-            <%= f.select :gender, Profile.genders.keys.map { |w| [w.humanize, w] }, {}, class: 'rounded-md w-96 text-black' %>
+            <%= f.select :gender, Profile.genders.keys.map { |w| [I18n.t("enums.profile.gender.#{w}").humanize, w] }, {}, class: 'rounded-md w-96 text-black' %>
           </div>
           <div class="field">
             <%= f.label :body %><br>
