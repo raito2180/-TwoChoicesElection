@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :redirect_root, only: [:new, :edit, :destroy]
+  before_action :redirect_root, only: [:new, :show, :edit, :destroy]
 
   def index
     @posts = Post.all
@@ -27,7 +27,8 @@ class PostsController < ApplicationController
         render :new, alert: 'Groupの作成に失敗しました。'
       end
     else
-      render :new
+      flash.now[:error] = '募集投稿に失敗しました'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -59,7 +60,7 @@ class PostsController < ApplicationController
     if @post.destroy
       flash[:success] = '募集投稿が削除されました'
     else
-      flash[:error] = '募集投稿の削除に失敗しました'
+      flash[:danger] = '募集投稿の削除に失敗しました'
     end
     redirect_to @post
   end

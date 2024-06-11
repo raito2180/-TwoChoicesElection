@@ -1,5 +1,8 @@
 <div class='h-full'>
-  <h1 class="text-5xl mb-4">AI記録一覧</h1>
+  <div class='flex items-center mb-2 mt-2'>
+    <h1 class="text-5xl mb-4">AI記録一覧</h1>
+    <%= link_to '検索する', new_response_path, class: "btn ml-5" %>
+  </div>
   <div class='my-2'>
     <% if @responses.present? %>
       <ul class='grid grid-cols-1 md:grid-cols-4'>

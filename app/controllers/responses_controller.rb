@@ -195,7 +195,7 @@ class ResponsesController < ApplicationController
   
   def save_response_with_redirect_or_render
     if @response.save
-      flash[:success] = "記録を作成しました"
+      flash[:notice] = "記録を作成しました"
       redirect_to @response
     else
       flash.now[:danger] = '作成失敗'

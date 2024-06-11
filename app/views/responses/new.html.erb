@@ -1,8 +1,6 @@
 <div class="bg-blue-900 w-full h-screen text-white">
-  <div class="tooltip tooltip-right" data-tip="知りたいこと欄にあるStardom Playerは、
-                                               2022年時点でのトップクラスの選手を11人教えてくれます。
-                                               タイトルのみ入力して検索できます。">
-    <h1 class="text-5xl mb-4">AI検索機能</h1>
+  <div class="tooltip md:tooltip-right mb-2 mx-2 pr-40 md:pr-0" data-tip="欧州トップクラスの選手を11人教えてくれます。タイトルのみ入力して検索できます。2022年時点のデータになります。">
+    <span>Stardom Playersとは？</span>
   </div>
     <%= form_with model: @response, url: responses_path, method: :post, local: true do |form| %>
       <div class='grid grid-cols-1 md:grid-cols-7 rounded-md text-black'>

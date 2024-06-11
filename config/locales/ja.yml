@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      post: 募集
+    attributes:
+      post:
+        title: タイトル
+        detail: 詳細
+        location: 場所
+        capacity: 最大人数
+      profile:
+        name: 名前
+        gender: 性別
+        body: ひとこと
+        image: アイコン
+        

@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   private
   
   def redirect_root
-    redirect_to root_path, flash: { success: 'ログインしてください' } unless user_signed_in?
+    redirect_to root_path, flash: { notice: 'ログインしてください' } unless user_signed_in?
   end
 
   def set_profile

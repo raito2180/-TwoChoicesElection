@@ -44,6 +44,10 @@ gem "aws-sdk-s3", require: false
 #チャットのテキストリンク用
 gem 'rinku'
 
+#deviseの日本語化用
+gem 'rails-i18n', '~> 7.0.0'
+gem 'devise-i18n'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 
@@ -106,9 +110,4 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-end
-
-group :production do
-  #actioncable用
-  gem 'redis', '~> 5.2'
 end
