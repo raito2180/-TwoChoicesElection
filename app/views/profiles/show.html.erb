@@ -1,33 +1,32 @@
 <div class="bg-blue-900 w-full h-screen text-white overflow-hidden flex items-center justify-center">
-  <div class='w-3/4 md:w-1/2 border-dotted border-t-2 border-fitting-whitec pt-2 flex flex-col items-center justify-center'>
-    <div class="avatar">
-      <div class="w-40 h-40 md:w-80 md:h-80 rounded-full flex items-center justify-center">
+  <div class="w-11/12 md:w-3/4 lg:w-1/2 border border-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+    <div class="avatar flex flex-col items-center">
+      <div class="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden mb-4">
         <% if @profile.avatar.present? %>
-        <%= image_tag @profile.avatar, size: '350x270' %>
+          <%= image_tag @profile.avatar, class: "object-cover w-full h-full" %>
         <% else %>
-          <%= image_tag "default.jpg" %>
+          <%= image_tag "default.jpg", class: "object-cover w-full h-full" %>
         <% end %>
       </div>
-    </div><br>
-    <% if current_user === @profile.user %>
-      <div class="badge badge-lg badge-primary">
-        <%= link_to 'プロフィール編集', edit_profile_path %>
+      <div class="text-center">
+        <% if current_user === @profile.user %>
+          <div class="mt-4">
+            <%= link_to 'プロフィール編集', edit_profile_path, class: "badge badge-lg badge-primary" %>
+          </div>
+        <% end %>
+        <h1 class="font-bold text-2xl md:text-3xl mt-3">
+          <%= @profile.name %>
+        </h1>
+        <h1 class="font-bold text-xl md:text-2xl mt-1">
+          <%= I18n.t("enums.profile.gender.#{@profile.gender}") %>
+        </h1>
       </div>
-    <% end %>
-    <h1 class='font-bold text-2xl pt-2'>
-      ユーザー名：<%= @profile.name %>
-    </h1>
-    <h1 class='font-bold text-2xl pt-2'>
-      性別：<%= I18n.t("enums.profile.gender.#{@profile.gender}") %>
-    </h1>
-    <h1 class='font-bold text-2xl pt-2'>
-      ひとこと<br>
-    </h1>
-    <h1 class='md:w-1/2 font-bold text-2xl pt-2 pb-2 flex items-center justify-center'>
+    </div>
+    <div class="divider divider-primary">ひとこと</div>
+    <h1 class="w-full font-bold text-xl md:text-2xl pt-2 pb-2 text-center">
       <%= @profile.body %>
-    </h1>
-    <h1 class='w-full font-bold text-2xl border-dotted border-b-2 border-fitting-white pt-2 pb-2'>
     </h1>
   </div>
 </div>
+
 
