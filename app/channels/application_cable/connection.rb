@@ -3,18 +3,13 @@ module ApplicationCable
     identified_by :current_user
 
     def connect
-      self.current_user = find_verified_user
-      logger.add_tags 'ActionCable', current_user.email
+      reject_unauthorized_connection unless find_verified_user
     end
 
-    protected
+    private
 
     def find_verified_user
-      if (verified_user = env['warden'].user)
-        verified_user
-      else
-        reject_unauthorized_connection
-      end
+      self.current_user = env['warden'].user
     end
   end
 end
