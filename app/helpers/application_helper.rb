@@ -23,7 +23,8 @@ module ApplicationHelper
       },
       twitter: {
         card: 'summary_large_image',
-        site: '@raito2180'
+        site: '@raito2180',
+        image: image_url('footerlogo.png')
       }
     }
   end
