@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :set_profile
+  before_action :set_profile, if: :user_signed_in?
   before_action :ensure_profile
   before_action :set_user_id_to_cookie
 
@@ -17,10 +17,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_profile
-    if user_signed_in?
-      @profile = current_user.profile
-      cookies.signed["user.id"] = current_user.id
-    end
+    @profile = current_user.profile
+    cookies.signed["user.id"] = current_user.id
   end
 
   def ensure_profile

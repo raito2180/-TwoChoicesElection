@@ -101,6 +101,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.hosts << 'stardomplayers.com'
+  config.hosts << "stardom-jonn.onrender.com"
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
