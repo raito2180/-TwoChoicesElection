@@ -59,7 +59,7 @@ class ResponsesController < ApplicationController
   def destroy
     @response = Response.find(params[:id])
     if @response.destroy
-      flash[:success] = '投稿が削除されました'
+      flash[:notice] = '投稿が削除されました'
     else
       flash[:error] = '投稿の削除に失敗しました'
     end

@@ -74,7 +74,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   
   #device用の設定
-  config.action_mailer.default_url_options = { host: 'https://stardom-jonn.onrender.com' }
+  config.action_mailer.default_url_options = { host: 'https://stardomplayers.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
@@ -99,6 +99,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.hosts << 'stardomplayers.com'
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [
