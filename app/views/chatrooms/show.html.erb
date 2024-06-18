@@ -6,7 +6,7 @@
       <%= link_to '募集一覧', posts_path, class: 'btn' %>
     </div>
   </div>
-  <div class="w-full md:w-1/2 rounded-md bg-cover" style="background-image: url('<%= asset_path('talk.jpg') %>')">
+  <div class="w-full md:w-1/2 rounded-md bg-fixed" style="background-image: url('<%= asset_path('talk.jpg') %>')">
     <div id="messages">
       <%= render partial: 'chatrooms/chat', collection: @chats, as: :chat %>
     </div>
@@ -14,7 +14,7 @@
       <input type="hidden" id="post" value="<%= @post.id %>">
       <input type="hidden" id="profile" value="<%= current_user.profile.id %>">
       <div class="w-full flex flex-row justify-center items-center">
-        <textarea id='post_input' name="mytext" class='text-black rounded-md mx-2' rows="1" placeholder="メッセージを入力" cols="40" autofocus ></textarea>
+        <textarea id='post_input' name="mytext" class='text-black rounded-md mx-2 textarea' rows="1" placeholder="メッセージを入力" cols="40" autofocus ></textarea>
         <button id='submit_button' type="submit" data-behavior="room_speaker" class='btn btn-sm'>
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
