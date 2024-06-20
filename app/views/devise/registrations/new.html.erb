@@ -1,29 +1,29 @@
 <div class="bg-blue-900 w-full h-screen text-white overflow-hidden flex items-center justify-center">
   <div>
-    <div>
-      <h1 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>ユーザー登録</h1>
+    <div >
+      <h1 class='m-3 font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-5'>ユーザー登録</h1>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="field">
+        <div class="field m-3">
           <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'メールアドレスを入力', class: 'rounded-md w-96 text-black'%>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'メールアドレスを入力', class: 'pl-1 rounded-md w-72 md:w-96 text-black'%>
         </div>
 
-        <div class="field">
+        <div class="field m-3">
           <%= f.label :password %>
           <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> 文字以上)</em>
           <% end %><br>
-          <%= f.password_field :password, autocomplete: "new-password", placeholder: 'パスワードを入力', class: 'rounded-md w-96 text-black'%>
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: 'パスワードを入力', class: 'pl-1 rounded-md w-72 md:w-96 text-black'%>
         </div>
 
-        <div class="field">
+        <div class="field m-3">
           <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'パスワードを再度入力', class: 'rounded-md w-96 text-black'%>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'パスワードを再度入力', class: 'pl-1 rounded-md w-72 md:w-96 text-black'%>
         </div>
      
-        <div class="actions flex justify-center pb-2 border-dotted border-b-2 border-fitting-white">
+        <div class="m-3 actions flex justify-center border-dotted border-b-2 border-fitting-white pb-5">
           <%= f.submit "登録", class: 'btn btn-sm mt-2', data: {"turbolinks" => false}%>
         </div>
 

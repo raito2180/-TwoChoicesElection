@@ -1,30 +1,30 @@
 <div class="bg-blue-900 w-full h-screen text-white overflow-hidden flex items-center justify-center">
   <div>
-    <h2 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>パスワード再設定</h2>
+    <h2 class='m-3 font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>パスワード再設定</h2>
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <%= f.hidden_field :reset_password_token %>
 
-      <div class="field">
+      <div class="m-3 field">
         <%= f.label :password, "新しいパスワード" %><br />
         <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> 文字以上)</em><br />
         <% end %>
-        <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'rounded-md w-96 text-black' %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'pl-1 rounded-md w-72 md:w-96 text-black' %>
       </div>
 
-      <div class="field">
+      <div class="m-3 field">
         <%= f.label :password_confirmation, "新PWを再度入力" %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'rounded-md w-96 text-black' %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'pl-1 rounded-md w-72 md:w-96 text-black' %>
       </div>
       
       
 
-      <div class="actions flex justify-center pb-2 border-dotted border-b-2 border-fitting-white"">
+      <div class="m-3 actions flex justify-center pb-2 border-dotted border-b-2 border-fitting-white">
         <%= f.submit "パスワード再設定", class: 'btn btn-sm mt-2' %>
       </div>
     <% end %>
-    <div class="flex justify-center items-center mt-2">
+    <div class="m-3 flex justify-center items-center mt-2">
       <%= render "devise/shared/links" %>
     </div>
   </div>

@@ -1,24 +1,29 @@
 <div class="bg-blue-900 w-full h-screen text-white overflow-hidden flex items-center justify-center">
   <div>
     <div>
-      <h1 class='font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-2'>ログイン</h1>
+      <h1 class='m-3 font-bold text-2xl border-dotted border-t-2 border-fitting-white pt-5'>ログイン</h1>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
-        <div class="field">
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'メールアドレスを入力', class: 'rounded-md w-96 text-black'%>
+        <div class="field w-full flex justify-center">
+          <div class="m-3 w-72 md:w-96">
+            <%= f.label :email, class: 'block text-left' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'メールアドレスを入力', class: 'pl-1 rounded-md w-full text-black' %>
+          </div>
         </div>
 
-        <div class="field ">
-          <%= f.label :password %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> 文字以上)</em>
-          <% end %><br>
-          <%= f.password_field :password, autocomplete: "current-password", placeholder: 'パスワードを入力', class: 'rounded-md w-96 text-black'%>
+        <div class="field w-full flex justify-center">
+          <div class="m-3 w-72 md:w-96">
+            <%= f.label :password, class: 'block text-left' %>
+            <% if @minimum_password_length %>
+            <em class="text-sm block text-left">(<%= @minimum_password_length %> 文字以上)</em>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "current-password", placeholder: 'パスワードを入力', class: 'pl-1 rounded-md w-full text-black' %>
+          </div>
         </div>
 
-        <div class="actions flex justify-center pb-2 border-dotted border-b-2 border-fitting-white">
+
+        <div class="m-3 actions flex justify-center pb-5 border-dotted border-b-2 border-fitting-white">
           <%= f.submit "ログイン", class: 'btn btn-sm mt-2', data: {"turbolinks" => false}%>
         </div>
       <% end %>
