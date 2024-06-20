@@ -207,7 +207,7 @@ class ResponsesController < ApplicationController
 
   def call_api
     case @response.request.name
-    when 'Stardom Players'
+    when 'ベストイレブン'
       handle_stardom_request
     when '成績'
       handle_score_request

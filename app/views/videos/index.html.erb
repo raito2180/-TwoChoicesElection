@@ -19,7 +19,7 @@
   </div>
   
   <% if @videos.present? %>
-      <h3 class="text-xl mt-6">検索結果</h3>
+      <h3 class="text-3xl mt-6 flex items-center justify-center">検索結果</h3>
       <div>
         <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 place-items-center">
           <% @videos.each do |video| %>
@@ -29,14 +29,16 @@
       </div>
   <% else %>
     <% if params[:keyword].present? %>
-      <h3 class="text-xl mt-6">検索結果</h3>
-      <h1>検索ワードに関連するビデオは見つかりませんでした。</h1>
-    <% else %>
+      <div class="m-12 flex flex-col items-center justify-center">
+        <h3 class="text-3xl">検索結果</h3>
+        <h1>検索ワードに関連するビデオは見つかりませんでした。違うワードで検索してみてください。</h1>
+      </div>
+    <% else %> 
     <% end %>
   <% end %>
 
   <% if @recommend_videos.present? %>
-      <h3 class="text-xl mt-6 ">おすすめ</h3>
+      <h3 class="text-3xl mt-6 flex items-center justify-center">おすすめ</h3>
       <div class="mb-20 w-full">
         <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 place-items-center">
           <% @recommend_videos.each do |video| %>
