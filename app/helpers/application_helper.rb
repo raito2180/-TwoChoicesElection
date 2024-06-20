@@ -4,11 +4,11 @@ module ApplicationHelper
       site: 'Stardom',
       title: 'サッカーファン向けwebサービス',
       reverse: true,
-      separator: '|',   #Webサイト名とページタイトルを区切るために使用されるテキスト
+      separator: '|', 
       description: '動画検索、AI機能、フットサル募集機能でサッカーを五感で楽しめます',
-      keywords: 'サッカー,AI,youtube,フットサル',   #キーワードを「,」区切りで設定する
-      canonical: request.original_url,   #優先するurlを指定する
-      icon: [                    #favicon、apple用アイコンを指定する
+      keywords: 'サッカー,AI,youtube,フットサル', 
+      canonical: request.original_url, 
+      icon: [
         { href: image_url('favicon.ico') },
         { href: image_url('logo.png'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' },
       ],

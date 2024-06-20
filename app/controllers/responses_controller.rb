@@ -36,9 +36,7 @@ class ResponsesController < ApplicationController
     end
 
     if can_call_api?
-      # APIを呼び出す処理
       call_api
-      # API利用回数をインクリメント
     else
       flash.now[:danger] = 'API利用回数が上限に達しました。午前5時に利用回数がリセットされます'
       render :new, status: :unprocessable_entity

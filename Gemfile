@@ -2,53 +2,39 @@ source "https://rubygems.org"
 
 ruby "3.2.2"
 
-#tailwindCSSインストール用
 gem 'cssbundling-rails'
 
-#静的ページ作成用
 gem 'high_voltage'
 
-#youtube data api用
 gem 'google-api-client', '~> 0.11'
 
-#環境変数指定用
 gem 'dotenv-rails'
 
-#バグフィックス用
 gem 'pry-rails'
 
-#認証機能用
 gem "devise"
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
-#メール確認用
 gem 'letter_opener_web'
 
-#openai用
 gem "ruby-openai"
 
-#openaiレスポンス調整用
 gem 'nokogiri'
 
-#openai使用制限定期実行用
 gem 'whenever', '1.0.0', :require => false
 gem 'chronic', '0.6.3'
 
-#active_storageバリデーション用
 gem "active_storage_validations"
 gem "aws-sdk-s3", require: false
 
-#チャットのテキストリンク用
 gem 'rinku'
 
-#deviseの日本語化用
 gem 'rails-i18n', '~> 7.0.0'
 gem 'devise-i18n'
 
-#OGP用
 gem 'meta-tags'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

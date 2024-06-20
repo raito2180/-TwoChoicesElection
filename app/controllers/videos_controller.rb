@@ -27,7 +27,6 @@ class VideosController < ApplicationController
         render :index, status: :internal_server_error
       end
     rescue StandardError => e
-      # その他の一般的なエラー処理
       render :index, status: :internal_server_error
     end
   end
@@ -58,7 +57,6 @@ def set_youtube
       render :index, status: :internal_server_error
     end
   rescue StandardError => e
-    # その他の一般的なエラー処理
     render :index, status: :internal_server_error
   end
 end

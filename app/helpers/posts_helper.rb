@@ -11,7 +11,6 @@ module PostsHelper
       沖縄県
     ]
 
-    # 正規表現を作成
     prefecture_regex = Regexp.union(prefectures)
     if location.match(prefecture_regex)
       prefecture = location.match(prefecture_regex)[0]
