@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     renderer.render(*args)
   end
 
+  def mobile_device?
+    request.user_agent =~ /Mobile|webOS/
+  end
+
   private
   
   def redirect_root

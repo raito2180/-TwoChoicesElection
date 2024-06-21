@@ -39,6 +39,11 @@ class PostsController < ApplicationController
     @participating_profiles = @group.memberships.where(status: :参加).includes(:profile)
     @interested_profiles = @group.memberships.where(status: :興味あり).includes(:profile)
     @not_participating_profiles = @group.memberships.where(status: :不参加).includes(:profile)
+    if mobile_device?
+      render :show
+    else
+      render :show_pc
+    end
   end
 
   def edit
