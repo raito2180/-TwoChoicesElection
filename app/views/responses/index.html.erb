@@ -1,7 +1,7 @@
-<div class='h-full'>
+<div class='min-h-screen'>
   <div class='mb-10'>
     <% if @responses.present? %>
-      <div class="tooltip md:tooltip-right mb-2 mx-2 pr-40 md:pr-0" data-tip="知りたいこと欄のStardomPlayersはメッシ、特長は選手、成績はスコアボードの画像で分類されています。">
+      <div class="text-xl tooltip md:tooltip-right my-2 mx-2 pr-40 md:pr-0" data-tip="知りたいこと欄のStardomPlayersはメッシ、特長は選手、成績はスコアボードの画像で分類されています。">
         <span>カード画像分類について</span>
       </div>
       <ul class='grid grid-cols-1 md:grid-cols-4'>
@@ -35,7 +35,7 @@
       <div class='w-full flex flex-col my-56 px-20 items-center'>
         <span class='font-bold text-3xl'>今のところ投稿がありません。ぜひAI検索機能を使ってみてください♪</span>
         <%= image_tag asset_path('POSTME.png') %>
-        <%= link_to '検索画面', new_response_path, class: "btn w-48 md:w-96 mt-5" %>
+        <%= link_to '検索画面へ', new_response_path, class: "btn w-48 md:w-96 mt-5" %>
       </div>
     <% end %>
   </div>
