@@ -37,7 +37,8 @@
                 <%= link_to '募集削除', post_path(@post), data: { turbo_method: :delete }, class: 'btn btn-sm mx-2 col-span-1' %>
               </div>
             <% end %>
-            <div class="card-actions mt-10 flex justify-center items-center">
+            <div class="divider divider-primary mt-10">メニュー</div>
+            <div class="card-actions flex justify-center items-center">
               <% if @post.group.memberships.exists?(profile: current_user.profile, status: '参加') %>
                 <%= link_to 'グループチャットへ', post_group_membership_chatroom_path(@post, @post.group, @membership), class: 'btn btn-accent' %>
               <% end %>
