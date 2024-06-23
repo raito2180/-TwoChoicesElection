@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : "ERROR" %></title>
+  <!-- その他のメタタグやスタイルシートのリンク -->
+</head>
+<body>
+  <!-- エラーメッセージやユーザーへの指示を含むページ固有のコンテンツ -->
+  <%= yield %>
+</body>
+</html>

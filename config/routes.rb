@@ -29,6 +29,17 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/400', to: 'errors#bad_request', as: :bad_request
+  get '/401', to: 'errors#unauthorized', as: :unauthorized
+  get '/403', to: 'errors#forbidden', as: :forbidden
+  get '/404', to: 'errors#not_found', as: :not_found
+  get '/500', to: 'errors#internal_server_error', as: :internal_server_error
+  get '/502', to: 'errors#bad_gateway', as: :bad_gateway
+  get '/503', to: 'errors#service_unavailable', as: :service_unavailable 
+  get '/504', to: 'errors#gateway_timeout', as: :gateway_timeout
+
+
+
   resources :contacts, only: [:new, :create]
   get 'done', to: 'contacts#done', as: 'done'
 
