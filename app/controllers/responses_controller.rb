@@ -141,44 +141,118 @@ class ResponsesController < ApplicationController
   end
 
   def fetch_score_information(*args)
-    team_name = args[0]
-    player_name = args[1]
-    season_name = args[2]
+    search_name = args[0]
+    season_name = args[1]
+    prompt = <<~PROMPT
+      #{search_name}と#{season_name}を参考に成績に加えて大事な試合などのメモリアルな話題を詳しく説明してください。シーズンの指定が無い場合、全体を通しての総評を説明して下さい。
+      選手やチーム名は正式名称に修正してください
+      シーズンが全体の場合、概要は不要です
+      メモリアルな話題は3つ教えてください
+      形式以外の文章は不要です
+      日本語で教えてください
+      形式の例は、以下の通りでお願いします
+      <h1>#{search_name}</h1>
+      <h2>シーズン: #{season_name}</h2>
+      <h2>成績</h2>
+      <ul>
+        <li>リーグ: </li>
+        <li>最終順位: </li>
+        <li>成績: </li>
+        <li>カップ戦: </li>
+      </ul>
+      <h2>メモリアルマッチ</h2>
+      <h3>メモリアルマッチ1</h3>
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <h3>メモリアルマッチ2</h3>
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <h3>メモリアルマッチ3</h3>
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <h2>総括</h2>
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul><br>
+    PROMPT
     response = @client.chat(
         parameters: {
             model: "gpt-4o",
             messages: [{ role: "user", 
-            content: "
-            サッカーの欧州リーグについて質問です。
-            成績に加えて大事な試合などのメモリアルな話題も導入してください。シーズンの指定が無い場合は、全体を通しての総評を説明して下さい。
-            説明の対象は下記のとおりです。
-            具体的な点数も含めてください
-            1回のチャットごとに記憶をリセットしてください。
-            マークダウン方式は使用しないでください
-            知りたい対象:#{team_name}#{player_name}
-            シーズン#{season_name}
-            " }],
+            content: prompt }],
         })
     @response.body = response.dig("choices", 0, "message", "content")
     puts @response.body
   end
   def fetch_character_information(*args)
-    team_name = args[0]
-    player_name = args[1]
-    season_name = args[2]
+    search_name = args[0]
+    season_name = args[1]
+    prompt = <<~PROMPT
+      #{search_name}と#{season_name}を参考にプレースタイルを分かりやすく説明してください。シーズンの指定が無い場合、全体を通しての総評を説明して下さい。
+      選手やチーム名は正式名称に修正してください
+      シーズンが全体の場合、概要は不要です
+      特長は3つ教えてください
+      形式以外の文章は不要です
+      チームの部分は、選手名が入った場合選手に変更してください
+      日本語で教えてください
+      形式の例は、以下の通りでお願いします
+      <h1>#{search_name}</h1>
+    <h2>シーズン: #{season_name}</h2>
+    <h2>概要</h2>
+    <ul>
+      <li>リーグ: </li>
+      <li>最終順位: </li>
+      <li>成績: </li>
+      <li>カップ戦: </li>
+    </ul>
+    <h2>プレースタイルの特長</h2>
+    <h3>守備重視</h3>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <h3>カウンターアタック</h3>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <h3>セットプレー活用</h3>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <h3>フィジカルプレー</h3>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <h2>総括</h2>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul><br>
+    PROMPT
     response = @client.chat(
         parameters: {
             model: "gpt-4o",
             messages: [{ role: "user", 
-            content: "
-            サッカーの欧州リーグについて質問です。
-            プレースタイルを分かりやすく説明してください。シーズンの指定が無い場合は、選手時代の全体を通しての総評を説明して下さい。
-            説明の対象は下記のとおりです。
-            1回のチャットごとに記憶をリセットしてください。
-            マークダウン方式は使用しないでください
-            知りたい対象:#{team_name}#{player_name}
-            シーズン#{season_name}
-            " }],
+            content: prompt }],
         })
     @response.body = response.dig("choices", 0, "message", "content")
     puts @response.body
