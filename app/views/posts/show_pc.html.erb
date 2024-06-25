@@ -1,0 +1,135 @@
+<div class='h-full w-full'>
+  <div class='flex flex-col items-center mx-5 m-10 '>
+    <div class="card card-compact bg-blue-500 shadow-xl w-full mx-2">
+      <div class="card-body">
+        <div class="flex justify-center items-center">
+          <div class='m-10'>
+            <div class='flex flex-row items-end'>
+              <div tabindex="0" class="avatar h-20 w-20">
+                <div class="h-20 w-20 rounded-full">
+                  <% if @post.profile.avatar.present? %>
+                    <%= link_to profile_path(@post.profile) do %>
+                      <%= image_tag @post.profile.avatar %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to profile_path(@post.profile) do %>
+                      <%= image_tag "default.jpg" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="chat chat-start w-full">
+                <div class="chat-bubble w-full">
+                  <div class="ml-4 max-w-full">
+                    <h3 class='font-bold text-xl text-red-300'>
+                      開催日:<%= "#{@post.date.strftime('%Y-%m-%d %H:%M')}" %>
+                    </h3>
+                    <p class="w-full overflow-hidden my-2 font-bold">
+                      タイトル:<%= "#{@post.title}" %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% if @post.owned_by?(current_user) %>
+              <div class='my-2 grid grid-cols-2 md:grid-cols-6'>
+                <%= link_to '募集編集', edit_post_path(@post), class: 'btn btn-sm mx-2 col-span-1' %>
+                <%= link_to '募集削除', post_path(@post), data: { turbo_method: :delete }, class: 'btn btn-sm mx-2 col-span-1' %>
+              </div>
+            <% end %>
+            <div class="divider divider-primary mt-10">メニュー</div>
+            <div class="card-actions flex justify-center items-center">
+              <% if @post.group.memberships.exists?(profile: current_user.profile, status: '参加') %>
+                <%= link_to 'グループチャットへ', post_group_membership_chatroom_path(@post, @post.group, @membership), class: 'btn btn-accent' %>
+              <% end %>
+              <%= link_to '募集一覧に戻る', posts_path, class: 'btn' %>
+              <div>
+                <div class='btn btn-neutral w-60'>
+                  <%= link_to "https://twitter.com/share?url=#{CGI.escape(request.original_url)}&text=サッカーファン用webアプリ【Stardom】でイベントを募集しています♪&hashtags=Stardom,フットサル募集,#{prefecture_scraping(@post.location)}", target: '_blank' do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                      <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                    </svg>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="divider divider-primary">場所</div>
+              <div class="w-full overflow-hidden"><span class='font-bold'></span><%= "#{@post.location}" %></div>
+            <div class="divider divider-primary">関連URL</div>
+              <div class="w-full overflow-hidden"><span class='font-bold'></span><%= link_to "#{@post.related_url}", @post.related_url, target: :_blank, rel: "noopener noreferrer"%></div>
+          </div>
+          <div class='m-10'>
+            <div class="divider divider-primary">参加状況</div>
+            <div class='grid grid-cols-1 md:grid-cols-3'>
+              <div class='bg-white text-black rounded-lg mx-2 my-1'>
+                <div class='mb-2 pl-1 pt-1 '>参加者(<%= @participating_profiles.count %>/<%= "#{@post.capacity}" %>人)</div>
+                <%= render partial: 'shared/membership_list', locals: { memberships: @participating_profiles }%>
+              </div>
+              <div class='bg-white text-black rounded-lg mx-2 my-1'>
+                <div class='mb-2 pl-1 pt-1 '>興味あり(<%= @interested_profiles.count %>人)</div>
+                <%= render partial: 'shared/membership_list', locals: { memberships: @interested_profiles }%>
+              </div>
+              <div class='bg-white text-black rounded-lg mx-2 my-1'>
+                <div class='mb-2 pl-1 pt-1 '>不参加(<%= @not_participating_profiles.count %>人)</div>
+                <%= render partial: 'shared/membership_list', locals: { memberships: @not_participating_profiles }%>
+              </div>
+            </div>
+            <div class='border-2 border-gray-500 rounded-md my-10'>
+              <div class='m-2'>
+                <div class='text-center'>
+                  このイベントに参加しますか？
+                </div>
+                <div class='grid grid-cols-1 md:grid-cols-3'>
+                  <div class='btn btn-accent mx-5 my-1 text-white'>
+                    <% if @group.memberships.exists?(profile: current_user.profile) %>
+                      <%= link_to post_group_membership_path(@post, @group, @group.memberships.find_by(profile: current_user.profile), status: '参加'), data: { turbo_method: :patch } do %>
+                          <span>参加する</span>
+                      <% end %>
+                    <% else %>
+                      <%= link_to post_group_memberships_path(@post, @group, status: '参加'), data: { turbo_method: :post } do %>
+                          <span>参加する</span>
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <div class='btn btn-neutral mx-5 my-1'>
+                    <% if @group.memberships.exists?(profile: current_user.profile) %>
+                      <%= link_to post_group_membership_path(@post, @group, @group.memberships.find_by(profile: current_user.profile), status: '興味あり'), data: { turbo_method: :patch } do %>
+                          <span>興味あり</span>
+                      <% end %>
+                    <% else %>
+                      <%= link_to post_group_memberships_path(@post, @group, status: '興味あり'), data: { turbo_method: :post } do %>
+                          <span>興味あり</span>
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <div class='btn btn-secondary mx-5 my-1'>
+                    <% if @group.memberships.exists?(profile: current_user.profile) %>
+                      <%= link_to post_group_membership_path(@post, @group, @group.memberships.find_by(profile: current_user.profile), status: '不参加'), data: { turbo_method: :patch } do %>
+                          <span>不参加</span>
+                      <% end %>
+                    <% else %>
+                      <%= link_to post_group_memberships_path(@post, @group, status: '不参加'), data: { turbo_method: :post } do %>
+                          <span>不参加</span>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='h-full w-full'>
+  <div class='flex flex-col items-center mx-5 my-10 '>
+    <div class="card card-compact bg-blue-500 shadow-xl w-full md:w-1/2 mx-2">
+      <div class="card-body">
+        <div class="divider divider-primary">詳細</div>
+          <div class="w-full overflow-hidden"><span class='font-bold'></span><%= safe_join(@post.detail.split("\n"), tag(:br)) %></div>
+      </div>
+    </div>
+  </div>
+</div>

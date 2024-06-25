@@ -1,8 +1,8 @@
 <div class="bg-blue-900 w-full h-full text-white">
-  <div class="bg-cover md:w-full md:h-screen min-h-[45vh] text-white" style="background-image: url('<%= asset_path('top.jpg') %>')">
-    <div class="h-[35vh] md:h-4/6 flex items-end">
+  <div class="bg-cover lg:w-full lg:h-screen min-h-[45vh] text-white" style="background-image: url('<%= asset_path('top.jpg') %>')">
+    <div class="h-[40vh] lg:h-full lg:pb-10 flex items-end">
       <div>
-        <p class="text-4xl md:text-7xl font-bold">何度でも、ファンになろう。</p>
+        <p class="ml-10 text-4xl lg:text-7xl font-bold">何度でも、ファンになろう。</p>
       </div>
     </div>
   </div>
@@ -17,14 +17,14 @@
 </div>
 
 
-<div class='flex items-center justify-center mb-16' >
+<div class='flex items-center justify-center mb-16'>
   <div>
     <%= image_tag asset_path('Product features.png'), class: "h-32 w-80" %>
-    <div class='grid grid-cols-1 xl:grid-cols-3 gap-4'>
-      <div class="card w-96 bg-base-100 shadow-xl">
+    <div class='grid grid-cols-1 lg:grid-cols-3'>
+      <div class="card m-5 lg:mx-10 justify-center bg-base-100 shadow-xl">
         <figure class="flex flex-col px-10 pt-10">
           <div class="badge badge-ghost">ログイン不要</div>
-          <%= image_tag asset_path('youtube.png')%>
+          <%= image_tag asset_path('youtube.png') %>
         </figure>
         <div class="card-body items-center text-center">
           <h2 class="card-title text-black">サッカー動画視聴</h2>
@@ -36,10 +36,10 @@
           </div>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-xl">
+      <div class="card m-5 lg:mx-10 justify-center bg-base-100 shadow-xl">
         <figure class="flex flex-col px-10 pt-10">
           <div class="badge badge-accent">要ログイン</div>
-          <%= image_tag asset_path('openai.png')%>
+          <%= image_tag asset_path('openai.png') %>
         </figure>
         <div class="card-body items-center text-center">
           <h2 class="card-title text-black">AIによるサッカー情報検索</h2>
@@ -51,17 +51,16 @@
           </div>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-xl">
-        
+      <div class="card m-5 lg:mx-10 justify-center bg-base-100 shadow-xl">
         <figure class="flex flex-col px-10 pt-10">
-        <div class="badge badge-accent">要ログイン</div>
-          <%= image_tag asset_path('footsal.png'), class: 'w-32'%>
+          <div class="badge badge-accent">要ログイン</div>
+          <%= image_tag asset_path('footsal.png'), class: 'w-32' %>
         </figure>
         <div class="card-body items-center text-center">
           <h2 class="card-title text-black">フットサル募集機能</h2>
           <p class="text-black">スーパープレイ動画とAI情報検索で熱い気持ちになったら、Let's Move♪</p>
           <div class="card-actions">
-            <%= link_to '#' do %>
+            <%= link_to posts_path do %>
               <button class="btn btn-primary">募集しに行く</button>
             <% end %>
           </div>
@@ -70,6 +69,7 @@
     </div>
   </div>
 </div>
+
 
 
 <% #todo スクリーンの高さスクロールしないようにする %>

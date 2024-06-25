@@ -7,8 +7,8 @@ class VideosController < ApplicationController
 
   def search
     begin
-      results = @youtube.list_searches(:snippet, q: "サッカー スーパープレイ #{params[:keyword]}", type: 'video', max_results:12, order: 'viewCount')
-      @videos = results.items.map do |result|
+      @results = @youtube.list_searches(:snippet, q: "サッカー スーパープレイ #{params[:keyword]}", type: 'video', max_results:12, order: 'viewCount')
+      @videos = @results.items.map do |result|
         video_id = result.id.video_id
         statistics = @youtube.list_videos(:statistics, id: video_id).items.first
         view_count = statistics.statistics.view_count
@@ -27,7 +27,6 @@ class VideosController < ApplicationController
         render :index, status: :internal_server_error
       end
     rescue StandardError => e
-      # その他の一般的なエラー処理
       render :index, status: :internal_server_error
     end
   end
@@ -58,7 +57,6 @@ def set_youtube
       render :index, status: :internal_server_error
     end
   rescue StandardError => e
-    # その他の一般的なエラー処理
     render :index, status: :internal_server_error
   end
 end

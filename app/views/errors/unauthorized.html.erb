@@ -1,0 +1,12 @@
+<div class='min-h-screen m-10'>
+  <div class='flex flex-col items-center justify-center'>
+    <%= image_tag "401.png" %>
+    <div class='m-10'>
+      <p class='text-xl md:tex-4xl text-center'>Unauthorized</p>
+      <p class='text-xl md:tex-4xl'>このページにアクセスするには認証が必要です。ログインしてください。</p>
+    </div>
+    <%= link_to root_path do %>
+        <span class='btn'>TOP画面に戻る</span>
+    <% end %>
+  </div>
+</div>

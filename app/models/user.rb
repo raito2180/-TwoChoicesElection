@@ -10,7 +10,6 @@ class User < ApplicationRecord
   has_many :contacts, dependent: :destroy
   has_many :responses, dependent: :destroy
   validates :email, uniqueness: true
-  # omniauthのコールバック時に呼ばれるメソッド
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

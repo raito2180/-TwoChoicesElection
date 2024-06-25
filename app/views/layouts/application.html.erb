@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html data-theme="light">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0BG0Q0X10Z"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    <% if ENV["RAILS_ENV"] == "production" %>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-0BG0Q0X10Z"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'G-0BG0Q0X10Z');
-    </script>
+        gtag('config', 'G-0BG0Q0X10Z');
+      </script>
+    <% end %>
     <title>Stardom</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
@@ -18,6 +20,8 @@
     <%= favicon_link_tag('favicon.ico') %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application.tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "monokai", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "markdown", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
@@ -31,7 +35,7 @@
     </header>
     <% flash.each do |type, message| %>
       <%= content_tag(:div, message, 
-          class: "alert #{type == 'notice' ? 'alert-success' : 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'} ", role: "alert") %>
+          class: "alert #{type == 'notice' ? 'bg-blue-600 border border-blue-900 text-white px-4 py-3 rounded relative' : 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'} ", role: "alert") %>
     <% end %>
     <%= yield %>
     <footer>

@@ -36,9 +36,7 @@ class ResponsesController < ApplicationController
     end
 
     if can_call_api?
-      # APIを呼び出す処理
       call_api
-      # API利用回数をインクリメント
     else
       flash.now[:danger] = 'API利用回数が上限に達しました。午前5時に利用回数がリセットされます'
       render :new, status: :unprocessable_entity
@@ -78,24 +76,65 @@ class ResponsesController < ApplicationController
   end
 
   def fetch_stardom_information
+    prompt = <<~PROMPT
+      最新のサッカー欧州リーグについてです
+      初心者が好きになれそうな世界トップクラスの選手簡単な特長・所属クラブチームと共に教えてください
+      ポジション毎(ゴールキーパー*1、センターバック*2、右サイドバック*1、左サイドバック*1、セントラルミッドフィルダー*1、右ミッドフィルダー*1、左ミッドフィルダー*1、左ウィングフォワード*1、右ウィングフォワード*1、センターフォワード)に計11人教えてください
+      形式以外の文章は不要です。
+      マークダウンで出力してください
+      日本語で教えてください
+      youtubeで見るのにおすすめな選手でお願いします
+      形式の例は、以下の通りでお願いします。
+      <h3>CF</h3> <p>
+        <strong>選手名:</strong> ロベルト・レヴァンドフスキ<br> 
+        <strong>所属クラブチーム:</strong> バイエルン・ミュンヘン<br> 
+        <strong>特長:</strong> 圧倒的な得点力とポジショニングセンスを誇る点取り屋。</p>
+      <h3>RWF</h3> <p>
+        <strong>選手名:</strong> キリアン・エムバペ<br> 
+        <strong>所属クラブチーム:</strong> パリ・サンジェルマン<br> 
+        <strong>特長:</strong> 圧倒的なスピードとドリブルで相手ディフェンスを翻弄する。</p>
+      <h3>LWF</h3> <p>
+        <strong>選手名:</strong> ネイマール<br> 
+        <strong>所属クラブチーム:</strong> パリ・サンジェルマン<br> 
+        <strong>特長:</strong> テクニックと創造力で試合の流れを変えるアーティスト。</p>
+      <h3>CMF</h3> <p>
+        <strong>選手名:</strong> ケビン・デ・ブライネ<br> 
+        <strong>所属クラブチーム:</strong> マンチェスター・シティ<br> 
+        <strong>特長:</strong> パス精度と視野の広さで攻撃を司るプレーメーカー。</p>
+      <h3>RMF</h3> <p>
+        <strong>選手名:</strong> ムハンマド・サラー<br> 
+        <strong>所属クラブチーム:</strong> リヴァプール<br> 
+        <strong>特長:</strong> スピードと得点力を兼ね備えた右サイドのエース。</p>
+      <h3>LMF</h3> <p>
+        <strong>選手名:</strong> フィル・フォーデン<br> 
+        <strong>所属クラブチーム:</strong> マンチェスター・シティ<br>
+        <strong>特長:</strong> 技術と創造力に秀でた若手の有望株。</p>
+      <h3>CB1</h3> <p>
+        <strong>選手名:</strong> ヴィルジル・ファン・ダイク<br> 
+        <strong>所属クラブチーム:</strong> リヴァプール<br> 
+        <strong>特長:</strong> 圧倒的なフィジカルとリーダーシップを持つディフェンダー。</p>
+      <h3>CB2</h3> <p>
+        <strong>選手名:</strong> ルベン・ディアス<br><br> 
+        <strong>所属クラブチーム:</strong> マンチェスター・シティ<br> 
+        <strong>特長:</strong> ボール奪取力と冷静なディフェンスで定評がある実力者。</p> 
+      <h3>LSB</h3> <p>
+        <strong>選手名:</strong> アンドリュー・ロバートソン<br>
+        <strong>所属クラブチーム:</strong> リヴァプール<br>
+        <strong>特長:</strong> スタミナと正確なクロスが魅力の攻撃的サイドバック。</p> 
+      <h3>RSB</h3> <p>
+        <strong>選手名:</strong> トレント・アレクサンダー＝アーノルド<br>
+        <strong>所属クラブチーム:</strong> リヴァプール<br>
+        <strong>特長:</strong> 精度の高いクロスと抜群の攻撃参加能力。</p> 
+      <h3>GK</h3><p>
+        <strong>選手名:</strong> アリソン・ベッカー<br>
+        <strong>所属クラブチーム:</strong> リヴァプール<br>
+        <strong>特長:</strong> 驚異的な反応速度と冷静な判断力で、ゴールを堅守する。</p> 
+    PROMPT
     response = @client.chat(
         parameters: {
             model: "gpt-4o",
             messages: [{ role: "user", 
-            content: "2022年のサッカー欧州リーグについてです
-            初心者が好きになれそうな世界トップクラスの選手簡単な特長・所属クラブチームと共に教えてください
-            ポジション毎に計11人教えてください
-            形式は、以下の通りでお願いします
-            形式以外の文章は不要です。
-            選手ごとに段落を分けてください
-
-            選手名:
-            所属クラブチーム:
-            特長:
-
-            日本語で教えてください
-            youtubeで見るのにおすすめな選手でお願いします
-            " }],
+            content: prompt }],
         })
     @response.body = response.dig("choices", 0, "message", "content")
     puts @response.body
@@ -209,7 +248,7 @@ class ResponsesController < ApplicationController
 
   def call_api
     case @response.request.name
-    when 'Stardom Players'
+    when 'ベストイレブン'
       handle_stardom_request
     when '成績'
       handle_score_request

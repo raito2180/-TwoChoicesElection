@@ -1,16 +1,16 @@
-<div class='h-full'>
+<div class='min-h-screen'>
   <div class='mb-10'>
-    <div class="tooltip md:tooltip-right mb-2 mx-2 pr-40 md:pr-0" data-tip="知りたいこと欄のStardomPlayersはメッシ、特長は選手、成績はスコアボードの画像で分類されています。">
-      <span>カード画像分類について</span>
-    </div>
     <% if @responses.present? %>
+      <div class="text-xl tooltip md:tooltip-right my-2 mx-2 pr-40 md:pr-0" data-tip="知りたいこと欄のStardomPlayersはメッシ、特長は選手、成績はスコアボードの画像で分類されています。">
+        <span>カード画像分類について</span>
+      </div>
       <ul class='grid grid-cols-1 md:grid-cols-4'>
         <% @responses.each do |response| %>
           <li class='my-2 translate-y-3 hover:translate-y-[-5] transition-all'>
             <div class="card card-compact bg-blue-500 shadow-xl mx-2">
               <figure>
                 <%= link_to response_path(response.id) do %>
-                  <% if response.request.name == 'Stardom Players' %>
+                  <% if response.request.name == 'ベストイレブン' %>
                     <%= image_tag "StardomPlayers.png", class: 'object-contain' %>
                   <% elsif response.request.name == '成績' %>
                     <%= image_tag "score.jpg" %>
@@ -32,10 +32,10 @@
         <% end %>
       </ul>
     <% else %>
-      <div class='w-full flex flex-col my-56 items-center'>
+      <div class='w-full flex flex-col my-56 px-20 items-center'>
         <span class='font-bold text-3xl'>今のところ投稿がありません。ぜひAI検索機能を使ってみてください♪</span>
         <%= image_tag asset_path('POSTME.png') %>
-        <%= link_to '検索画面', new_response_path, class: "btn w-96 mt-5" %>
+        <%= link_to '検索画面へ', new_response_path, class: "btn w-48 md:w-96 mt-5" %>
       </div>
     <% end %>
   </div>

@@ -1,8 +1,8 @@
 <div class='h-full'>
-  <div class="tooltip md:tooltip-right mb-2 mx-2 pr-40 md:pr-0" data-tip="実際にフットサルを募集して皆で楽しむためのページです。参加者はグループチャットも利用可能です。">
-    <span>フットサル募集画面について</span>
-  </div>
-  <div class='flex items-center mb-2 mt-2'>
+  <div class='flex flex-col justify-center items-center mb-2 mt-2'>
+    <div class="tooltip md:tooltip-right mb-2 mx-2 pr-40 md:pr-0" data-tip="実際にフットサルを募集して皆で楽しむためのページです。参加者はグループチャットも利用可能です。">
+      <span class="text-center">フットサル募集画面について</span>
+    </div>
     <%= link_to '募集する', new_post_path, class: "btn w-1/3" %>
   </div>
   <div class='my-10'>
@@ -12,6 +12,7 @@
           <li class='my-2 translate-y-3 hover:translate-y-[-5] transition-all'>
             <div class="card card-compact bg-blue-500 shadow-xl mx-2">
               <div class="card-body">
+              <div class='flex flex-col'>
                 <div class='flex flex-row'>
                   <div tabindex="0" class="avatar h-20 w-20">
                   <div class="h-20 w-20 rounded-full">
@@ -28,33 +29,54 @@
                   </div>
                   <div class="ml-4 max-w-full">
                     <h2 class="card-title">
-                      <%= "開催日: #{post.date.strftime('%Y-%m-%d %H:%M')}" %>
-                      <%= "募集状況: #{post.group.memberships.where(status: '参加').count}/#{post.capacity}" %>
+                      <%= "#{post.title}" %>
                     </h2>
-                    <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]"><%= "#{post.location}" %></p>
-                    <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]"><%= "#{post.title}" %></p>
-                    <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]"><%= "#{post.detail}" %></p>
+                    <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]">
+                      <span class='font-bold'>
+                        日時:
+                      </span>
+                      <%= "#{post.date.strftime('%Y-%m-%d %H:%M')}" %> 
+                      <span class='font-bold ml-2'>
+                        募集状況:
+                      </span>
+                      <%= "#{post.group.memberships.where(status: '参加').count}/#{post.capacity}" %>
+                    </p>
+                    <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]"><span class='font-bold'>場所:</span><%= "#{post.location}" %></p>
                   </div>
                 </div>
-                <div class="collapse bg-base-200">
-                  <input type="checkbox" class="peer" /> 
-                  <div class="collapse-title bg-primary text-primary-content peer-checked:bg-info peer-checked:text-secondary-content font-bold">
-                    場所などの関連リンクはこちら♪
+                <div class="m-3">
+                  <div>Join Us!</div>
+                  <div class="avatar-group -space-x-6 rtl:space-x-reverse">
+                    <% members = post.group.memberships.where(status: '参加').limit(10) %>
+                    <% members.where(status: '参加').each do |member| %>
+                      <div class="avatar">
+                        <div class="w-12">
+                          <% if member.profile.avatar.present? %>
+                            <%= link_to profile_path(member.profile) do %>
+                              <%= image_tag member.profile.avatar %>
+                            <% end %>
+                          <% else %>
+                            <%= link_to profile_path(member.profile) do %>
+                              <%= image_tag "default.jpg" %>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                    <% if post.group.memberships.where(status: '参加').count > 10 %>
+                      <div class="avatar placeholder">
+                        <div class="w-12 bg-neutral text-neutral-content">
+                          <span>+<%= post.group.memberships.where(status: '参加').count - 10 %></span>
+                        </div>
+                      </div>
+                    <% end %>
                   </div>
-                  <% if post.related_url.present? %>
-                    <div class="collapse-content bg-primary text-primary-content peer-checked:bg-info peer-checked:text-secondary-content"> 
-                      <%= link_to "#{post.related_url}", post.related_url, target: :_blank, rel: "noopener noreferrer"%>
-                    </div>
-                  <% else %>
-                    <div class="collapse-content bg-primary text-primary-content peer-checked:bg-info peer-checked:text-secondary-content"> 
-                      <span>関連URLリンクはありません</span>
-                    </div>
-                  <% end %>
                 </div>
-                <div class="card-actions justify-end">
+              </div>
+                <div class="card-actions justify-end grid grid-cols-2 md:grid-cols-4">
                   <% if post.group.memberships.exists?(profile: current_user.profile, status: '参加') %>
                   <% membership = post.group.memberships.find_by(profile: current_user.profile, status: '参加') %>
-                    <%= link_to 'グループチャットへ', post_group_membership_chatroom_path(post, post.group, membership), class: 'btn btn-accent' %>
+                    <%= link_to 'グループチャットへ', post_group_membership_chatroom_path(post, post.group, membership), class: 'btn btn-accent ' %>
                   <% end %>
                   <%= link_to '募集内容を見る', post_path(post.id), class: 'btn' %>
                   <% if post.owned_by?(current_user) %>
