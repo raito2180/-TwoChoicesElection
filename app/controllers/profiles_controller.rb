@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:edit, :update]
+  before_action :redirect_root
 
   def show
     @profile = Profile.find(params[:id])
