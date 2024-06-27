@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :redirect_root
-  def user_delete
+  def destroy
     @user = current_user
     @user.destroy 
     flash[:notice] = "ありがとうございました。またのご利用を心よりお待ちしております。"
