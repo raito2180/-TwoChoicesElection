@@ -17,6 +17,10 @@ class User < ApplicationRecord
     end
   end
 
+  def can_call_api?
+    request_limit_count < 3
+  end
+
   private
 
   def create_profile
