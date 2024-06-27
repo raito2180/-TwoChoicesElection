@@ -5,11 +5,7 @@ Rails.application.routes.draw do
 
   root 'tops#index'
 
-  resources :users do
-    member do
-      delete 'user_delete'
-    end
-  end
+  resources :users, only: [:destroy]
 
   resources :videos do
     collection do
