@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     services:
-      postgresql:
-        image: postgresql:15.5
+      postgres:
+        image: postgres:15.5
         ports:
           - 5432:5432
 
