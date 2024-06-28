@@ -1,5 +1,5 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require'devise'
+require 'devise'
 require File.expand_path("spec/support/controller_macros.rb")
 require 'spec_helper'
 require 'capybara/rspec'
@@ -44,7 +44,7 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :selenium_chrome_headless
   end
-  config.extend ControllerMacros, :type => :controller
+  config.extend ControllerMacros, type: :controller
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
