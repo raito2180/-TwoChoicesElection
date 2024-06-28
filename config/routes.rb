@@ -13,13 +13,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profiles, only: [:show, :edit ,:update]
+  resources :profiles, only: [:show, :edit, :update]
 
   resources :responses
 
   resources :posts do
     resources :groups do
-      resources :memberships, only: [:create,:update] do
+      resources :memberships, only: [:create, :update] do
         resource :chatroom, only: [:show]
       end
     end
@@ -31,18 +31,13 @@ Rails.application.routes.draw do
   get '/404', to: 'errors#not_found', as: :not_found
   get '/500', to: 'errors#internal_server_error', as: :internal_server_error
   get '/502', to: 'errors#bad_gateway', as: :bad_gateway
-  get '/503', to: 'errors#service_unavailable', as: :service_unavailable 
+  get '/503', to: 'errors#service_unavailable', as: :service_unavailable
   get '/504', to: 'errors#gateway_timeout', as: :gateway_timeout
-
-
 
   resources :contacts, only: [:new, :create]
   get 'done', to: 'contacts#done', as: 'done'
 
-
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
-  end
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

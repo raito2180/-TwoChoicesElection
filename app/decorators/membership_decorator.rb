@@ -22,5 +22,4 @@ class MembershipDecorator < Draper::Decorator
       '興味ありに変更しました。'
     end
   end
-
 end

@@ -1,6 +1,6 @@
 class ContactsController < ApplicationController
   before_action :redirect_root
-  
+
   def new
     @contact = Contact.new
   end
@@ -16,12 +16,11 @@ class ContactsController < ApplicationController
     end
   end
 
-  def done
-  end
+  def done; end
 
   private
 
   def contact_params
-    params.require(:contact).permit(:name,:subject,:body)
+    params.require(:contact).permit(:name, :subject, :body)
   end
 end

@@ -14,7 +14,7 @@ module MyApp
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w(assets tasks))
+    config.autoload_lib(ignore: %w[assets tasks])
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -24,9 +24,9 @@ module MyApp
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.time_zone = 'Tokyo'
-		config.active_record.default_timezone = :local
+    config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
-    config.exceptions_app = self.routes
+    config.action_view.field_error_proc = proc { |html_tag, _instance| html_tag }
+    config.exceptions_app = routes
   end
 end

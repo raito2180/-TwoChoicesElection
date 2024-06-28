@@ -1,7 +1,5 @@
 class TopsController < ApplicationController
   def index
-    if user_signed_in?
-      @profile = current_user.profile
-    end
+    @profile = current_user.profile if user_signed_in?
   end
 end

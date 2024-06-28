@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def self.render_with_signed_in_user(user, *)
     ActionController::Renderer::RACK_KEY_TRANSLATION['warden'] ||= 'warden'
-    proxy = Warden::Proxy.new({}, Warden::Manager.new({})).tap{|i| i.set_user(user, scope: :user) }
+    proxy = Warden::Proxy.new({}, Warden::Manager.new({})).tap { |i| i.set_user(user, scope: :user) }
     renderer = self.renderer.new('warden' => proxy)
     renderer.render(*)
   end
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  
+
   def redirect_root
     redirect_to root_path, flash: { notice: 'ログインしてください' } unless user_signed_in?
   end
@@ -26,15 +26,10 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_profile
-    if user_signed_in? && current_user.profile.nil?
-      Profile.create(user: current_user, name: "ファン#{current_user.id}号", gender: 0, body: 'こんにちは、皆でフットサルやりましょう!')
-    end
+    Profile.create(user: current_user, name: "ファン#{current_user.id}号", gender: 0, body: 'こんにちは、皆でフットサルやりましょう!') if user_signed_in? && current_user.profile.nil?
   end
 
   def set_user_id_to_cookie
-    if current_user
-      cookies.signed["user.id"] = current_user.id
-    end
+    cookies.signed["user.id"] = current_user.id if current_user
   end
-
 end

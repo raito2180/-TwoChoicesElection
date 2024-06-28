@@ -4,7 +4,7 @@ module ResponsesHelper
     doc = Nokogiri::HTML(html_content)
 
     # ポジションごとに要素を分ける
-    positions = doc.css('h3').map do |header|
+    doc.css('h3').map do |header|
       content = ''
       element = header.next_element
       while element && element.name != 'h3'
@@ -13,11 +13,9 @@ module ResponsesHelper
       end
       {
         title: header.text,
-        content: content
+        content:
       }
     end
-
-    positions
   end
 
   def position_style(index)
@@ -36,10 +34,8 @@ module ResponsesHelper
     }
     base_style = styles[index] || ""
 
-    responsive_style = "@media (max-width: 640px) { #{base_style.gsub(/(\d+)%/) { |match| "#{($1.to_i * 0.9).round}%" }} }"
-  
+    responsive_style = "@media (max-width: 640px) { #{base_style.gsub(/(\d+)%/) { |_match| "#{(::Regexp.last_match(1).to_i * 0.9).round}%" }} }"
+
     base_style + responsive_style
-
   end
-
 end

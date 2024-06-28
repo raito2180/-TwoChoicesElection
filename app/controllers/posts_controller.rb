@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def new 
+  def new
     @post = Post.new
   end
 
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     if @post.save
       group = Group.new(post: @post)
       if group.save
-        membership = Membership.new(profile_id: current_user.profile.id, group: group, status: :参加)
+        membership = Membership.new(profile_id: current_user.profile.id, group:, status: :参加)
         if membership.save
           redirect_to @post, notice: '募集投稿が作成されました。'
         else
@@ -73,7 +73,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :date, :location, :detail, :capacity, :related_url )
+    params.require(:post).permit(:title, :date, :location, :detail, :capacity, :related_url)
   end
-
 end

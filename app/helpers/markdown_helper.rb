@@ -1,6 +1,6 @@
-  require 'rouge/plugins/redcarpet'
+require 'rouge/plugins/redcarpet'
 
-  class CustomRenderHTML < Redcarpet::Render::HTML
+class CustomRenderHTML < Redcarpet::Render::HTML
   include Rouge::Plugins::Redcarpet
 
   # Rouge::Plugins::Redcarpetのメソッドを上書きする

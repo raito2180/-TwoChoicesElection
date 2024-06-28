@@ -23,5 +23,4 @@ class MembershipsController < ApplicationController
       redirect_to request.referer, alert: 'Membershipが見つかりませんでした。'
     end
   end
-
 end
