@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+env:
+  DATABASE_URL: ${{secrets.RENDER_DB_URL}}
+
 jobs:
   rspec:
     runs-on: ubuntu-latest
