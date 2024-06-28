@@ -3,7 +3,7 @@ require 'dotenv'
 Dotenv.load
 
 client = client = OpenAI::Client.new(
-  access_token: ENV["OPENAI_API_KEY"],
+  access_token: ENV.fetch("OPENAI_API_KEY", nil),
   log_errors: true # Highly recommended in development, so you can see what errors OpenAI is returning. Not recommended in production.
 )
     response = client.chat(

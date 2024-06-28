@@ -35,7 +35,7 @@ private
 
 def set_youtube
   @youtube = Google::Apis::YoutubeV3::YouTubeService.new
-  @youtube.key = ENV['YOUTUBE_API_KEY']
+  @youtube.key = ENV.fetch('YOUTUBE_API_KEY', nil)
   recommend_keyword = "サッカー スーパープレイ集"
   begin 
     recommend_results = @youtube.list_searches(:snippet, q: recommend_keyword, type: 'video', max_results: 12, order: 'viewCount')

@@ -29,7 +29,7 @@ class Response < ApplicationRecord
     end
 
     if save
-      current_user.increment!(:request_limit_count)
+      current_user.increment!(:request_limit_count) # rubocop:disable all
       true
     else
       raise StandardError, '作成失敗'
@@ -98,7 +98,6 @@ class Response < ApplicationRecord
             content: prompt }],
         })
     self.body = response.dig("choices", 0, "message", "content")
-    puts self.body
   end
 
   def fetch_score_information(client, search_name, season_name = nil)
@@ -152,7 +151,6 @@ class Response < ApplicationRecord
             content: prompt }],
         })
     self.body = response.dig("choices", 0, "message", "content")
-    puts self.body
   end
   def fetch_character_information(client, search_name, season_name = nil)
     prompt = <<~PROMPT
@@ -212,7 +210,6 @@ class Response < ApplicationRecord
             content: prompt }],
         })
     self.body = response.dig("choices", 0, "message", "content")
-    puts self.body
   end
 
   def handle_stardom_request(client)

@@ -4,10 +4,15 @@ class ResponsesController < ApplicationController
   def index
     @responses = current_user.responses
   end
+  def show
+    @response = Response.find(params[:id])
+  end
   def new
     @response = Response.new
   end
 
+  def edit
+  end
   def create
     player_name = response_params.delete(:player_name)
     player = Player.create(name: player_name)
@@ -47,13 +52,6 @@ class ResponsesController < ApplicationController
       flash.now[:danger] = 'API利用回数が上限に達しました。午前5時に利用回数がリセットされます'
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def show
-    @response = Response.find(params[:id])
-  end
-
-  def edit
   end
 
   def update

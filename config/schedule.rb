@@ -25,9 +25,9 @@ rails_env = ENV['RAILS_ENV'] || :development
 # cronを実行する環境変数をセット
 set :environment, rails_env
 # cronのログの吐き出し場所
-set :output, "#{Rails.root}/log/cron.log"
+set :output, Rails.root.join('log/cron.log').to_s
 
-every 1.minutes do
+every 1.minute do
   begin
     rake 'reset_api:request_limit_count'
   rescue => e

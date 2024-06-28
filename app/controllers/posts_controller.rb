@@ -5,8 +5,26 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def show
+    @post = Post.find(params[:id])
+    @group = @post.group
+    @membership = @post.group.memberships.find_by(profile: current_user.profile, status: '参加')
+    @participating_profiles = @group.memberships.where(status: :参加).includes(:profile)
+    @interested_profiles = @group.memberships.where(status: :興味あり).includes(:profile)
+    @not_participating_profiles = @group.memberships.where(status: :不参加).includes(:profile)
+    if mobile_device?
+      render :show
+    else
+      render :show_pc
+    end
+  end
+
   def new 
     @post = Post.new
+  end
+
+  def edit
+    @post = Post.find(params[:id])
   end
 
   def create
@@ -30,24 +48,6 @@ class PostsController < ApplicationController
       flash.now[:error] = '募集投稿に失敗しました'
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def show
-    @post = Post.find(params[:id])
-    @group = @post.group
-    @membership = @post.group.memberships.find_by(profile: current_user.profile, status: '参加')
-    @participating_profiles = @group.memberships.where(status: :参加).includes(:profile)
-    @interested_profiles = @group.memberships.where(status: :興味あり).includes(:profile)
-    @not_participating_profiles = @group.memberships.where(status: :不参加).includes(:profile)
-    if mobile_device?
-      render :show
-    else
-      render :show_pc
-    end
-  end
-
-  def edit
-    @post = Post.find(params[:id])
   end
 
   def update
