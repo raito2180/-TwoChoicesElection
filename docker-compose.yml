@@ -1,7 +1,7 @@
 version: '3'
 services:
   db:
-    image: postgres:15.5
+    image: postgres:15.5 # バージョンを15.5にしています
     environment:
       POSTGRES_DB: app_development
       POSTGRES_USER: root
@@ -15,7 +15,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        USERNAME: ${USERNAME} 
+        USERNAME: ${USERNAME} # パーミッションエラー対策にユーザー名の環境変数を設定
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     container_name: my_app_web
     volumes:
