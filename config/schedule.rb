@@ -19,19 +19,18 @@
 
 # Learn more: http://github.com/javan/whenever
 # Rails.rootを使用するために必要
-require File.expand_path(File.dirname(__FILE__) + "/environment")
+require File.expand_path("#{File.dirname(__FILE__)}/environment")
+
 # cronを実行する環境変数
 rails_env = ENV['RAILS_ENV'] || :development
 # cronを実行する環境変数をセット
 set :environment, rails_env
 # cronのログの吐き出し場所
-set :output, "#{Rails.root}/log/cron.log"
+set :output, Rails.root.join('log/cron.log').to_s
 
-every 1.minutes do
-  begin
-    rake 'reset_api:request_limit_count'
-  rescue => e
-    Rails.logger.error("aborted rake task")
-    raise e
-  end
+every 1.minute do
+  rake 'reset_api:request_limit_count'
+rescue StandardError => e
+  Rails.logger.error("aborted rake task")
+  raise e
 end

@@ -6,5 +6,4 @@ class Post < ApplicationRecord
   def owned_by?(user)
     profile.user == user
   end
-
 end

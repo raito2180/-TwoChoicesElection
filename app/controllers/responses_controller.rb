@@ -4,9 +4,16 @@ class ResponsesController < ApplicationController
   def index
     @responses = current_user.responses
   end
+
+  def show
+    @response = Response.find(params[:id])
+  end
+
   def new
     @response = Response.new
   end
+
+  def edit; end
 
   def create
     player_name = response_params.delete(:player_name)
@@ -19,7 +26,7 @@ class ResponsesController < ApplicationController
     @team_data = Team.where(id: @response.team_id).order(created_at: :desc).first
     @request_data = Request.where(id: @response.request_id).order(created_at: :desc).first
     @season_data = Season.where(id: @response.season_id).order(created_at: :desc).first
-    
+
     # リクエストに関連する情報を取得するメソッドを呼び出す
     if @response.request_id.blank?
       flash.now[:danger] = '知りたい事を入力してください'
@@ -49,15 +56,7 @@ class ResponsesController < ApplicationController
     end
   end
 
-  def show
-    @response = Response.find(params[:id])
-  end
-
-  def edit
-  end
-
-  def update
-  end
+  def update; end
 
   def destroy
     @response = Response.find(params[:id])
@@ -74,5 +73,4 @@ class ResponsesController < ApplicationController
   def response_params
     params.require(:response).permit(:title, :user_id, :player_name, :team_id, :request_id, :season_id)
   end
-
 end

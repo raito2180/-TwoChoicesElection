@@ -13,8 +13,8 @@ module PostsHelper
 
     prefecture_regex = Regexp.union(prefectures)
     if location.match(prefecture_regex)
-      prefecture = location.match(prefecture_regex)[0]
-      prefecture
+      location.match(prefecture_regex)[0]
+
     else
       "都道府県が見つかりませんでした"
     end

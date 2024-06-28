@@ -4,22 +4,22 @@ module ApplicationHelper
       site: 'Stardom',
       title: 'サッカーファン向けwebサービス',
       reverse: true,
-      separator: '|', 
+      separator: '|',
       description: '動画検索、AI機能、フットサル募集機能でサッカーを五感で楽しめます',
-      keywords: 'サッカー,AI,youtube,フットサル', 
-      canonical: request.original_url, 
+      keywords: 'サッカー,AI,youtube,フットサル',
+      canonical: request.original_url,
       icon: [
         { href: image_url('favicon.ico') },
-        { href: image_url('logo.png'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' },
+        { href: image_url('logo.png'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' }
       ],
       og: {
         site_name: :site,
         title: :title,
-        description: :description, 
+        description: :description,
         type: 'website',
         url: request.original_url,
         image: image_url('footerlogo.png'),
-        locale: 'ja_JP',
+        locale: 'ja_JP'
       },
       twitter: {
         card: 'summary_large_image',
@@ -27,5 +27,4 @@ module ApplicationHelper
       }
     }
   end
-  
 end
