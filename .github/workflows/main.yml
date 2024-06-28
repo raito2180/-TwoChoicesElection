@@ -13,6 +13,10 @@ jobs:
     timeout-minutes: 10
     services:
       postgres:
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test
         image: postgres:15.5
         ports:
           - 5432:5432
