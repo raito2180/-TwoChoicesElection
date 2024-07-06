@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'groupchats/index'
   mount ActionCable.server => '/cable'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
