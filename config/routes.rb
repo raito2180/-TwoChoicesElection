@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   resources :profiles, only: [:show, :edit, :update]
 
+  resources :groupchats, only: [:index] 
+
   resources :responses
 
   resources :posts do
