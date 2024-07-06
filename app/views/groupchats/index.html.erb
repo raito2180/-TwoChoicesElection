@@ -1,0 +1,93 @@
+<div class='h-full'>
+  <div class='my-10'>
+    <% if @groupchats.present? %>
+      <ul class='grid grid-cols-1 md:grid-cols-2'>
+        <% @groupchats.each do |post| %>
+          <li class='my-2 translate-y-3 hover:translate-y-[-5] transition-all'>
+            <div class="card card-compact bg-blue-500 shadow-xl mx-2">
+              <div class="card-body">
+              <div class='flex flex-col'>
+                <div class='flex flex-row'>
+                  <div tabindex="0" class="avatar h-20 w-20">
+                  <div class="h-20 w-20 rounded-full">
+                    <% if post.profile.avatar.present? %>
+                      <%= link_to profile_path(post.profile) do %>
+                        <%= image_tag post.profile.avatar %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to profile_path(post.profile) do %>
+                        <%= image_tag "default.jpg" %>
+                      <% end %>
+                    <% end %>
+                    </div>
+                  </div>
+                  <div class="ml-4 max-w-full">
+                    <h2 class="card-title">
+                      <%= "#{post.title}" %>
+                    </h2>
+                    <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]">
+                      <span class='font-bold'>
+                        日時:
+                      </span>
+                      <%= "#{post.date.strftime('%Y-%m-%d %H:%M')}" %> 
+                      <span class='font-bold ml-2'>
+                        募集状況:
+                      </span>
+                      <%= "#{post.group.memberships.where(status: '参加').count}/#{post.capacity}" %>
+                    </p>
+                    <p class="w-full overflow-hidden whitespace-nowrap text-ellipsis max-w-[28ch] xl:max-w-[65ch]"><span class='font-bold'>場所:</span><%= "#{post.location}" %></p>
+                  </div>
+                </div>
+                <div class="m-3">
+                  <div>Join Us!</div>
+                  <div class="avatar-group -space-x-6 rtl:space-x-reverse">
+                    <% members = post.group.memberships.where(status: '参加').limit(10) %>
+                    <% members.where(status: '参加').each do |member| %>
+                      <div class="avatar">
+                        <div class="w-12">
+                          <% if member.profile.avatar.present? %>
+                            <%= link_to profile_path(member.profile) do %>
+                              <%= image_tag member.profile.avatar %>
+                            <% end %>
+                          <% else %>
+                            <%= link_to profile_path(member.profile) do %>
+                              <%= image_tag "default.jpg" %>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                    <% if post.group.memberships.where(status: '参加').count > 10 %>
+                      <div class="avatar placeholder">
+                        <div class="w-12 bg-neutral text-neutral-content">
+                          <span>+<%= post.group.memberships.where(status: '参加').count - 10 %></span>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+                <div class="card-actions justify-end grid grid-cols-2 md:grid-cols-4">
+                  <% if post.group.memberships.exists?(profile: current_user.profile, status: '参加') %>
+                  <% membership = post.group.memberships.find_by(profile: current_user.profile, status: '参加') %>
+                    <%= link_to 'グループチャットへ', post_group_membership_chatroom_path(post, post.group, membership), class: 'btn btn-accent ' %>
+                  <% end %>
+                  <%= link_to '募集内容を見る', post_path(post.id), class: 'btn' %>
+                  <% if post.owned_by?(current_user) %>
+                    <%= link_to '募集編集', edit_post_path(post), class: 'btn' %>
+                    <%= link_to '募集削除', post_path(post), data: { turbo_method: :delete, turbo_confirm: "投稿を削除しますか？" }, class: 'btn' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class='w-full flex flex-col my-56 items-center'>
+        <span class='font-bold text-3xl'>今のところ投稿がありません。募集して皆でフットサルしませんか？</span>
+        <%= image_tag asset_path('POSTME.png') %>
+      </div>
+    <% end %>
+  </div>
+</div>
