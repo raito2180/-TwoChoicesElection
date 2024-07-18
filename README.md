@@ -64,5 +64,7 @@ https://stardomplayers.com/
 ![画面遷移図](https://github.com/user-attachments/assets/82d8bc4a-43ef-4477-b076-2202c72a6871)
 <br>
 ## ER図
-![ER図20240613](https://github.com/user-attachments/assets/d7b88c54-efd0-4265-9bf4-30e2b96c37b9)
+![ER図20240613](https://github.com/user-attachments/assets/226e8e35-2655-4909-b280-c9834585294c)
+
+
 
