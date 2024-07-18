@@ -36,7 +36,7 @@ https://stardomplayers.com/
 
 | フットサル募集機能 | グループチャット機能 |
 |-----|-----|
-|![d540d739502844cdb392e79906f7caee](https://github.com/user-attachments/assets/14419c6d-22dc-4e42-bd64-6f5a70977304)|![bc2e1e133845ff1545998002f47c786b](https://github.com/user-attachments/assets/60439e33-add9-4d0c-8e2d-9e5ecf49d262)|
+|![87cc45c1f5c4cf942c4c789ee9aab7e3](https://github.com/user-attachments/assets/f31855c1-1ebc-440f-b5d6-0313dce62ed5)|![bc2e1e133845ff1545998002f47c786b](https://github.com/user-attachments/assets/60439e33-add9-4d0c-8e2d-9e5ecf49d262)|
 |視覚で楽しんだ後は実際に動いてみませんか？|フットサル募集に参加するとグルチャが使用可能です。|
 ## 使用技術スタック<br>
 **フロントエンド**<br>
